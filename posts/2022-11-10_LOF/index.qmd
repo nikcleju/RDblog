@@ -1,0 +1,37 @@
+---
+title: "LOF: identifying density-based local outliers"
+#author: "Harlow Malloc"
+date: "2022-11-10"
+categories: [paper, anomaly]
+image: "Breunig2000 - LOF_ Identifying Density Based Local Outliers_1.png"
+---
+
+Article (Breunig2000)\
+Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.\
+LOF: identifying density-based local outliers\
+ACM SIGMOD Record, 2000, 29, 93-104
+
+## Comments:
+
+- Outlier-ness is **not binary**, but is a **degree**: it is a number. 
+
+- LOF = Local Outlier Factor = average density around nearest neighbors / density around point in question (sort of):
+  - High LOF = more outlier
+  - Low LOF (around 1) = not outlier, in cluster
+
+- LOF score depends on the neighbourhoods of neigbors, adapts to "density" of neighboring clusters
+
+- Me: Not clear how it scales to high dimensions, the intuitions might be wrong
+
+- Image:
+
+  ![](Breunig2000 - LOF_ Identifying Density Based Local Outliers_1.png)
+
+
+## Details
+[https://doi.org/10.1145/335191.335388](https://doi.org/10.1145/335191.335388)
+
+Article (Breunig2000)
+Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.
+LOF: identifying density-based local outliers 
+ACM SIGMOD Record, 2000, 29, 93-104 
