@@ -1,5 +1,6 @@
 ---
-title: "myblog"
+#title: "My Notes"
+#description: "Research notes, reviews, stuff I don't want to forget <br> By Me."
 listing:
   contents: posts
   sort: "date desc"

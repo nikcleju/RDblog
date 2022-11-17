@@ -2,16 +2,13 @@
 title: "LOF: identifying density-based local outliers"
 #author: "Harlow Malloc"
 date: "2022-11-10"
+description: 'Paper introducing outlier detection with LOF'
+
 categories: [paper, anomaly]
 image: "Breunig2000 - LOF_ Identifying Density Based Local Outliers_1.png"
 ---
 
-Article (Breunig2000)\
-Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.\
-LOF: identifying density-based local outliers\
-ACM SIGMOD Record, 2000, 29, 93-104
-
-## Comments:
+## Notes
 
 - Outlier-ness is **not binary**, but is a **degree**: it is a number. 
 
@@ -31,7 +28,8 @@ ACM SIGMOD Record, 2000, 29, 93-104
 ## Details
 [https://doi.org/10.1145/335191.335388](https://doi.org/10.1145/335191.335388)
 
-Article (Breunig2000)
-Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.
-LOF: identifying density-based local outliers 
+Article (Breunig2000) \
+Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J. \
+LOF: identifying density-based local outliers \
 ACM SIGMOD Record, 2000, 29, 93-104 
+

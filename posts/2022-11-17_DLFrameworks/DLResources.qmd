@@ -1,0 +1,179 @@
+---
+title: "Deep Learning resources"
+date: "2022-11-17"
+categories: [software]
+description: An overview of software frameworks, libraries and infrastructure for AI
+#image: 'img/2022-11-14-09-20-56.png'
+toc: true
+toc-location: left
+toc-depth: 4
+---
+
+## High-level frameworks
+
+Frameworks coming with lost of pre-built tools and algorithms.
+
+### Monai
+
+![Monai modules](img/Monai_arch_modules.png)
+
+- [Home](https://monai.io/)
+- Comprehensive framework for Medical Imaging
+- Based on PyTorch
+- Three packages:
+  - Label: for labeling and user input. For medical experts.
+  - Core: AI models and training. For researchers.
+  - Deploy: Packaging, deployment, running
+  
+---
+
+### NVIDIA Clara
+
+![](img/Clara-monai.PNG)
+
+- [Home](https://developer.nvidia.com/industries/healthcare)
+- AI platform for medical applications, from NVIDIA, with tools and pre-trained models
+- Available as container in [NGC Catalog](https://catalog.ngc.nvidia.com/?filters=&orderBy=scoreDESC&query=clara)
+- Applications:
+  - genomics
+  - natural language processing (NLP)
+  - imaging
+  - medical devices
+  - drug discovery
+  - smart hospitals
+- Multiple modules:
+  - Clara Parabricks: for genomics
+  - Clara Train SDK: for AI models, training, pre-trained etc. Based on Monai
+
+---
+  
+## Libraries
+
+Smaller, more targeted libraries.
+
+### Rapids
+
+![rapids.ai](img/Rapids.png)
+
+- [Home](https://rapids.ai/)
+- Accelarate generic Machine Learning algorithms in Python, with minimal code changes, based on Cuda.
+
+![Github repos of Rapids](img/Rapids_Github.png)
+
+---
+
+### NVIDIA Triton Inference Server
+
+![](img/nvidia-triton-scalable-diagram.svg)
+
+- Front-end ynference server to serve models remotely
+- [Home](https://developer.nvidia.com/nvidia-triton-inference-server)
+- Supports model backends from [various frameworks](https://github.com/triton-inference-server/backend#where-can-i-find-all-the-backends-that-are-available-for-triton):
+TensorRT, ONNX-Runtime, Tensorflow, PyTorch, OpenVino, pure Python, DALI, FIL (tree-based standard ML models)
+  
+  ![Triton diagram](img/TritonArch.png)
+
+- > The new Forest Inference Library (FIL) backend in Triton provides support for high-performance inference of tree-based models with explainability (SHAP values) on CPUs and GPUs. It supports models from XGBoost, LightGBM, scikit-learn RandomForest, RAPIDS™ cuML RandomForest, and others in Treelite format.
+
+---
+
+### NVIDIA DeepStream
+
+![DeepStream architecture](img/DS_overview_graph_architecture.png)
+
+> DeepStream SDK is a complete streaming analytics toolkit based on GStreamer for AI-based multi-sensor processing, video, audio, and image understanding
+
+- AI toolkit for applications with streaming data: video, audio
+- Based on GStreamer libraries, integrates with GStreamer plugins
+- C++ and Python
+- Can be used on **Jetson** edge devices (I worked personally on this)
+
+---
+
+### NVIDIA Tao Toolkit
+
+![](img/TaoToolkit.png)
+
+> The NVIDIA TAO Toolkit, built on TensorFlow and PyTorch, is a low-code version of the NVIDIA TAO framework that accelerates the model training process by abstracting away the AI/deep learning framework complexity. The TAO Toolkit lets you use the power of transfer learning to fine-tune NVIDIA pretrained models with your own data and optimize for inference—without AI expertise or large training datasets
+
+---
+
+### NVIDIA Digits
+
+![](img/digits-image1.png)
+
+- Interactive Deep Learning GPU Training System
+- [Home](https://developer.nvidia.com/digits)
+- [Technical Documentation](https://docs.nvidia.com/deeplearning/digits/digits-tutorial/index.html)
+- About:
+
+> - DIGITS is **not a framework**
+> - DIGITS is a **wrapper for NVCaffe and TensorFlow**, which provides a graphical web interface to those frameworks rather than   dealing with them directly on the command-line
+> - Design, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow
+> - Pre-trained models from the DIGITS Model Store
+> - Perform hyperparameter sweep of learning rate and batch size
+> - Schedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time
+> - Import a wide variety of image formats and sources with DIGITS plug-in
+> - Scale training jobs across multiple GPUs automatically
+
+- Available in NGC: [https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits ](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits)
+
+- **Notes**
+  - Rather old (started in 2015), might be out of touch with recent developments
+  - Last container version on NGC is from September 2021
+
+---
+
+### PyTorch, Tensorflow, Matlab etc
+
+- All available on the [NGC Catalog](https://catalog.ngc.nvidia.com/)
+
+---
+
+## Infrastructure
+
+Low-level technology to make all the magic run
+
+### Docker containers
+
+- [What is a container](https://www.docker.com/resources/what-container/)
+
+- In practice, mostly used for deployment / builing in isolated environments, but not necessarily day-to-day development
+
+- [Docker vs Virtual Machine](https://www.weave.works/blog/a-practical-guide-to-choosing-between-docker-containers-and-vms)
+
+  ![Docker vs. Virtual machines](img/containers-vs-virtual-machines.jpg)
+
+---
+
+### Jupyter Hub server
+
+![](img/JUPYTER_ARCHITECTURE.png)
+
+- [Home](https://jupyterhub.readthedocs.io/en/latest)
+- Enabling multiple users to work simultaneously on their notebooks, from client browsers
+
+---
+
+### NVIDIA NGC Catalog
+
+- Catalog of GPU-enabled Docker containers for AI
+- [Home](https://catalog.ngc.nvidia.com/)
+- Popular container collections:
+  - [Nvidia AI](https://catalog.ngc.nvidia.com/orgs/nvidia/collections/nvidiaai) collection:
+  
+    > - Deep Learning Frameworks: Updated monthly, PyTorch and TensorFlow
+    > - RAPIDS: Accelerates end-to-end data science and analytics pipelines entirely on GPUs.
+    > - TensorRT: Takes a trained network and produces a highly optimized runtime engine that performs inference for that network.
+    > - TAO: A python-based AI toolkit for taking purpose-built pre-trained AI models and customizing them with your own data. Add all 3 TAO containers in the entities tab.
+    > - Triton: An open-source software to deploy trained AI models from any framework, on any GPU- or CPU-based infrastructure in the cloud, data center, or embedded devices.
+    > - DeepStream: This SDK delivers a complete streaming analytics toolkit for AI based video and image understanding and multi-sensor processing.
+    > - RIVA: A GPU-accelerated SDK for building speech applications that are customized for your use case and deliver real-time performance. Include RIVA Clients and RIVIA Speech skills
+
+---
+
+### Misc
+
+- Google Colab notebooks on local runtime container:
+  - [Create your own GPU accelerated Jupyter Notebook Server for Google Colab using Docker](https://towardsdatascience.com/create-your-own-gpu-accelerated-yupyter-notebook-server-with-google-colab-using-docker-2fa14900bab5)
+  - [Jupyter local runtime for Google Colab with CUDA and BERT](https://hub.docker.com/r/sorokine/docker-colab-local)
