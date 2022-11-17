@@ -11,35 +11,49 @@
     "href": "index.html",
     "title": "myblog",
     "section": "",
-    "text": "paper\n\n\nanomaly\n\n\nscoring\n\n\nbrainstorming\n\n\n\n\n\n\n\n\n\n\n\nNov 14, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "software\n\n\n\n\nAn overview of frameworks and software for AI research\n\n\n\n\n\n\nNov 17, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\nscoring\n\n\nbrainstorming\n\n\n\n\nCombining multiple estimator scores\n\n\n\n\n\n\nNov 14, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\n\n\nBreunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J. ACM SIGMOD Record, 2000, 29, 93-104  Article (Breunig2000)\n\n\n\n\n\n\nNov 10, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2022-11-10_LOF/index.html",
     "href": "posts/2022-11-10_LOF/index.html",
     "title": "LOF: identifying density-based local outliers",
     "section": "",
-    "text": "Article (Breunig2000)\nBreunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.\nLOF: identifying density-based local outliers\nACM SIGMOD Record, 2000, 29, 93-104"
-  },
-  {
-    "objectID": "posts/2022-11-10_LOF/index.html#comments",
-    "href": "posts/2022-11-10_LOF/index.html#comments",
-    "title": "LOF: identifying density-based local outliers",
-    "section": "Comments:",
-    "text": "Comments:\n\nOutlier-ness is not binary, but is a degree: it is a number.\nLOF = Local Outlier Factor = average density around nearest neighbors / density around point in question (sort of):\n\nHigh LOF = more outlier\nLow LOF (around 1) = not outlier, in cluster\n\nLOF score depends on the neighbourhoods of neigbors, adapts to “density” of neighboring clusters\nMe: Not clear how it scales to high dimensions, the intuitions might be wrong\nImage:"
+    "text": "Outlier-ness is not binary, but is a degree: it is a number.\nLOF = Local Outlier Factor = average density around nearest neighbors / density around point in question (sort of):\n\nHigh LOF = more outlier\nLow LOF (around 1) = not outlier, in cluster\n\nLOF score depends on the neighbourhoods of neigbors, adapts to “density” of neighboring clusters\nMe: Not clear how it scales to high dimensions, the intuitions might be wrong\nImage:"
   },
   {
     "objectID": "posts/2022-11-10_LOF/index.html#details",
     "href": "posts/2022-11-10_LOF/index.html#details",
     "title": "LOF: identifying density-based local outliers",
     "section": "Details",
-    "text": "Details\nhttps://doi.org/10.1145/335191.335388\nArticle (Breunig2000) Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J. LOF: identifying density-based local outliers ACM SIGMOD Record, 2000, 29, 93-104"
+    "text": "Details\nhttps://doi.org/10.1145/335191.335388\nArticle (Breunig2000)\nBreunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.\nLOF: identifying density-based local outliers\nACM SIGMOD Record, 2000, 29, 93-104"
   },
   {
     "objectID": "posts/2022-11-14_Scoring/index.html",
     "href": "posts/2022-11-14_Scoring/index.html",
     "title": "Scoring ideas",
     "section": "",
-    "text": "InCollection (Kriegel2011)\nKriegel, H.-P.; Kroger, P.; Schubert, E. & Zimek, A.\nInterpreting and Unifying Outlier Scores\nSociety for Industrial and Applied Mathematics, 2011, 13-24\n\nDifferent (simple) regularizations and normalizations\nRegularization = 0 to infinity, increasing values = more outlying\nNormalization = 0 to 1\nTypical: Gaussian scaling\n\nis = probability (X < value) for a standard normal with mean and dev as the scores (1/2(1+erf()) formula)\nimplemented in PyOD as predict_proba(X, method=‘unify’)\n\n\n\n\n\nArticle (Zimek2014) Zimek, A.; Campello, R. J. & Sander, J. Ensembles for unsupervised outlier detection: challenges and research questions a position paper ACM SIGKDD Explorations Newsletter, 2014, 15, 11-22\n\nModel selection:\n\nfirst takes the union of the top k points of all results as preliminary outliers\nThen the ensemble is composed, starting with the result that is closest to this consensus result.\nNext the remaining outlier detectors are sorted by the lowest correlation to the result of the current ensemble (initially, the ensemble consists only of one outlier detector) and test if including the next detector would improve the correlation of the ensemble result with the (preliminary) target vector (i.e., the estimated ground truth)."
+    "text": "A quick overview of some papers about normalizing and combining scores.\n\n\n\nInCollection (Kriegel2011)\nKriegel, H.-P.; Kroger, P.; Schubert, E. & Zimek, A.\nInterpreting and Unifying Outlier Scores\nSociety for Industrial and Applied Mathematics, 2011, 13-24\n\n\n\nDifferent (simple) regularizations and normalizations\nRegularization = 0 to infinity, with increasing values = more outlying\nNormalization = 0 to 1, with increasing values = more outlying\nTypical: Gaussian scaling\n\nis = probability (X < value) for a standard normal with mean and dev as the scores (1/2(1+erf()) formula)\nimplemented in PyOD as predict_proba(X, method=‘unify’)\n\n\n\n\n\n\nArticle (Zimek2014)\nZimek, A.; Campello, R. J. & Sander, J.\nEnsembles for unsupervised outlier detection: challenges and research questions\nACM SIGKDD Explorations Newsletter, 2014, 15, 11-22\n\n\nDiscussions, but no clear solution to take home\nSimple model selection:\n\nfirst takes the union of the top k points of all results as preliminary outliers\nThen the ensemble is composed, starting with the result that is closest to this consensus result.\nNext the remaining outlier detectors are sorted by the lowest correlation to the result of the current ensemble (initially, the ensemble consists only of one outlier detector) and test if including the next detector would improve the correlation of the ensemble result with the (preliminary) target vector (i.e., the estimated ground truth)."
+  },
+  {
+    "objectID": "posts/2022-11-17_DLFrameworks/indeq.html",
+    "href": "posts/2022-11-17_DLFrameworks/indeq.html",
+    "title": "Deep Learning frameworks and solutions",
+    "section": "",
+    "text": "Frameworks coming with lost of pre-built tools and algorithms.\n\n\n\n\n\nMonai modules\n\n\n\nHome\nComprehensive framework for Medical Imaging\nBased on PyTorch\nThree packages:\n\nLabel: for labeling and user input. For medical experts.\nCore: AI models and training. For researchers.\nDeploy: Packaging, deployment, running\n\n\n\n\n\n\n\n\nHome\nAI platform for medical applications, from NVIDIA, with tools and pre-trained models\nAvailable as container in NGC Catalog\nApplications:\n\ngenomics\nnatural language processing (NLP)\nimaging\nmedical devices\ndrug discovery\nsmart hospitals\n\nMultiple modules:\n\nClara Parabricks: for genomics\nClara Train SDK: for AI models, training, pre-trained etc. Based on Monai"
+  },
+  {
+    "objectID": "posts/2022-11-17_DLFrameworks/indeq.html#low-level-libraries",
+    "href": "posts/2022-11-17_DLFrameworks/indeq.html#low-level-libraries",
+    "title": "Deep Learning frameworks and solutions",
+    "section": "Low-level libraries",
+    "text": "Low-level libraries\nSmaller, targeted, libraries.\n\nNVIDIA Digits\n\nInteractive Deep Learning GPU Training System\nHome\nTechnical Documentation\nAbout:\n\nDIGITS is not a framework. DIGITS is a wrapper for NVCaffe and TensorFlow ; which provides a graphical web interface to those frameworks rather than dealing with them directly on the command-line. command-line.\nDesign, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow\nPre-trained models from the DIGITS Model Store\nPerform hyperparameter sweep of learning rate and batch size\nSchedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time\nImport a wide variety of image formats and sources with DIGITS plug-in\nScale training jobs across multiple GPUs automatically\n\nAvailable in NGC: https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits\nOpinions\n\nRather old (started in 2015), might be out of date!\n\n\n\n\nNVIDIA DeepStream\n\n\nPyTorch"
+  },
+  {
+    "objectID": "posts/2022-11-17_DLFrameworks/indeq.html#infrastructure",
+    "href": "posts/2022-11-17_DLFrameworks/indeq.html#infrastructure",
+    "title": "Deep Learning frameworks and solutions",
+    "section": "Infrastructure",
+    "text": "Infrastructure\nLow-level technology to make all the magic run\n\nDocker containers\n\nWhat is a container\nIn practice, mostly used for deployment / builing in isolated environments, not day-to-day development\nDocker vs Virtual Machine\n\n\n\nDocker vs. Virtual machines\n\n\n\n\n\nJupyter Server\n\n\nMatlab (in container)\n\n\nMisc\n\nGoogle Colab notebooks on local runtime container"
   },
   {
     "objectID": "posts/post-with-code/index.html",

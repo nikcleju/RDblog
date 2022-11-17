@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-11-10">
-<meta name="description" content="Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. &amp; Sander, J.  ACM SIGMOD Record, 2000, 29, 93-104   Article (Breunig2000)">
+<meta name="dcterms.date" content="2022-11-17">
+<meta name="description" content="An overview of frameworks and software for AI research">
 
-<title>myblog - LOF: identifying density-based local outliers</title>
+<title>myblog - Deep Learning frameworks and solutions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -101,18 +101,17 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">LOF: identifying density-based local outliers</h1>
+      <h1 class="title">Deep Learning frameworks and solutions</h1>
                   <div>
         <div class="description">
-          Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. &amp; Sander, J.<br> ACM SIGMOD Record, 2000, 29, 93-104 <br> Article (Breunig2000)
+          An overview of frameworks and software for AI research
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">paper</div>
-                <div class="quarto-category">anomaly</div>
+                <div class="quarto-category">software</div>
               </div>
                   </div>
   </div>
@@ -124,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 10, 2022</p>
+        <p class="date">November 17, 2022</p>
       </div>
     </div>
       
@@ -133,38 +132,159 @@ ul.task-list li input[type="checkbox"] {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#high-level-frameworks" id="toc-high-level-frameworks" class="nav-link active" data-scroll-target="#high-level-frameworks">High-level frameworks</a>
+  <ul>
+  <li><a href="#monai" id="toc-monai" class="nav-link" data-scroll-target="#monai">Monai</a></li>
+  <li><a href="#nvidia-clara" id="toc-nvidia-clara" class="nav-link" data-scroll-target="#nvidia-clara">NVIDIA Clara</a></li>
+  <li><a href="#nvidia-rapids" id="toc-nvidia-rapids" class="nav-link" data-scroll-target="#nvidia-rapids">NVIDIA Rapids</a></li>
+  </ul></li>
+  <li><a href="#low-level-libraries" id="toc-low-level-libraries" class="nav-link" data-scroll-target="#low-level-libraries">Low-level libraries</a>
+  <ul>
+  <li><a href="#nvidia-digits" id="toc-nvidia-digits" class="nav-link" data-scroll-target="#nvidia-digits">NVIDIA Digits</a></li>
+  <li><a href="#nvidia-deepstream" id="toc-nvidia-deepstream" class="nav-link" data-scroll-target="#nvidia-deepstream">NVIDIA DeepStream</a></li>
+  <li><a href="#pytorch" id="toc-pytorch" class="nav-link" data-scroll-target="#pytorch">PyTorch</a></li>
+  </ul></li>
+  <li><a href="#infrastructure" id="toc-infrastructure" class="nav-link" data-scroll-target="#infrastructure">Infrastructure</a>
+  <ul>
+  <li><a href="#docker-containers" id="toc-docker-containers" class="nav-link" data-scroll-target="#docker-containers">Docker containers</a></li>
+  <li><a href="#jupyter-server" id="toc-jupyter-server" class="nav-link" data-scroll-target="#jupyter-server">Jupyter Server</a></li>
+  <li><a href="#matlab-in-container" id="toc-matlab-in-container" class="nav-link" data-scroll-target="#matlab-in-container">Matlab (in container)</a></li>
+  <li><a href="#misc" id="toc-misc" class="nav-link" data-scroll-target="#misc">Misc</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<section id="high-level-frameworks" class="level2">
+<h2 class="anchored" data-anchor-id="high-level-frameworks">High-level frameworks</h2>
+<p>Frameworks coming with lost of pre-built tools and algorithms.</p>
+<section id="monai" class="level3">
+<h3 class="anchored" data-anchor-id="monai">Monai</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/Monai_arch_modules.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Monai modules</figcaption><p></p>
+</figure>
+</div>
 <ul>
-<li><p>Outlier-ness is <strong>not binary</strong>, but is a <strong>degree</strong>: it is a number.</p></li>
-<li><p>LOF = Local Outlier Factor = average density around nearest neighbors / density around point in question (sort of):</p>
+<li><a href="https://monai.io/">Home</a></li>
+<li>Comprehensive framework for Medical Imaging</li>
+<li>Based on PyTorch</li>
+<li>Three packages:
 <ul>
-<li>High LOF = more outlier</li>
-<li>Low LOF (around 1) = not outlier, in cluster</li>
+<li>Label: for labeling and user input. For medical experts.</li>
+<li>Core: AI models and training. For researchers.</li>
+<li>Deploy: Packaging, deployment, running</li>
 </ul></li>
-<li><p>LOF score depends on the neighbourhoods of neigbors, adapts to “density” of neighboring clusters</p></li>
-<li><p>Me: Not clear how it scales to high dimensions, the intuitions might be wrong</p></li>
-<li><p>Image:</p>
-<p><img src="Breunig2000%20-%20LOF_%20Identifying%20Density%20Based%20Local%20Outliers_1.png" class="img-fluid"></p></li>
+</ul>
+<hr>
+</section>
+<section id="nvidia-clara" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-clara">NVIDIA Clara</h3>
+<p><img src="img/Clara-monai.PNG" class="img-fluid"></p>
+<ul>
+<li><a href="https://developer.nvidia.com/industries/healthcare">Home</a></li>
+<li>AI platform for medical applications, from NVIDIA, with tools and pre-trained models</li>
+<li>Available as container in <a href="https://catalog.ngc.nvidia.com/?filters=&amp;orderBy=scoreDESC&amp;query=clara">NGC Catalog</a></li>
+<li>Applications:
+<ul>
+<li>genomics</li>
+<li>natural language processing (NLP)</li>
+<li>imaging</li>
+<li>medical devices</li>
+<li>drug discovery</li>
+<li>smart hospitals</li>
+</ul></li>
+<li>Multiple modules:
+<ul>
+<li>Clara Parabricks: for genomics</li>
+<li>Clara Train SDK: for AI models, training, pre-trained etc. Based on Monai</li>
+</ul></li>
+</ul>
+<hr>
+<hr>
+</section>
+<section id="nvidia-rapids" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-rapids">NVIDIA Rapids</h3>
+</section>
+</section>
+<section id="low-level-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="low-level-libraries">Low-level libraries</h2>
+<p>Smaller, targeted, libraries.</p>
+<section id="nvidia-digits" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-digits">NVIDIA Digits</h3>
+<ul>
+<li><p>Interactive Deep Learning GPU Training System</p></li>
+<li><p><a href="https://developer.nvidia.com/digits">Home</a></p></li>
+<li><p><a href="https://docs.nvidia.com/deeplearning/digits/digits-tutorial/index.html">Technical Documentation</a></p></li>
+<li><p>About:</p>
+<ul>
+<li>DIGITS is <strong>not a framework</strong>. DIGITS is a <strong>wrapper for NVCaffe and TensorFlow</strong> ; which provides a graphical web interface to those frameworks rather than dealing with them directly on the command-line. command-line.</li>
+<li>Design, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow</li>
+<li>Pre-trained models from the DIGITS Model Store</li>
+<li>Perform hyperparameter sweep of learning rate and batch size</li>
+<li>Schedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time</li>
+<li>Import a wide variety of image formats and sources with DIGITS plug-in</li>
+<li>Scale training jobs across multiple GPUs automatically</li>
+</ul></li>
+<li><p>Available in NGC: <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits">https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits</a></p></li>
+<li><p><strong>Opinions</strong></p>
+<ul>
+<li>Rather old (started in 2015), might be out of date!</li>
+</ul></li>
 </ul>
 </section>
-<section id="details" class="level2">
-<h2 class="anchored" data-anchor-id="details">Details</h2>
-<p><a href="https://doi.org/10.1145/335191.335388">https://doi.org/10.1145/335191.335388</a></p>
-<p>Article (Breunig2000)<br>
-Breunig, M. M.; Kriegel, H.-P.; Ng, R. T. &amp; Sander, J.<br>
-LOF: identifying density-based local outliers<br>
-ACM SIGMOD Record, 2000, 29, 93-104</p>
+<section id="nvidia-deepstream" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-deepstream">NVIDIA DeepStream</h3>
+</section>
+<section id="pytorch" class="level3">
+<h3 class="anchored" data-anchor-id="pytorch">PyTorch</h3>
+</section>
+</section>
+<section id="infrastructure" class="level2">
+<h2 class="anchored" data-anchor-id="infrastructure">Infrastructure</h2>
+<p>Low-level technology to make all the magic run</p>
+<section id="docker-containers" class="level3">
+<h3 class="anchored" data-anchor-id="docker-containers">Docker containers</h3>
+<ul>
+<li><p><a href="https://www.docker.com/resources/what-container/">What is a container</a></p></li>
+<li><p>In practice, mostly used for deployment / builing in isolated environments, not day-to-day development</p></li>
+<li><p><a href="https://www.weave.works/blog/a-practical-guide-to-choosing-between-docker-containers-and-vms">Docker vs Virtual Machine</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/containers-vs-virtual-machines.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Docker vs.&nbsp;Virtual machines</figcaption><p></p>
+</figure>
+</div></li>
+</ul>
+</section>
+<section id="jupyter-server" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-server">Jupyter Server</h3>
+</section>
+<section id="matlab-in-container" class="level3">
+<h3 class="anchored" data-anchor-id="matlab-in-container">Matlab (in container)</h3>
+</section>
+<section id="misc" class="level3">
+<h3 class="anchored" data-anchor-id="misc">Misc</h3>
+<ul>
+<li>Google Colab notebooks on local runtime container</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
