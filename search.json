@@ -9,51 +9,65 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "myblog",
+    "title": "My Notes",
     "section": "",
-    "text": "software\n\n\n\n\nAn overview of frameworks and software for AI research\n\n\n\n\n\n\nNov 17, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\nscoring\n\n\nbrainstorming\n\n\n\n\nCombining multiple estimator scores\n\n\n\n\n\n\nNov 14, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\n\n\nBreunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J. ACM SIGMOD Record, 2000, 29, 93-104  Article (Breunig2000)\n\n\n\n\n\n\nNov 10, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "software\n\n\n\n\nAn overview of software frameworks, libraries and infrastructure for AI\n\n\n\n\n\n\nNov 17, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\nscoring\n\n\nbrainstorming\n\n\n\n\nCombining multiple estimator scores into a common ensenble\n\n\n\n\n\n\nNov 14, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\npaper\n\n\nanomaly\n\n\n\n\nPaper introducing outlier detection with LOF\n\n\n\n\n\n\nNov 10, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nNov 10, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/2022-11-10_LOF/index.html",
-    "href": "posts/2022-11-10_LOF/index.html",
+    "objectID": "posts/2022-11-10_LOF/LOF.html",
+    "href": "posts/2022-11-10_LOF/LOF.html",
     "title": "LOF: identifying density-based local outliers",
     "section": "",
     "text": "Outlier-ness is not binary, but is a degree: it is a number.\nLOF = Local Outlier Factor = average density around nearest neighbors / density around point in question (sort of):\n\nHigh LOF = more outlier\nLow LOF (around 1) = not outlier, in cluster\n\nLOF score depends on the neighbourhoods of neigbors, adapts to “density” of neighboring clusters\nMe: Not clear how it scales to high dimensions, the intuitions might be wrong\nImage:"
   },
   {
-    "objectID": "posts/2022-11-10_LOF/index.html#details",
-    "href": "posts/2022-11-10_LOF/index.html#details",
+    "objectID": "posts/2022-11-10_LOF/LOF.html#details",
+    "href": "posts/2022-11-10_LOF/LOF.html#details",
     "title": "LOF: identifying density-based local outliers",
     "section": "Details",
     "text": "Details\nhttps://doi.org/10.1145/335191.335388\nArticle (Breunig2000)\nBreunig, M. M.; Kriegel, H.-P.; Ng, R. T. & Sander, J.\nLOF: identifying density-based local outliers\nACM SIGMOD Record, 2000, 29, 93-104"
   },
   {
-    "objectID": "posts/2022-11-14_Scoring/index.html",
-    "href": "posts/2022-11-14_Scoring/index.html",
-    "title": "Scoring ideas",
+    "objectID": "posts/2022-11-14_Scoring/Scoring.html",
+    "href": "posts/2022-11-14_Scoring/Scoring.html",
+    "title": "Ensemble scoring review",
     "section": "",
-    "text": "A quick overview of some papers about normalizing and combining scores.\n\n\n\nInCollection (Kriegel2011)\nKriegel, H.-P.; Kroger, P.; Schubert, E. & Zimek, A.\nInterpreting and Unifying Outlier Scores\nSociety for Industrial and Applied Mathematics, 2011, 13-24\n\n\n\nDifferent (simple) regularizations and normalizations\nRegularization = 0 to infinity, with increasing values = more outlying\nNormalization = 0 to 1, with increasing values = more outlying\nTypical: Gaussian scaling\n\nis = probability (X < value) for a standard normal with mean and dev as the scores (1/2(1+erf()) formula)\nimplemented in PyOD as predict_proba(X, method=‘unify’)\n\n\n\n\n\n\nArticle (Zimek2014)\nZimek, A.; Campello, R. J. & Sander, J.\nEnsembles for unsupervised outlier detection: challenges and research questions\nACM SIGKDD Explorations Newsletter, 2014, 15, 11-22\n\n\nDiscussions, but no clear solution to take home\nSimple model selection:\n\nfirst takes the union of the top k points of all results as preliminary outliers\nThen the ensemble is composed, starting with the result that is closest to this consensus result.\nNext the remaining outlier detectors are sorted by the lowest correlation to the result of the current ensemble (initially, the ensemble consists only of one outlier detector) and test if including the next detector would improve the correlation of the ensemble result with the (preliminary) target vector (i.e., the estimated ground truth)."
+    "text": "A quick overview of some papers about normalizing and combining scores."
   },
   {
-    "objectID": "posts/2022-11-17_DLFrameworks/indeq.html",
-    "href": "posts/2022-11-17_DLFrameworks/indeq.html",
-    "title": "Deep Learning frameworks and solutions",
+    "objectID": "posts/2022-11-14_Scoring/Scoring.html#krieger2011-interpreting-and-unifying-outlier-scores",
+    "href": "posts/2022-11-14_Scoring/Scoring.html#krieger2011-interpreting-and-unifying-outlier-scores",
+    "title": "Ensemble scoring review",
+    "section": "Krieger2011: Interpreting and Unifying Outlier Scores",
+    "text": "Krieger2011: Interpreting and Unifying Outlier Scores\n\nInCollection (Kriegel2011)\nKriegel, H.-P.; Kroger, P.; Schubert, E. & Zimek, A.\nInterpreting and Unifying Outlier Scores\nSociety for Industrial and Applied Mathematics, 2011, 13-24\n\n\n\nDifferent (simple) regularizations and normalizations\nRegularization = 0 to infinity, with increasing values = more outlying\nNormalization = 0 to 1, with increasing values = more outlying\nTypical: Gaussian scaling\n\nis = probability (X < value) for a standard normal with mean and dev as the scores (1/2(1+erf()) formula)\nimplemented in PyOD as predict_proba(X, method=‘unify’)"
+  },
+  {
+    "objectID": "posts/2022-11-14_Scoring/Scoring.html#zimek2014-ensembles-for-unsupervised-outlier-detection-challenges-and-research-questions",
+    "href": "posts/2022-11-14_Scoring/Scoring.html#zimek2014-ensembles-for-unsupervised-outlier-detection-challenges-and-research-questions",
+    "title": "Ensemble scoring review",
+    "section": "Zimek2014: Ensembles for unsupervised outlier detection: challenges and research questions",
+    "text": "Zimek2014: Ensembles for unsupervised outlier detection: challenges and research questions\n\nArticle (Zimek2014)\nZimek, A.; Campello, R. J. & Sander, J.\nEnsembles for unsupervised outlier detection: challenges and research questions\nACM SIGKDD Explorations Newsletter, 2014, 15, 11-22\n\n\nDiscussions, but no clear solution to take home\nSimple model selection:\n\nfirst takes the union of the top k points of all results as preliminary outliers\nThen the ensemble is composed, starting with the result that is closest to this consensus result.\nNext the remaining outlier detectors are sorted by the lowest correlation to the result of the current ensemble (initially, the ensemble consists only of one outlier detector) and test if including the next detector would improve the correlation of the ensemble result with the (preliminary) target vector (i.e., the estimated ground truth)."
+  },
+  {
+    "objectID": "posts/2022-11-17_DLFrameworks/DLResources.html",
+    "href": "posts/2022-11-17_DLFrameworks/DLResources.html",
+    "title": "Deep Learning resources",
     "section": "",
     "text": "Frameworks coming with lost of pre-built tools and algorithms.\n\n\n\n\n\nMonai modules\n\n\n\nHome\nComprehensive framework for Medical Imaging\nBased on PyTorch\nThree packages:\n\nLabel: for labeling and user input. For medical experts.\nCore: AI models and training. For researchers.\nDeploy: Packaging, deployment, running\n\n\n\n\n\n\n\n\nHome\nAI platform for medical applications, from NVIDIA, with tools and pre-trained models\nAvailable as container in NGC Catalog\nApplications:\n\ngenomics\nnatural language processing (NLP)\nimaging\nmedical devices\ndrug discovery\nsmart hospitals\n\nMultiple modules:\n\nClara Parabricks: for genomics\nClara Train SDK: for AI models, training, pre-trained etc. Based on Monai"
   },
   {
-    "objectID": "posts/2022-11-17_DLFrameworks/indeq.html#low-level-libraries",
-    "href": "posts/2022-11-17_DLFrameworks/indeq.html#low-level-libraries",
-    "title": "Deep Learning frameworks and solutions",
-    "section": "Low-level libraries",
-    "text": "Low-level libraries\nSmaller, targeted, libraries.\n\nNVIDIA Digits\n\nInteractive Deep Learning GPU Training System\nHome\nTechnical Documentation\nAbout:\n\nDIGITS is not a framework. DIGITS is a wrapper for NVCaffe and TensorFlow ; which provides a graphical web interface to those frameworks rather than dealing with them directly on the command-line. command-line.\nDesign, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow\nPre-trained models from the DIGITS Model Store\nPerform hyperparameter sweep of learning rate and batch size\nSchedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time\nImport a wide variety of image formats and sources with DIGITS plug-in\nScale training jobs across multiple GPUs automatically\n\nAvailable in NGC: https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits\nOpinions\n\nRather old (started in 2015), might be out of date!\n\n\n\n\nNVIDIA DeepStream\n\n\nPyTorch"
+    "objectID": "posts/2022-11-17_DLFrameworks/DLResources.html#libraries",
+    "href": "posts/2022-11-17_DLFrameworks/DLResources.html#libraries",
+    "title": "Deep Learning resources",
+    "section": "Libraries",
+    "text": "Libraries\nSmaller, more targeted libraries.\n\nRapids\n\n\n\nrapids.ai\n\n\n\nHome\nAccelarate generic Machine Learning algorithms in Python, with minimal code changes, based on Cuda.\n\n\n\n\nGithub repos of Rapids\n\n\n\n\n\nNVIDIA Triton Inference Server\n\n\nFront-end ynference server to serve models remotely\nHome\nSupports model backends from various frameworks: TensorRT, ONNX-Runtime, Tensorflow, PyTorch, OpenVino, pure Python, DALI, FIL (tree-based standard ML models)\n\n\n\nTriton diagram\n\n\n\nThe new Forest Inference Library (FIL) backend in Triton provides support for high-performance inference of tree-based models with explainability (SHAP values) on CPUs and GPUs. It supports models from XGBoost, LightGBM, scikit-learn RandomForest, RAPIDS™ cuML RandomForest, and others in Treelite format.\n\n\n\n\n\nNVIDIA DeepStream\n\n\n\nDeepStream architecture\n\n\n\nDeepStream SDK is a complete streaming analytics toolkit based on GStreamer for AI-based multi-sensor processing, video, audio, and image understanding\n\n\nAI toolkit for applications with streaming data: video, audio\nBased on GStreamer libraries, integrates with GStreamer plugins\nC++ and Python\nCan be used on Jetson edge devices (I worked personally on this)\n\n\n\n\nNVIDIA Tao Toolkit\n\n\nThe NVIDIA TAO Toolkit, built on TensorFlow and PyTorch, is a low-code version of the NVIDIA TAO framework that accelerates the model training process by abstracting away the AI/deep learning framework complexity. The TAO Toolkit lets you use the power of transfer learning to fine-tune NVIDIA pretrained models with your own data and optimize for inference—without AI expertise or large training datasets\n\n\n\n\nNVIDIA Digits\n\n\nInteractive Deep Learning GPU Training System\nHome\nTechnical Documentation\nAbout:\n\n\n\nDIGITS is not a framework\nDIGITS is a wrapper for NVCaffe and TensorFlow, which provides a graphical web interface to those frameworks rather than dealing with them directly on the command-line\nDesign, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow\nPre-trained models from the DIGITS Model Store\nPerform hyperparameter sweep of learning rate and batch size\nSchedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time\nImport a wide variety of image formats and sources with DIGITS plug-in\nScale training jobs across multiple GPUs automatically\n\n\n\nAvailable in NGC: https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits\nNotes\n\nRather old (started in 2015), might be out of touch with recent developments\nLast container version on NGC is from September 2021\n\n\n\n\n\nPyTorch, Tensorflow, Matlab etc\n\nAll available on the NGC Catalog"
   },
   {
-    "objectID": "posts/2022-11-17_DLFrameworks/indeq.html#infrastructure",
-    "href": "posts/2022-11-17_DLFrameworks/indeq.html#infrastructure",
-    "title": "Deep Learning frameworks and solutions",
+    "objectID": "posts/2022-11-17_DLFrameworks/DLResources.html#infrastructure",
+    "href": "posts/2022-11-17_DLFrameworks/DLResources.html#infrastructure",
+    "title": "Deep Learning resources",
     "section": "Infrastructure",
-    "text": "Infrastructure\nLow-level technology to make all the magic run\n\nDocker containers\n\nWhat is a container\nIn practice, mostly used for deployment / builing in isolated environments, not day-to-day development\nDocker vs Virtual Machine\n\n\n\nDocker vs. Virtual machines\n\n\n\n\n\nJupyter Server\n\n\nMatlab (in container)\n\n\nMisc\n\nGoogle Colab notebooks on local runtime container"
+    "text": "Infrastructure\nLow-level technology to make all the magic run\n\nDocker containers\n\nWhat is a container\nIn practice, mostly used for deployment / builing in isolated environments, but not necessarily day-to-day development\nDocker vs Virtual Machine\n\n\n\nDocker vs. Virtual machines\n\n\n\n\n\n\nJupyter Hub server\n\n\nHome\nEnabling multiple users to work simultaneously on their notebooks, from client browsers\n\n\n\n\nNVIDIA NGC Catalog\n\nCatalog of GPU-enabled Docker containers for AI\nHome\nPopular container collections:\n\nNvidia AI collection:\n\n\nDeep Learning Frameworks: Updated monthly, PyTorch and TensorFlow\nRAPIDS: Accelerates end-to-end data science and analytics pipelines entirely on GPUs.\nTensorRT: Takes a trained network and produces a highly optimized runtime engine that performs inference for that network.\nTAO: A python-based AI toolkit for taking purpose-built pre-trained AI models and customizing them with your own data. Add all 3 TAO containers in the entities tab.\nTriton: An open-source software to deploy trained AI models from any framework, on any GPU- or CPU-based infrastructure in the cloud, data center, or embedded devices.\nDeepStream: This SDK delivers a complete streaming analytics toolkit for AI based video and image understanding and multi-sensor processing.\nRIVA: A GPU-accelerated SDK for building speech applications that are customized for your use case and deliver real-time performance. Include RIVA Clients and RIVIA Speech skills\n\n\n\n\n\n\n\nMisc\n\nGoogle Colab notebooks on local runtime container:\n\nCreate your own GPU accelerated Jupyter Notebook Server for Google Colab using Docker\nJupyter local runtime for Google Colab with CUDA and BERT"
   },
   {
     "objectID": "posts/post-with-code/index.html",

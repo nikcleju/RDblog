@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tristan O’Malley">
-<meta name="dcterms.date" content="2022-11-07">
+<meta name="dcterms.date" content="2022-11-14">
+<meta name="description" content="Combining multiple estimator scores into a common ensenble">
 
-<title>My Notes - Welcome To My Blog</title>
+<title>My Notes - Ensemble scoring review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,9 +104,17 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome To My Blog</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+      <h1 class="title">Ensemble scoring review</h1>
+                  <div>
+        <div class="description">
+          Combining multiple estimator scores into a common ensenble
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">paper</div>
+                <div class="quarto-category">anomaly</div>
+                <div class="quarto-category">scoring</div>
+                <div class="quarto-category">brainstorming</div>
               </div>
                   </div>
   </div>
@@ -114,17 +122,11 @@ ul.task-list li input[type="checkbox"] {
   
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Tristan O’Malley </p>
-            </div>
-    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 7, 2022</p>
+        <p class="date">November 14, 2022</p>
       </div>
     </div>
       
@@ -141,11 +143,48 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+<p>A quick overview of some papers about normalizing and combining scores.</p>
+<section id="krieger2011-interpreting-and-unifying-outlier-scores" class="level2">
+<h2 class="anchored" data-anchor-id="krieger2011-interpreting-and-unifying-outlier-scores">Krieger2011: Interpreting and Unifying Outlier Scores</h2>
+<blockquote class="blockquote">
+<p>InCollection (Kriegel2011)<br>
+Kriegel, H.-P.; Kroger, P.; Schubert, E. &amp; Zimek, A.<br>
+Interpreting and Unifying Outlier Scores<br>
+Society for Industrial and Applied Mathematics, 2011, 13-24<br>
+</p>
+</blockquote>
+<ul>
+<li><p>Different (simple) regularizations and normalizations</p></li>
+<li><p><strong>Regularization</strong> = 0 to infinity, with increasing values = more outlying</p></li>
+<li><p><strong>Normalization</strong> = 0 to 1, with increasing values = more outlying</p></li>
+<li><p>Typical: <strong>Gaussian scaling</strong></p>
+<ul>
+<li>is = probability (X &lt; value) for a standard normal with mean and dev as the scores (1/2(1+erf()) formula)</li>
+<li>implemented in PyOD as predict_proba(X, method=‘<strong>unify</strong>’)</li>
+</ul></li>
+</ul>
+</section>
+<section id="zimek2014-ensembles-for-unsupervised-outlier-detection-challenges-and-research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="zimek2014-ensembles-for-unsupervised-outlier-detection-challenges-and-research-questions">Zimek2014: Ensembles for unsupervised outlier detection: challenges and research questions</h2>
+<blockquote class="blockquote">
+<p>Article (Zimek2014)<br>
+Zimek, A.; Campello, R. J. &amp; Sander, J.<br>
+Ensembles for unsupervised outlier detection: challenges and research questions<br>
+ACM SIGKDD Explorations Newsletter, 2014, 15, 11-22</p>
+</blockquote>
+<ul>
+<li><p>Discussions, but no clear solution to take home</p></li>
+<li><p>Simple <strong>model selection</strong>:</p>
+<ul>
+<li>first takes the union of the top k points of all results as preliminary outliers</li>
+<li>Then the ensemble is composed, starting with the result that is closest to this consensus result.</li>
+<li>Next the remaining outlier detectors are sorted by the lowest correlation to the result of the current ensemble (initially, the ensemble consists only of one outlier detector) and test if including the next detector would improve the correlation of the ensemble result with the (preliminary) target vector (i.e., the estimated ground truth).</li>
+</ul>
+<p><img src="img/2022-11-14-09-20-56.png" class="img-fluid"></p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

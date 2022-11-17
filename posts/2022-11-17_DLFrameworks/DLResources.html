@@ -142,20 +142,21 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#monai" id="toc-monai" class="nav-link" data-scroll-target="#monai">Monai</a></li>
   <li><a href="#nvidia-clara" id="toc-nvidia-clara" class="nav-link" data-scroll-target="#nvidia-clara">NVIDIA Clara</a></li>
   </ul></li>
-  <li><a href="#low-level-libraries" id="toc-low-level-libraries" class="nav-link" data-scroll-target="#low-level-libraries">Low-level libraries</a>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries">Libraries</a>
   <ul>
   <li><a href="#rapids" id="toc-rapids" class="nav-link" data-scroll-target="#rapids">Rapids</a></li>
-  <li><a href="#nvidia-digits" id="toc-nvidia-digits" class="nav-link" data-scroll-target="#nvidia-digits">NVIDIA Digits</a></li>
   <li><a href="#nvidia-triton-inference-server" id="toc-nvidia-triton-inference-server" class="nav-link" data-scroll-target="#nvidia-triton-inference-server">NVIDIA Triton Inference Server</a></li>
   <li><a href="#nvidia-deepstream" id="toc-nvidia-deepstream" class="nav-link" data-scroll-target="#nvidia-deepstream">NVIDIA DeepStream</a></li>
+  <li><a href="#nvidia-tao-toolkit" id="toc-nvidia-tao-toolkit" class="nav-link" data-scroll-target="#nvidia-tao-toolkit">NVIDIA Tao Toolkit</a></li>
+  <li><a href="#nvidia-digits" id="toc-nvidia-digits" class="nav-link" data-scroll-target="#nvidia-digits">NVIDIA Digits</a></li>
   <li><a href="#pytorch-tensorflow-matlab-etc" id="toc-pytorch-tensorflow-matlab-etc" class="nav-link" data-scroll-target="#pytorch-tensorflow-matlab-etc">PyTorch, Tensorflow, Matlab etc</a></li>
   </ul></li>
   <li><a href="#infrastructure" id="toc-infrastructure" class="nav-link" data-scroll-target="#infrastructure">Infrastructure</a>
   <ul>
   <li><a href="#docker-containers" id="toc-docker-containers" class="nav-link" data-scroll-target="#docker-containers">Docker containers</a></li>
   <li><a href="#jupyter-hub-server" id="toc-jupyter-hub-server" class="nav-link" data-scroll-target="#jupyter-hub-server">Jupyter Hub server</a></li>
-  <li><a href="#misc" id="toc-misc" class="nav-link" data-scroll-target="#misc">Misc</a></li>
   <li><a href="#nvidia-ngc-catalog" id="toc-nvidia-ngc-catalog" class="nav-link" data-scroll-target="#nvidia-ngc-catalog">NVIDIA NGC Catalog</a></li>
+  <li><a href="#misc" id="toc-misc" class="nav-link" data-scroll-target="#misc">Misc</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -218,8 +219,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="low-level-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="low-level-libraries">Low-level libraries</h2>
+<section id="libraries" class="level2">
+<h2 class="anchored" data-anchor-id="libraries">Libraries</h2>
 <p>Smaller, more targeted libraries.</p>
 <section id="rapids" class="level3">
 <h3 class="anchored" data-anchor-id="rapids">Rapids</h3>
@@ -239,37 +240,6 @@ ul.task-list li input[type="checkbox"] {
 <p></p><figcaption class="figure-caption">Github repos of Rapids</figcaption><p></p>
 </figure>
 </div>
-<hr>
-</section>
-<section id="nvidia-digits" class="level3">
-<h3 class="anchored" data-anchor-id="nvidia-digits">NVIDIA Digits</h3>
-<p><img src="img/digits-image1.png" class="img-fluid"></p>
-<ul>
-<li>Interactive Deep Learning GPU Training System</li>
-<li><a href="https://developer.nvidia.com/digits">Home</a></li>
-<li><a href="https://docs.nvidia.com/deeplearning/digits/digits-tutorial/index.html">Technical Documentation</a></li>
-<li>About:</li>
-</ul>
-<blockquote class="blockquote">
-<ul>
-<li>DIGITS is <strong>not a framework</strong></li>
-<li>DIGITS is a <strong>wrapper for NVCaffe and TensorFlow</strong>, which provides a graphical web interface to those frameworks rather than dealing with them directly on the command-line</li>
-<li>Design, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow</li>
-<li>Pre-trained models from the DIGITS Model Store</li>
-<li>Perform hyperparameter sweep of learning rate and batch size</li>
-<li>Schedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time</li>
-<li>Import a wide variety of image formats and sources with DIGITS plug-in</li>
-<li>Scale training jobs across multiple GPUs automatically</li>
-</ul>
-</blockquote>
-<ul>
-<li><p>Available in NGC: <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits">https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits</a></p></li>
-<li><p><strong>Notes</strong></p>
-<ul>
-<li>Rather old (started in 2015), might be out of touch with recent developments</li>
-<li>Last container version on NGC is from September 2021</li>
-</ul></li>
-</ul>
 <hr>
 </section>
 <section id="nvidia-triton-inference-server" class="level3">
@@ -310,11 +280,51 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <hr>
 </section>
+<section id="nvidia-tao-toolkit" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-tao-toolkit">NVIDIA Tao Toolkit</h3>
+<p><img src="img/TaoToolkit.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>The NVIDIA TAO Toolkit, built on TensorFlow and PyTorch, is a low-code version of the NVIDIA TAO framework that accelerates the model training process by abstracting away the AI/deep learning framework complexity. The TAO Toolkit lets you use the power of transfer learning to fine-tune NVIDIA pretrained models with your own data and optimize for inference—without AI expertise or large training datasets</p>
+</blockquote>
+<hr>
+</section>
+<section id="nvidia-digits" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-digits">NVIDIA Digits</h3>
+<p><img src="img/digits-image1.png" class="img-fluid"></p>
+<ul>
+<li>Interactive Deep Learning GPU Training System</li>
+<li><a href="https://developer.nvidia.com/digits">Home</a></li>
+<li><a href="https://docs.nvidia.com/deeplearning/digits/digits-tutorial/index.html">Technical Documentation</a></li>
+<li>About:</li>
+</ul>
+<blockquote class="blockquote">
+<ul>
+<li>DIGITS is <strong>not a framework</strong></li>
+<li>DIGITS is a <strong>wrapper for NVCaffe and TensorFlow</strong>, which provides a graphical web interface to those frameworks rather than dealing with them directly on the command-line</li>
+<li>Design, train and visualize deep neural networks for image classification, segmentation and object detection using Caffe, Torch and TensorFlow</li>
+<li>Pre-trained models from the DIGITS Model Store</li>
+<li>Perform hyperparameter sweep of learning rate and batch size</li>
+<li>Schedule, monitor, and manage neural network training jobs, and analyze accuracy and loss in real time</li>
+<li>Import a wide variety of image formats and sources with DIGITS plug-in</li>
+<li>Scale training jobs across multiple GPUs automatically</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Available in NGC: <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits">https://catalog.ngc.nvidia.com/orgs/nvidia/containers/digits</a></p></li>
+<li><p><strong>Notes</strong></p>
+<ul>
+<li>Rather old (started in 2015), might be out of touch with recent developments</li>
+<li>Last container version on NGC is from September 2021</li>
+</ul></li>
+</ul>
+<hr>
+</section>
 <section id="pytorch-tensorflow-matlab-etc" class="level3">
 <h3 class="anchored" data-anchor-id="pytorch-tensorflow-matlab-etc">PyTorch, Tensorflow, Matlab etc</h3>
 <ul>
 <li>All available on the <a href="https://catalog.ngc.nvidia.com/">NGC Catalog</a></li>
 </ul>
+<hr>
 </section>
 </section>
 <section id="infrastructure" class="level2">
@@ -333,6 +343,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div></li>
 </ul>
+<hr>
 </section>
 <section id="jupyter-hub-server" class="level3">
 <h3 class="anchored" data-anchor-id="jupyter-hub-server">Jupyter Hub server</h3>
@@ -341,6 +352,30 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://jupyterhub.readthedocs.io/en/latest">Home</a></li>
 <li>Enabling multiple users to work simultaneously on their notebooks, from client browsers</li>
 </ul>
+<hr>
+</section>
+<section id="nvidia-ngc-catalog" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-ngc-catalog">NVIDIA NGC Catalog</h3>
+<ul>
+<li>Catalog of GPU-enabled Docker containers for AI</li>
+<li><a href="https://catalog.ngc.nvidia.com/">Home</a></li>
+<li>Popular container collections:
+<ul>
+<li><p><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/collections/nvidiaai">Nvidia AI</a> collection:</p>
+<blockquote class="blockquote">
+<ul>
+<li>Deep Learning Frameworks: Updated monthly, PyTorch and TensorFlow</li>
+<li>RAPIDS: Accelerates end-to-end data science and analytics pipelines entirely on GPUs.</li>
+<li>TensorRT: Takes a trained network and produces a highly optimized runtime engine that performs inference for that network.</li>
+<li>TAO: A python-based AI toolkit for taking purpose-built pre-trained AI models and customizing them with your own data. Add all 3 TAO containers in the entities tab.</li>
+<li>Triton: An open-source software to deploy trained AI models from any framework, on any GPU- or CPU-based infrastructure in the cloud, data center, or embedded devices.</li>
+<li>DeepStream: This SDK delivers a complete streaming analytics toolkit for AI based video and image understanding and multi-sensor processing.</li>
+<li>RIVA: A GPU-accelerated SDK for building speech applications that are customized for your use case and deliver real-time performance. Include RIVA Clients and RIVIA Speech skills</li>
+</ul>
+</blockquote></li>
+</ul></li>
+</ul>
+<hr>
 </section>
 <section id="misc" class="level3">
 <h3 class="anchored" data-anchor-id="misc">Misc</h3>
@@ -351,9 +386,6 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://hub.docker.com/r/sorokine/docker-colab-local">Jupyter local runtime for Google Colab with CUDA and BERT</a></li>
 </ul></li>
 </ul>
-</section>
-<section id="nvidia-ngc-catalog" class="level3">
-<h3 class="anchored" data-anchor-id="nvidia-ngc-catalog">NVIDIA NGC Catalog</h3>
 
 
 </section>
