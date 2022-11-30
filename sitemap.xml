@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://nikcleju.github.io/RDblog/about.html</loc>
-    <lastmod>2022-11-17T16:16:08.841Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/about.html</loc>
+    <lastmod>2022-11-30T14:49:27.673Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/index.html</loc>
-    <lastmod>2022-11-17T16:16:09.247Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/index.html</loc>
+    <lastmod>2022-11-30T14:49:28.052Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-10_LOF/LOF.html</loc>
-    <lastmod>2022-11-17T16:16:09.566Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-10_LOF/LOF.html</loc>
+    <lastmod>2022-11-30T14:49:28.303Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-14_Scoring/Scoring.html</loc>
-    <lastmod>2022-11-17T16:16:09.850Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-14_Scoring/Scoring.html</loc>
+    <lastmod>2022-11-30T14:49:28.789Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
-    <lastmod>2022-11-17T16:16:10.206Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
+    <lastmod>2022-11-30T14:49:29.388Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/post-with-code/index.html</loc>
-    <lastmod>2022-11-17T16:16:10.447Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
+    <lastmod>2022-11-30T14:49:29.669Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/welcome/index.html</loc>
-    <lastmod>2022-11-17T16:16:10.700Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/post-with-code/index.html</loc>
+    <lastmod>2022-11-30T14:49:30.013Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/nikcleju/RDblog/posts/welcome/index.html</loc>
+    <lastmod>2022-11-30T14:49:30.419Z</lastmod>
   </url>
 </urlset>
