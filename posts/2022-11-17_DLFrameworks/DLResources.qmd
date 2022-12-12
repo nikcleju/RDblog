@@ -11,7 +11,7 @@ toc-depth: 4
 
 ## High-level frameworks
 
-Frameworks coming with lost of pre-built tools and algorithms.
+Frameworks coming with lots of pre-built tools and algorithms.
 
 ### Monai
 
@@ -95,6 +95,34 @@ TensorRT, ONNX-Runtime, Tensorflow, PyTorch, OpenVino, pure Python, DALI, FIL (t
 ![](img/TaoToolkit.png)
 
 > The NVIDIA TAO Toolkit, built on TensorFlow and PyTorch, is a low-code version of the NVIDIA TAO framework that accelerates the model training process by abstracting away the AI/deep learning framework complexity. The TAO Toolkit lets you use the power of transfer learning to fine-tune NVIDIA pretrained models with your own data and optimize for inference—without AI expertise or large training datasets
+
+---
+
+### MeVisLab
+
+![](img/FME_mevislab_macosx_wp_B.jpg)
+
+> Modular framework for image processing research and development with a special focus on medical imaging. 
+>
+> It allows fast integration and testing of new algorithms and the development of clinical application prototypes.
+
+- [Home](https://www.mevislab.de/)
+- SW library and IDE
+- Details:
+
+    > MeVisLab is a rapid prototyping and development platform for medical image processing and visualization. With its image processing library, it fulfills the following requirements:
+    >
+    > - Able to handle large, six-dimensional images (x, y, z, color, time, user-defined).
+    > - Offers easy ways to develop new algorithms or changing/improving existing ones in a modular C++ interface, perfect for a fast-developing research area.
+    > - Offers easy ways of combining algorithms to algorithm pipelines and networks.
+    > - Fast and easy integration into clinical environments due to standard interfaces, for example to DICOM.
+    > - Fair performance for clinical routine due to a page-based, demand-driven approach in the image processing.
+    >
+    > Beside general image processing algorithms and visualization tools, MeVisLab includes advanced medical imaging modules for segmentation, registration, volumetry and quantitative morphological, and functional analysis.
+    >
+    > Based on MeVisLab, several clinical prototypes have been developed, including software assistants for neuro-imaging, dynamic image analysis, surgery planning, and vessel analysis.
+    >
+    > The implementation of MeVisLab makes use of a number of well known third-party libraries and technologies, most importantly the application framework Qt, the visualization and interaction toolkit Open Inventor, the scripting language Python, and the graphics standard OpenGL. In addition, modules based on the Insight ToolKit (ITK) and the Visualization ToolKit (VTK) are available.
 
 ---
 

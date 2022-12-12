@@ -2,7 +2,7 @@
 title: "Ensemble scoring review"
 date: "2022-11-14"
 categories: [paper, anomaly, scoring, brainstorming]
-description: 'Combining multiple estimator scores into a common ensenble'
+description: 'Combining multiple estimator scores into a common ensemble'
 image: 'img/2022-11-14-09-20-56.png'
 ---
 
