@@ -1,0 +1,399 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={ML/AI in CNC and machining},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ML/AI in CNC and machining}
+\author{}
+\date{2023-01-07}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, enhanced, breakable, interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+A review of papers on ML / AI approaches in machining and CNC
+
+\hypertarget{review-papers}{%
+\subsection{Review papers}\label{review-papers}}
+
+\hypertarget{star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview}{%
+\subsubsection{\texorpdfstring{(\(3\star\)) Smart Machining Process
+Using Machine Learning: A Review and Perspective on Machining Industry
+(2018) (Kim et al.
+2018)}{(3\textbackslash star) Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) (Kim et al. 2018)}}\label{star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview}}
+
+Contains a listing of many machining problems where machine learning
+algorithms have been used in machining.
+
+\begin{itemize}
+\tightlist
+\item
+  Machine processes: General, milling, drilling
+\item
+  Purpose: Tool wear and breakage, predict energy consumption, surface
+  roughness prediction, process parameter optimization
+\item
+  Algorithms: SVM and SVR, various NNs, Random forests, linear
+  regression, k-NN, depending on task
+\end{itemize}
+
+\hypertarget{star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021}{%
+\subsubsection{\texorpdfstring{(\(2\star\)) Data Driven Cutting Tool
+Fault Diagnosis System Using Machine Learning Approach: A Review
+(Tambake, Deshmukh, and Patange
+2021)}{(2\textbackslash star) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review (Tambake, Deshmukh, and Patange 2021)}}\label{star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021}}
+
+\begin{itemize}
+\tightlist
+\item
+  Poorly written, but contains a list of papers on fault detection
+\end{itemize}
+
+\includegraphics{img/2023-01-07-12-19-30.png}
+
+\includegraphics{img/2023-01-07-12-20-27.png}
+
+\hypertarget{star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021}{%
+\subsubsection{\texorpdfstring{(\(5\star\)) Machine Learning for
+industrial applications: A comprehensive literature review (Bertolini et
+al.
+2021)}{(5\textbackslash star) Machine Learning for industrial applications: A comprehensive literature review (Bertolini et al. 2021)}}\label{star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021}}
+
+\begin{itemize}
+\item
+  Good review paper, classifies papers by Application Domain and by ML
+  algorithm.
+\item
+  Not only for CNC / machining, but many types of industrial
+  applications
+\item
+  Large number of papare surveyed
+\item
+  To come back later
+\item
+  Hot and not-so-hot topics, clustered:
+
+  \begin{quote}
+  Using these metrics, five main clusters can be identified. These are:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Question Marks (Low Age and Negative Trend)} -- Recently
+    introduced topics, that have not got a follow-up, yet. Thermography
+    (THER), Cyber-Physical Systems (CPS), and Design For (D4) belong to
+    this category.
+  \item
+    \textbf{Hot Topics (Low Age and \sout{Negative} Positive Trend)} --
+    Very recent topics of booming interest. At present, none of the
+    keywords properly belong to this category. Yet, Additive
+    Manufacturing (ADD\_MN), Prediction \& Prognostic (PR\_PR), and
+    Industry 4.0 (I4.0) are those who come closest to this category. For
+    this reason, they have been labeled as `new promises'.
+  \item
+    \textbf{Consolidated (Medium Age and Stable Trend)} -- Not recent
+    topics, which are still studied, but without the initial spike of
+    interests. Topics such as Supply Chain Management (SCMI), Flexible
+    Manufacturing Systems (FMS), Inventory Control (INV\_CTRI), and Tool
+    Monitoring (TLL\_MN) belong to this category.
+  \item
+    \textbf{Stars (High Age and Positive Trend)} -- Old and consolidated
+    topics that are still attracting increasing research interest.
+    Topics such as Diagnosis and Fault Detection (DG\_FLT),
+    Manufacturing Process (MN\_PR), Intelligent Manufacturing (INT\_MN),
+    and Big Data analysis (BD\_DM) certainly belong to this class.
+    Probably, Simulation (SIM) and the Internet of Things (IoT) are on
+    their way to become stars.
+  \item
+    \textbf{Obsoletes (High Age and Negative Trend)} -- Old topics that
+    have never received much scientific interest and that have almost
+    disappeared from the technical literature. Due to the recent
+    introduction of ML, for operation management, no keywords can be
+    classified as obso­ letes yet. However, Order Management (OM) and,
+    probably, also Feature Extraction (FT\_EX) are moving toward this
+    class.
+  \end{enumerate}
+  \end{quote}
+
+  \includegraphics{img/2023-01-07-12-44-41.png}
+\end{itemize}
+
+\includegraphics{img/2023-01-07-12-32-41.png}
+
+\includegraphics{img/2023-01-07-12-38-32.png} \ldots{}
+
+\begin{itemize}
+\item
+  Anomaly detection examples:
+
+  \includegraphics{img/2023-01-07-12-48-20.png}
+
+  \includegraphics{img/2023-01-07-12-49-39.png}
+\item
+  Sample variables commonly used in datasets:
+
+  \begin{quote}
+  Table 4, which provides some indications concerning the variables that
+  are commonly used per each application domain and sub-area
+  \end{quote}
+
+  \includegraphics{img/2023-01-07-12-53-08.png}
+\end{itemize}
+
+\hypertarget{technical-papers}{%
+\subsection{Technical papers}\label{technical-papers}}
+
+\hypertarget{wear-characterization-of-the-cutting-tool-in-milling-processes-using-shape-and-texture-descriptors-phd-thesis-2017ordas2017_wearcharactphd}{%
+\subsubsection{Wear Characterization of the Cutting Tool in Milling
+Processes using Shape and Texture Descriptors (PhD thesis,
+2017)(García-Ordás
+2017)}\label{wear-characterization-of-the-cutting-tool-in-milling-processes-using-shape-and-texture-descriptors-phd-thesis-2017ordas2017_wearcharactphd}}
+
+\begin{itemize}
+\item
+  PhD thesis which proposes and evaluates some image-based descriptors
+  to characterize tool wear, using a cheap Raspberry Pi + camera setup
+  which captures images of the cutting tool.
+\item
+  Investigative / no remarkable results.
+\end{itemize}
+
+\hypertarget{surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020}{%
+\subsubsection{Surface roughness diagnosis in hard turning using
+acoustic signals and support vector machine: A PCA-based approach
+(Papandrea et al.
+2020)}\label{surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020}}
+
+\begin{itemize}
+\tightlist
+\item
+  Surface roughness classification, based on acoustic signals during
+  cutting.
+\item
+  Use STFT followed by PCA per coefficients, and SVM for classification.
+\item
+  Tested on CNC, with stock microphone
+\item
+  Some complicated experimental machining setups, several parameters in
+  the process (rotating speed, feed rate). The experimental setups
+  depend on many factors.
+\item
+  Results weak. Some PCA coeffs are correlated with roughness, and can
+  be clustered consistently into 3 groups, which can then be identified
+  in test sets.
+\item
+  More investigative / basic research, no remarkable results.
+\end{itemize}
+
+\includegraphics{img/2023-01-07-12-16-33.png}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-Bertolini2021}{}}%
+Bertolini, Massimo, Davide Mezzogori, Mattia Neroni, and Francesco
+Zammori. 2021. {``Machine {Learning} for Industrial Applications: {A}
+Comprehensive Literature Review.''} \emph{Expert Systems with
+Applications} 175 (August): 114820.
+\url{https://doi.org/10.1016/j.eswa.2021.114820}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Ordas2017_WearCharactPhD}{}}%
+García-Ordás, Teresa María. 2017. {``Wear Characterization of the
+Cutting Tool in Milling Processes Using Shape and Texture
+Descriptors.''} PhD thesis. \url{https://doi.org/10.18002/10612/6915}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Kim2018_SmartMachineReview}{}}%
+Kim, Dong-Hyeon, Thomas J. Y. Kim, Xinlin Wang, Mincheol Kim, Ying-Jun
+Quan, Jin Woo Oh, Soo-Hong Min, et al. 2018. {``Achine Learning in Cnc
+Machining: Best Practices.''} \emph{International Journal of Precision
+Engineering and Manufacturing-Green Technology} 5 (4): 555--68.
+\url{https://doi.org/10.1007/s40684-018-0057-y}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Papandrea2020}{}}%
+Papandrea, Pedro J., Edielson P. Frigieri, Paulo Roberto Maia, Lucas G.
+Oliveira, and Anderson P. Paiva. 2020. {``Surface Roughness Diagnosis in
+Hard Turning Using Acoustic Signals and Support Vector Machine: {A}
+{PCA}-Based Approach.''} \emph{Applied Acoustics} 159 (February):
+107102. \url{https://doi.org/10.1016/j.apacoust.2019.107102}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Tambake2021}{}}%
+Tambake, Nagesh R., Bhagyesh B. Deshmukh, and Abhishek D. Patange. 2021.
+{``Data {Driven} {Cutting} {Tool} {Fault} {Diagnosis} {System} {Using}
+{Machine} {Learning} {Approach}: {A} {Review}.''} \emph{Journal of
+Physics: Conference Series} 1969 (1): 012049.
+\url{https://doi.org/10.1088/1742-6596/1969/1/012049}.
+
+\end{CSLReferences}
+
+
+
+\end{document}
