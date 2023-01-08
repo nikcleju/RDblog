@@ -172,7 +172,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, enhanced, breakable, interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, enhanced, breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -185,48 +185,18 @@ A review of papers on ML / AI approaches in machining and CNC
 \hypertarget{review-papers}{%
 \subsection{Review papers}\label{review-papers}}
 
-\hypertarget{star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview}{%
-\subsubsection{\texorpdfstring{(\(3\star\)) Smart Machining Process
-Using Machine Learning: A Review and Perspective on Machining Industry
-(2018) (Kim et al.
-2018)}{(3\textbackslash star) Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) (Kim et al. 2018)}}\label{star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview}}
-
-Contains a listing of many machining problems where machine learning
-algorithms have been used in machining.
-
-\begin{itemize}
-\tightlist
-\item
-  Machine processes: General, milling, drilling
-\item
-  Purpose: Tool wear and breakage, predict energy consumption, surface
-  roughness prediction, process parameter optimization
-\item
-  Algorithms: SVM and SVR, various NNs, Random forests, linear
-  regression, k-NN, depending on task
-\end{itemize}
-
-\hypertarget{star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021}{%
-\subsubsection{\texorpdfstring{(\(2\star\)) Data Driven Cutting Tool
-Fault Diagnosis System Using Machine Learning Approach: A Review
-(Tambake, Deshmukh, and Patange
-2021)}{(2\textbackslash star) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review (Tambake, Deshmukh, and Patange 2021)}}\label{star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021}}
-
-\begin{itemize}
-\tightlist
-\item
-  Poorly written, but contains a list of papers on fault detection
-\end{itemize}
-
-\includegraphics{img/2023-01-07-12-19-30.png}
-
-\includegraphics{img/2023-01-07-12-20-27.png}
-
 \hypertarget{star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021}{%
 \subsubsection{\texorpdfstring{(\(5\star\)) Machine Learning for
 industrial applications: A comprehensive literature review (Bertolini et
 al.
 2021)}{(5\textbackslash star) Machine Learning for industrial applications: A comprehensive literature review (Bertolini et al. 2021)}}\label{star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021}}
+
+\begin{quote}
+Article (Bertolini2021) Bertolini, M.; Mezzogori, D.; Neroni, M. \&
+Zammori, F. Machine Learning for industrial applications: A
+comprehensive literature review Expert Systems with Applications, 2021,
+175, 114820
+\end{quote}
 
 \begin{itemize}
 \item
@@ -236,9 +206,7 @@ al.
   Not only for CNC / machining, but many types of industrial
   applications
 \item
-  Large number of papare surveyed
-\item
-  To come back later
+  Large number of papers surveyed
 \item
   Hot and not-so-hot topics, clustered:
 
@@ -310,6 +278,122 @@ al.
   \includegraphics{img/2023-01-07-12-53-08.png}
 \end{itemize}
 
+\hypertarget{interesting-aspects}{%
+\paragraph{Interesting aspects}\label{interesting-aspects}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Maintenance management: keep assets and machines at a full operating
+  state
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Failure Mode Analysis: Faults detection and classification. Easily
+    interpreted as a prediction task, where historical data are
+    collected on the production floor, and faulty and non-faulty events
+    are used as ground-truth data against which a prediction model can
+    be trained (NN, SVM)
+  \item
+    Condition Monitoring: the most common applications concern condition
+    monitoring of rotating mechanical systems and rolling bearings. The
+    problem is solved using vibrations and/or acoustic signals as
+    classifiers inputs.
+  \item
+    Downtime Minimization: Plan predictive maintainance operations
+    smartly, to minimize costs.
+  \end{itemize}
+\item
+  Quality Management
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Defects' Detection and Classification
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Unbalanced datasets
+    \end{itemize}
+  \item
+    Visual quality inspection: detect defects by image classification
+  \end{itemize}
+\item
+  Production Planning \& Control (PPC)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Performance Prediction and Optimization: order acceptance policy,
+    optimal sequence of technical steps, reduce electricity consumption,
+    optimize parameters
+  \item
+    Scheduling: NP-hard, select dispatching rules, dynamic scheduling
+    based on conditions
+  \item
+    Process Control: Reinforcement Learning to automate a process;
+    optimizing parameters for safe behavior in non-conforming
+    operations.
+  \end{itemize}
+\item
+  Supply Chain Management: logistics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Modeling and Coordination: Reinforcement Learning
+  \item
+    Demand Forecasts: prediction models
+  \item
+    Inventory Control:\\
+  \item
+    complex modeling of supply chains, not easy, RL is a good fit here
+  \end{itemize}
+\end{enumerate}
+
+Other things: - noisy data is common, many techniques used to clean it -
+unbalanced data - low interpretability, with Deep NNs
+
+\hypertarget{star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview}{%
+\subsubsection{\texorpdfstring{(\(3\star\)) Smart Machining Process
+Using Machine Learning: A Review and Perspective on Machining Industry
+(2018) (Kim et al.
+2018)}{(3\textbackslash star) Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) (Kim et al. 2018)}}\label{star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview}}
+
+Contains a listing of many machining problems where machine learning
+algorithms have been used in machining.
+
+\begin{itemize}
+\tightlist
+\item
+  Machine processes: General, milling, drilling
+\item
+  Purpose: Tool wear and breakage, predict energy consumption, surface
+  roughness prediction, process parameter optimization
+\item
+  Algorithms: SVM and SVR, various NNs, Random forests, linear
+  regression, k-NN, depending on task
+\end{itemize}
+
+\hypertarget{star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021}{%
+\subsubsection{\texorpdfstring{(\(2\star\)) Data Driven Cutting Tool
+Fault Diagnosis System Using Machine Learning Approach: A Review
+(Tambake, Deshmukh, and Patange
+2021)}{(2\textbackslash star) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review (Tambake, Deshmukh, and Patange 2021)}}\label{star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021}}
+
+\begin{itemize}
+\tightlist
+\item
+  Poorly written, but contains a list of papers on fault detection
+\end{itemize}
+
+\includegraphics{img/2023-01-07-12-19-30.png}
+
+\includegraphics{img/2023-01-07-12-20-27.png}
+
 \hypertarget{technical-papers}{%
 \subsection{Technical papers}\label{technical-papers}}
 
@@ -357,6 +441,103 @@ acoustic signals and support vector machine: A PCA-based approach
 
 \includegraphics{img/2023-01-07-12-16-33.png}
 
+\hypertarget{tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005}{%
+\subsubsection{Tool breakage detection using support vector machine
+learning in a milling process (Cho et al.
+2005)}\label{tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005}}
+
+\begin{quote}
+Article (Cho2005) Cho, S.; Asfour, S.; Onar, A. \& Kaundinya, N. Tool
+breakage detection using support vector machine learning in a milling
+process International Journal of Machine Tools and Manufacture, 2005,
+45, 241-249
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Detect two types of tool breakage: shank breakage and flute breakage
+\item
+  Cutting forces + power consumption (proportional with force) +
+  SVRegression =\textgreater{} detect flute breakage
+\item
+  Idea:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In normal operation, model the cutting force / normal power
+    consumption based on spindle speed, feed rate, depth of cut with
+    SVRegression (alternative: with multiple linear regression)
+  \item
+    Detection: if actual measured values deviate a lot from model
+    predictions (by a threshold), we have a breakage.
+  \end{itemize}
+\item
+  SVR is hard to parameterize!
+\end{itemize}
+
+\hypertarget{an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017}{%
+\subsubsection{An Ensemble Deep Convolutional Neural Network Model with
+Improved D-S Evidence Fusion for Bearing Fault Diagnosis (Li et al.
+2017)}\label{an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017}}
+
+\begin{quote}
+Article (Li2017) Li, S.; Liu, G.; Tang, X.; Lu, J. \& Hu, J. An Ensemble
+Deep Convolutional Neural Network Model with Improved D-S Evidence
+Fusion for Bearing Fault Diagnosis Sensors, Multidisciplinary Digital
+Publishing Institute, 2017, 17, 1729
+\end{quote}
+
+\includegraphics{img/2023-01-08-19-37-45.png}
+
+\begin{itemize}
+\tightlist
+\item
+  For bearing fault detection, with deep neural networks
+\item
+  Using Dempster--Shafer (D-S) evidence theory for sensor fusion,
+  improves it with custom modifications
+\item
+  Raw signals: acceleration and vibration from 2 sensors
+\item
+  Data preprocessing: sliding windows, subband, RMS, reshape to square
+  images
+\item
+  Small CNN trained in images, used as feature extractors
+\item
+  CNN outputs are fused with the Improved D-S scheme
+\end{itemize}
+
+\hypertarget{datasets}{%
+\subsection{Datasets}\label{datasets}}
+
+\hypertarget{crwu-bearing-dataset}{%
+\subsubsection{CRWU Bearing Dataset}\label{crwu-bearing-dataset}}
+
+\includegraphics{img/2023-01-08-19-36-39.png}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://engineering.case.edu/bearingdatacenter/download-data-file}{Link
+  here}
+\end{itemize}
+
+\begin{quote}
+Vibration data was collected using accelerometers, which were attached
+to the housing with magnetic bases. Accelerometers were placed at the 12
+o'clock position at both the drive end and fan end of the motor housing.
+During some experiments, an accelerometer was attached to the motor
+supporting base plate as well. Vibration signals were collected using a
+16 channel DAT recorder, and were post processed in a Matlab
+environment. All data files are in Matlab (*.mat) format. Digital data
+was collected at 12,000 samples per second, and data was also collected
+at 48,000 samples per second for drive end bearing faults. Speed and
+horsepower data were collected using the torque transducer/encoder and
+were recorded by hand.
+\end{quote}
+
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-Bertolini2021}{}}%
@@ -366,6 +547,13 @@ Comprehensive Literature Review.''} \emph{Expert Systems with
 Applications} 175 (August): 114820.
 \url{https://doi.org/10.1016/j.eswa.2021.114820}.
 
+\leavevmode\vadjust pre{\hypertarget{ref-Cho2005}{}}%
+Cho, Sohyung, Shihab Asfour, Arzu Onar, and Nandita Kaundinya. 2005.
+{``Tool Breakage Detection Using Support Vector Machine Learning in a
+Milling Process.''} \emph{International Journal of Machine Tools and
+Manufacture} 45 (3): 241--49.
+\url{https://doi.org/10.1016/j.ijmachtools.2004.08.016}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-Ordas2017_WearCharactPhD}{}}%
 García-Ordás, Teresa María. 2017. {``Wear Characterization of the
 Cutting Tool in Milling Processes Using Shape and Texture
@@ -373,10 +561,18 @@ Descriptors.''} PhD thesis. \url{https://doi.org/10.18002/10612/6915}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kim2018_SmartMachineReview}{}}%
 Kim, Dong-Hyeon, Thomas J. Y. Kim, Xinlin Wang, Mincheol Kim, Ying-Jun
-Quan, Jin Woo Oh, Soo-Hong Min, et al. 2018. {``Achine Learning in Cnc
-Machining: Best Practices.''} \emph{International Journal of Precision
-Engineering and Manufacturing-Green Technology} 5 (4): 555--68.
+Quan, Jin Woo Oh, Soo-Hong Min, et al. 2018. {``Smart Machining Process
+Using Machine Learning: A Review and Perspective on Machining
+Industry.''} \emph{International Journal of Precision Engineering and
+Manufacturing-Green Technology} 5 (4): 555--68.
 \url{https://doi.org/10.1007/s40684-018-0057-y}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Li2017}{}}%
+Li, Shaobo, Guokai Liu, Xianghong Tang, Jianguang Lu, and Jianjun Hu.
+2017. {``An {Ensemble} {Deep} {Convolutional} {Neural} {Network} {Model}
+with {Improved} {D}-{S} {Evidence} {Fusion} for {Bearing} {Fault}
+{Diagnosis}.''} \emph{Sensors} 17 (8): 1729.
+\url{https://doi.org/10.3390/s17081729}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Papandrea2020}{}}%
 Papandrea, Pedro J., Edielson P. Frigieri, Paulo Roberto Maia, Lucas G.
