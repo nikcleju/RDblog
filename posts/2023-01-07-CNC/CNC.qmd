@@ -2,7 +2,7 @@
 title: ML/AI in CNC and machining
 date: "2023-01-07"
 categories: [paper]
-description: Paper review
+description: A review of papers on ML / AI approaches in machining and CNC
 #image: 'img/2022-11-14-09-20-56.png'
 toc: true
 toc-location: body
@@ -15,7 +15,6 @@ format:
   latex: default
 ---
 
-A review of papers on ML / AI approaches in machining and CNC
 
 ## Review papers
 
