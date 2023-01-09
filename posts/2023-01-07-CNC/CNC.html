@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.179">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2023-01-07">
-<meta name="description" content="Paper review">
+<meta name="description" content="A review of papers on ML / AI approaches in machining and CNC">
 
 <title>My Notes - ML/AI in CNC and machining</title>
 <style>
@@ -102,17 +102,18 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -127,7 +128,7 @@ div.csl-indent {
       <h1 class="title">ML/AI in CNC and machining</h1>
                   <div>
         <div class="description">
-          Paper review
+          A review of papers on ML / AI approaches in machining and CNC
         </div>
       </div>
                           <div class="quarto-categories">
@@ -146,6 +147,7 @@ div.csl-indent {
         <p class="date">January 7, 2023</p>
       </div>
     </div>
+    
       
     </div>
     
@@ -176,6 +178,8 @@ div.csl-indent {
   <li><a href="#surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020" id="toc-surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020">Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach <span class="citation" data-cites="Papandrea2020">(Papandrea et al. 2020)</span></a></li>
   <li><a href="#tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005" id="toc-tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005">Tool breakage detection using support vector machine learning in a milling process <span class="citation" data-cites="Cho2005">(Cho et al. 2005)</span></a></li>
   <li><a href="#an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017" id="toc-an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017">An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis <span class="citation" data-cites="Li2017">(Li et al. 2017)</span></a></li>
+  <li><a href="#fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011" id="toc-fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011">Fault diagnosis of ball bearings using machine learning methods <span class="citation" data-cites="Kankar2011">(Kankar, Sharma, and Harsha 2011)</span></a></li>
+  <li><a href="#tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision" id="toc-tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision">Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision</a></li>
   </ul></li>
   <li><a href="#datasets" id="toc-datasets">Datasets</a>
   <ul>
@@ -183,13 +187,15 @@ div.csl-indent {
   </ul></li>
   </ul>
 </nav>
-<p>A review of papers on ML / AI approaches in machining and CNC</p>
 <section id="review-papers" class="level2">
 <h2 class="anchored" data-anchor-id="review-papers">Review papers</h2>
 <section id="star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021" class="level3">
 <h3 class="anchored" data-anchor-id="star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021">(<span class="math inline">\(5\star\)</span>) Machine Learning for industrial applications: A comprehensive literature review <span class="citation" data-cites="Bertolini2021">(<a href="#ref-Bertolini2021" role="doc-biblioref">Bertolini et al. 2021</a>)</span></h3>
 <blockquote class="blockquote">
-<p>Article (Bertolini2021) Bertolini, M.; Mezzogori, D.; Neroni, M. &amp; Zammori, F. Machine Learning for industrial applications: A comprehensive literature review Expert Systems with Applications, 2021, 175, 114820</p>
+<p>Article (Bertolini2021)<br>
+Bertolini, M.; Mezzogori, D.; Neroni, M. &amp; Zammori, F.<br>
+Machine Learning for industrial applications: A comprehensive literature review<br>
+Expert Systems with Applications, 2021, 175, 114820</p>
 </blockquote>
 <ul>
 <li><p>Good review paper, classifies papers by Application Domain and by ML algorithm.</p></li>
@@ -253,6 +259,7 @@ Using these metrics, five main clusters can be identified. These are:
 </ul></li>
 </ol>
 <p>Other things: - noisy data is common, many techniques used to clean it - unbalanced data - low interpretability, with Deep NNs</p>
+<hr>
 </section>
 </section>
 <section id="star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview" class="level3">
@@ -263,6 +270,7 @@ Using these metrics, five main clusters can be identified. These are:
 <li>Purpose: Tool wear and breakage, predict energy consumption, surface roughness prediction, process parameter optimization</li>
 <li>Algorithms: SVM and SVR, various NNs, Random forests, linear regression, k-NN, depending on task</li>
 </ul>
+<hr>
 </section>
 <section id="star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021" class="level3">
 <h3 class="anchored" data-anchor-id="star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021">(<span class="math inline">\(2\star\)</span>) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review <span class="citation" data-cites="Tambake2021">(<a href="#ref-Tambake2021" role="doc-biblioref">Tambake, Deshmukh, and Patange 2021</a>)</span></h3>
@@ -271,6 +279,7 @@ Using these metrics, five main clusters can be identified. These are:
 </ul>
 <p><img src="img/2023-01-07-12-19-30.png" class="img-fluid"></p>
 <p><img src="img/2023-01-07-12-20-27.png" class="img-fluid"></p>
+<hr>
 </section>
 </section>
 <section id="technical-papers" class="level2">
@@ -281,10 +290,12 @@ Using these metrics, five main clusters can be identified. These are:
 <li><p>PhD thesis which proposes and evaluates some image-based descriptors to characterize tool wear, using a cheap Raspberry Pi + camera setup which captures images of the cutting tool.</p></li>
 <li><p>Investigative / no remarkable results.</p></li>
 </ul>
+<hr>
 </section>
 <section id="surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020" class="level3">
 <h3 class="anchored" data-anchor-id="surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020">Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach <span class="citation" data-cites="Papandrea2020">(<a href="#ref-Papandrea2020" role="doc-biblioref">Papandrea et al. 2020</a>)</span></h3>
 <ul>
+<li>Supervised Learning</li>
 <li>Surface roughness classification, based on acoustic signals during cutting.</li>
 <li>Use STFT followed by PCA per coefficients, and SVM for classification.</li>
 <li>Tested on CNC, with stock microphone</li>
@@ -293,13 +304,18 @@ Using these metrics, five main clusters can be identified. These are:
 <li>More investigative / basic research, no remarkable results.</li>
 </ul>
 <p><img src="img/2023-01-07-12-16-33.png" class="img-fluid"></p>
+<hr>
 </section>
 <section id="tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005" class="level3">
 <h3 class="anchored" data-anchor-id="tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005">Tool breakage detection using support vector machine learning in a milling process <span class="citation" data-cites="Cho2005">(<a href="#ref-Cho2005" role="doc-biblioref">Cho et al. 2005</a>)</span></h3>
 <blockquote class="blockquote">
-<p>Article (Cho2005) Cho, S.; Asfour, S.; Onar, A. &amp; Kaundinya, N. Tool breakage detection using support vector machine learning in a milling process International Journal of Machine Tools and Manufacture, 2005, 45, 241-249</p>
+<p>Article (Cho2005)<br>
+Cho, S.; Asfour, S.; Onar, A. &amp; Kaundinya, N.<br>
+Tool breakage detection using support vector machine learning in a milling process<br>
+International Journal of Machine Tools and Manufacture, 2005, 45, 241-249</p>
 </blockquote>
 <ul>
+<li>Supervised Learning</li>
 <li>Detect two types of tool breakage: shank breakage and flute breakage</li>
 <li>Cutting forces + power consumption (proportional with force) + SVRegression =&gt; detect flute breakage</li>
 <li>Idea:
@@ -309,14 +325,19 @@ Using these metrics, five main clusters can be identified. These are:
 </ul></li>
 <li>SVR is hard to parameterize!</li>
 </ul>
+<hr>
 </section>
 <section id="an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017" class="level3">
 <h3 class="anchored" data-anchor-id="an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017">An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis <span class="citation" data-cites="Li2017">(<a href="#ref-Li2017" role="doc-biblioref">Li et al. 2017</a>)</span></h3>
 <blockquote class="blockquote">
-<p>Article (Li2017) Li, S.; Liu, G.; Tang, X.; Lu, J. &amp; Hu, J. An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729</p>
+<p>Article (Li2017)<br>
+Li, S.; Liu, G.; Tang, X.; Lu, J. &amp; Hu, J.<br>
+An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis<br>
+Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729</p>
 </blockquote>
 <p><img src="img/2023-01-08-19-37-45.png" class="img-fluid"></p>
 <ul>
+<li>Supervised Learning</li>
 <li>For bearing fault detection, with deep neural networks</li>
 <li>Using Dempster–Shafer (D-S) evidence theory for sensor fusion, improves it with custom modifications</li>
 <li>Raw signals: acceleration and vibration from 2 sensors</li>
@@ -324,6 +345,66 @@ Using these metrics, five main clusters can be identified. These are:
 <li>Small CNN trained in images, used as feature extractors</li>
 <li>CNN outputs are fused with the Improved D-S scheme</li>
 </ul>
+<hr>
+</section>
+<section id="fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011" class="level3">
+<h3 class="anchored" data-anchor-id="fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011">Fault diagnosis of ball bearings using machine learning methods <span class="citation" data-cites="Kankar2011">(<a href="#ref-Kankar2011" role="doc-biblioref">Kankar, Sharma, and Harsha 2011</a>)</span></h3>
+<blockquote class="blockquote">
+<p>Article (Kankar2011)<br>
+Kankar, P. K.; Sharma, S. C. &amp; Harsha, S. P.<br>
+Fault diagnosis of ball bearings using machine learning methods<br>
+Expert Systems with Applications, 2011, 38, 1876-1886</p>
+</blockquote>
+<ul>
+<li><p>Supervised Learning</p></li>
+<li><p>Detect defects and in ball bearings based on vibration data collected with accelerometers</p></li>
+<li><p>2D acceleration signals (horizontal and vertical)</p></li>
+<li><p>Recording length = about 0.5 to 1 second</p></li>
+<li><p>5 classes:</p>
+<ul>
+<li>Healthy bearings (HB).</li>
+<li>Bearing with outer race crack (BORC).</li>
+<li>Bearing with rough inner race surface (BRIR).</li>
+<li>Ball with corrosion pitting (BCP).</li>
+<li>Combined bearing component defects (CBD)</li>
+</ul></li>
+<li><p><strong>Manual features</strong> (range, mean, kurtosis etc):</p>
+<p>6 features from horizontal + 6 features vertical + speed + “number of loader” =&lt; 14 features per instance</p></li>
+<li><p>Feature selection step (not clear how)</p></li>
+<li><p>Results: accuracy about 70%</p></li>
+</ul>
+<p><img src="img/2023-01-09-12-28-36.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision" class="level3">
+<h3 class="anchored" data-anchor-id="tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision">Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision</h3>
+<blockquote class="blockquote">
+<p>Article (Ong2019)<br>
+Ong, P.; Lee, W. K. &amp; Lau, R. J. H.<br>
+Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision<br>
+The International Journal of Advanced Manufacturing Technology, 2019, 104, 1369-1379</p>
+</blockquote>
+<ul>
+<li><p>Nice introduction and review:</p>
+<ul>
+<li><blockquote class="blockquote">
+<p>For the indirect method of tool condition monitoring, there are considerably numerous studies attempting to correlate the relationship between the machining parameters with tool wear</p>
+</blockquote></li>
+<li>tool wear detection with visual and non-visual signals (cutting force, sound, vibration)</li>
+<li>tool wear estimation by visually analyzing the surface of the machined part</li>
+</ul></li>
+<li><p>Ue a special type of NN, Wavelet Neural Network, to predict <strong>flank wear</strong>. WNN is just their quirk.</p></li>
+<li><p>WNN are a generalized form of RBF-NN, with wavelet activation functions</p></li>
+<li><p>Use images of the tool itself and/or the surface of the machined part</p></li>
+<li><p>Image preprocessing of the worn region of the tool:</p>
+<p><img src=".png" class="img-fluid">img/2023-01-09-12-54-18.png</p></li>
+<li><p>NN architecture used. Shallow with 1 hidden layer:</p>
+<p><img src="img/2023-01-09-12-55-14.png" class="img-fluid"></p></li>
+<li><p>Dataset: just 126 images</p></li>
+<li><p>Results: good predictions by pretty much all methods compared.</p>
+<p><img src="img/2023-01-09-13-01-36.png" class="img-fluid"></p></li>
+</ul>
+<hr>
 </section>
 </section>
 <section id="datasets" class="level2">
@@ -352,6 +433,9 @@ Cho, Sohyung, Shihab Asfour, Arzu Onar, and Nandita Kaundinya. 2005. <span>“To
 </div>
 <div id="ref-Ordas2017_WearCharactPhD" class="csl-entry" role="doc-biblioentry">
 García-Ordás, Teresa María. 2017. <span>“Wear Characterization of the Cutting Tool in Milling Processes Using Shape and Texture Descriptors.”</span> PhD thesis. <a href="https://doi.org/10.18002/10612/6915">https://doi.org/10.18002/10612/6915</a>.
+</div>
+<div id="ref-Kankar2011" class="csl-entry" role="doc-biblioentry">
+Kankar, P. K., Satish C. Sharma, and S. P. Harsha. 2011. <span>“Fault Diagnosis of Ball Bearings Using Machine Learning Methods.”</span> <em>Expert Systems with Applications</em> 38 (3): 1876–86. <a href="https://doi.org/10.1016/j.eswa.2010.07.119">https://doi.org/10.1016/j.eswa.2010.07.119</a>.
 </div>
 <div id="ref-Kim2018_SmartMachineReview" class="csl-entry" role="doc-biblioentry">
 Kim, Dong-Hyeon, Thomas J. Y. Kim, Xinlin Wang, Mincheol Kim, Ying-Jun Quan, Jin Woo Oh, Soo-Hong Min, et al. 2018. <span>“Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry.”</span> <em>International Journal of Precision Engineering and Manufacturing-Green Technology</em> 5 (4): 555–68. <a href="https://doi.org/10.1007/s40684-018-0057-y">https://doi.org/10.1007/s40684-018-0057-y</a>.
@@ -407,7 +491,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -443,24 +544,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
