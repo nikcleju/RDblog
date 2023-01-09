@@ -85,7 +85,7 @@ div.csl-indent {
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -122,7 +122,7 @@ div.csl-indent {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">ML/AI in CNC and machining</h1>
@@ -154,6 +154,33 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#review-papers" id="toc-review-papers" class="nav-link active" data-scroll-target="#review-papers">Review papers</a>
+  <ul class="collapse">
+  <li><a href="#bertolini2021" id="toc-bertolini2021" class="nav-link" data-scroll-target="#bertolini2021">Bertolini2021</a></li>
+  <li><a href="#kim2018" id="toc-kim2018" class="nav-link" data-scroll-target="#kim2018">Kim2018</a></li>
+  <li><a href="#tambake2021" id="toc-tambake2021" class="nav-link" data-scroll-target="#tambake2021">Tambake2021</a></li>
+  </ul></li>
+  <li><a href="#technical-papers" id="toc-technical-papers" class="nav-link" data-scroll-target="#technical-papers">Technical papers</a>
+  <ul class="collapse">
+  <li><a href="#ordas2017" id="toc-ordas2017" class="nav-link" data-scroll-target="#ordas2017">Ordas2017</a></li>
+  <li><a href="#papandrea2020" id="toc-papandrea2020" class="nav-link" data-scroll-target="#papandrea2020">Papandrea2020</a></li>
+  <li><a href="#cho2005" id="toc-cho2005" class="nav-link" data-scroll-target="#cho2005">Cho2005</a></li>
+  <li><a href="#li2017" id="toc-li2017" class="nav-link" data-scroll-target="#li2017">Li2017</a></li>
+  <li><a href="#kankar2011" id="toc-kankar2011" class="nav-link" data-scroll-target="#kankar2011">Kankar2011</a></li>
+  <li><a href="#ong2019" id="toc-ong2019" class="nav-link" data-scroll-target="#ong2019">Ong2019</a></li>
+  </ul></li>
+  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a>
+  <ul class="collapse">
+  <li><a href="#crwu-bearing-dataset" id="toc-crwu-bearing-dataset" class="nav-link" data-scroll-target="#crwu-bearing-dataset">CRWU Bearing Dataset</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
@@ -162,40 +189,17 @@ div.csl-indent {
 
 
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#review-papers" id="toc-review-papers">Review papers</a>
-  <ul>
-  <li><a href="#star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021" id="toc-star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021">(<span class="math inline">\(5\star\)</span>) Machine Learning for industrial applications: A comprehensive literature review <span class="citation" data-cites="Bertolini2021">(Bertolini et al. 2021)</span></a></li>
-  <li><a href="#star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview" id="toc-star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview">(<span class="math inline">\(3\star\)</span>) Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) <span class="citation" data-cites="Kim2018_SmartMachineReview">(Kim et al. 2018)</span></a></li>
-  <li><a href="#star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021" id="toc-star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021">(<span class="math inline">\(2\star\)</span>) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review <span class="citation" data-cites="Tambake2021">(Tambake, Deshmukh, and Patange 2021)</span></a></li>
-  </ul></li>
-  <li><a href="#technical-papers" id="toc-technical-papers">Technical papers</a>
-  <ul>
-  <li><a href="#wear-characterization-of-the-cutting-tool-in-milling-processes-using-shape-and-texture-descriptors-phd-thesis-2017ordas2017_wearcharactphd" id="toc-wear-characterization-of-the-cutting-tool-in-milling-processes-using-shape-and-texture-descriptors-phd-thesis-2017ordas2017_wearcharactphd">Wear Characterization of the Cutting Tool in Milling Processes using Shape and Texture Descriptors (PhD thesis, 2017)<span class="citation" data-cites="Ordas2017_WearCharactPhD">(García-Ordás 2017)</span></a></li>
-  <li><a href="#surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020" id="toc-surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020">Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach <span class="citation" data-cites="Papandrea2020">(Papandrea et al. 2020)</span></a></li>
-  <li><a href="#tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005" id="toc-tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005">Tool breakage detection using support vector machine learning in a milling process <span class="citation" data-cites="Cho2005">(Cho et al. 2005)</span></a></li>
-  <li><a href="#an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017" id="toc-an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017">An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis <span class="citation" data-cites="Li2017">(Li et al. 2017)</span></a></li>
-  <li><a href="#fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011" id="toc-fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011">Fault diagnosis of ball bearings using machine learning methods <span class="citation" data-cites="Kankar2011">(Kankar, Sharma, and Harsha 2011)</span></a></li>
-  <li><a href="#tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision" id="toc-tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision">Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision</a></li>
-  </ul></li>
-  <li><a href="#datasets" id="toc-datasets">Datasets</a>
-  <ul>
-  <li><a href="#crwu-bearing-dataset" id="toc-crwu-bearing-dataset">CRWU Bearing Dataset</a></li>
-  </ul></li>
-  </ul>
-</nav>
+
 <section id="review-papers" class="level2">
 <h2 class="anchored" data-anchor-id="review-papers">Review papers</h2>
-<section id="star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021" class="level3">
-<h3 class="anchored" data-anchor-id="star-machine-learning-for-industrial-applications-a-comprehensive-literature-review-bertolini2021">(<span class="math inline">\(5\star\)</span>) Machine Learning for industrial applications: A comprehensive literature review <span class="citation" data-cites="Bertolini2021">(<a href="#ref-Bertolini2021" role="doc-biblioref">Bertolini et al. 2021</a>)</span></h3>
+<section id="bertolini2021" class="level3">
+<h3 class="anchored" data-anchor-id="bertolini2021">Bertolini2021</h3>
+<p><strong>Machine Learning for industrial applications: A comprehensive literature review</strong></p>
+<p><span class="math inline">\(5/5 \star\)</span></p>
 <blockquote class="blockquote">
 <p>Article (Bertolini2021)<br>
 Bertolini, M.; Mezzogori, D.; Neroni, M. &amp; Zammori, F.<br>
-Machine Learning for industrial applications: A comprehensive literature review<br>
-Expert Systems with Applications, 2021, 175, 114820</p>
+Machine Learning for industrial applications: A comprehensive literature review Expert Systems with Applications, 2021, 175, 114820</p>
 </blockquote>
 <ul>
 <li><p>Good review paper, classifies papers by Application Domain and by ML algorithm.</p></li>
@@ -262,8 +266,10 @@ Using these metrics, five main clusters can be identified. These are:
 <hr>
 </section>
 </section>
-<section id="star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview" class="level3">
-<h3 class="anchored" data-anchor-id="star-smart-machining-process-using-machine-learning-a-review-and-perspective-on-machining-industry-2018-kim2018_smartmachinereview">(<span class="math inline">\(3\star\)</span>) Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) <span class="citation" data-cites="Kim2018_SmartMachineReview">(<a href="#ref-Kim2018_SmartMachineReview" role="doc-biblioref">Kim et al. 2018</a>)</span></h3>
+<section id="kim2018" class="level3">
+<h3 class="anchored" data-anchor-id="kim2018">Kim2018</h3>
+<p><strong>Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) <span class="citation" data-cites="Kim2018_SmartMachineReview">(<a href="#ref-Kim2018_SmartMachineReview" role="doc-biblioref">Kim et al. 2018</a>)</span></strong></p>
+<p><span class="math inline">\(3/5 \star\)</span></p>
 <p>Contains a listing of many machining problems where machine learning algorithms have been used in machining.</p>
 <ul>
 <li>Machine processes: General, milling, drilling</li>
@@ -272,8 +278,10 @@ Using these metrics, five main clusters can be identified. These are:
 </ul>
 <hr>
 </section>
-<section id="star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021" class="level3">
-<h3 class="anchored" data-anchor-id="star-data-driven-cutting-tool-fault-diagnosis-system-using-machine-learning-approach-a-review-tambake2021">(<span class="math inline">\(2\star\)</span>) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review <span class="citation" data-cites="Tambake2021">(<a href="#ref-Tambake2021" role="doc-biblioref">Tambake, Deshmukh, and Patange 2021</a>)</span></h3>
+<section id="tambake2021" class="level3">
+<h3 class="anchored" data-anchor-id="tambake2021">Tambake2021</h3>
+<p><strong>Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review <span class="citation" data-cites="Tambake2021">(<a href="#ref-Tambake2021" role="doc-biblioref">Tambake, Deshmukh, and Patange 2021</a>)</span></strong></p>
+<p><span class="math inline">\(2/5 \star\)</span></p>
 <ul>
 <li>Poorly written, but contains a list of papers on fault detection</li>
 </ul>
@@ -284,16 +292,18 @@ Using these metrics, five main clusters can be identified. These are:
 </section>
 <section id="technical-papers" class="level2">
 <h2 class="anchored" data-anchor-id="technical-papers">Technical papers</h2>
-<section id="wear-characterization-of-the-cutting-tool-in-milling-processes-using-shape-and-texture-descriptors-phd-thesis-2017ordas2017_wearcharactphd" class="level3">
-<h3 class="anchored" data-anchor-id="wear-characterization-of-the-cutting-tool-in-milling-processes-using-shape-and-texture-descriptors-phd-thesis-2017ordas2017_wearcharactphd">Wear Characterization of the Cutting Tool in Milling Processes using Shape and Texture Descriptors (PhD thesis, 2017)<span class="citation" data-cites="Ordas2017_WearCharactPhD">(<a href="#ref-Ordas2017_WearCharactPhD" role="doc-biblioref">García-Ordás 2017</a>)</span></h3>
+<section id="ordas2017" class="level3">
+<h3 class="anchored" data-anchor-id="ordas2017">Ordas2017</h3>
+<p><strong>Wear Characterization of the Cutting Tool in Milling Processes using Shape and Texture Descriptors (PhD thesis, 2017)<span class="citation" data-cites="Ordas2017_WearCharactPhD">(<a href="#ref-Ordas2017_WearCharactPhD" role="doc-biblioref">García-Ordás 2017</a>)</span></strong></p>
 <ul>
 <li><p>PhD thesis which proposes and evaluates some image-based descriptors to characterize tool wear, using a cheap Raspberry Pi + camera setup which captures images of the cutting tool.</p></li>
 <li><p>Investigative / no remarkable results.</p></li>
 </ul>
 <hr>
 </section>
-<section id="surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020" class="level3">
-<h3 class="anchored" data-anchor-id="surface-roughness-diagnosis-in-hard-turning-using-acoustic-signals-and-support-vector-machine-a-pca-based-approach-papandrea2020">Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach <span class="citation" data-cites="Papandrea2020">(<a href="#ref-Papandrea2020" role="doc-biblioref">Papandrea et al. 2020</a>)</span></h3>
+<section id="papandrea2020" class="level3">
+<h3 class="anchored" data-anchor-id="papandrea2020">Papandrea2020</h3>
+<p><strong>Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach <span class="citation" data-cites="Papandrea2020">(<a href="#ref-Papandrea2020" role="doc-biblioref">Papandrea et al. 2020</a>)</span></strong></p>
 <ul>
 <li>Supervised Learning</li>
 <li>Surface roughness classification, based on acoustic signals during cutting.</li>
@@ -306,8 +316,9 @@ Using these metrics, five main clusters can be identified. These are:
 <p><img src="img/2023-01-07-12-16-33.png" class="img-fluid"></p>
 <hr>
 </section>
-<section id="tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005" class="level3">
-<h3 class="anchored" data-anchor-id="tool-breakage-detection-using-support-vector-machine-learning-in-a-milling-process-cho2005">Tool breakage detection using support vector machine learning in a milling process <span class="citation" data-cites="Cho2005">(<a href="#ref-Cho2005" role="doc-biblioref">Cho et al. 2005</a>)</span></h3>
+<section id="cho2005" class="level3">
+<h3 class="anchored" data-anchor-id="cho2005">Cho2005</h3>
+<p><strong>Tool breakage detection using support vector machine learning in a milling process <span class="citation" data-cites="Cho2005">(<a href="#ref-Cho2005" role="doc-biblioref">Cho et al. 2005</a>)</span></strong></p>
 <blockquote class="blockquote">
 <p>Article (Cho2005)<br>
 Cho, S.; Asfour, S.; Onar, A. &amp; Kaundinya, N.<br>
@@ -327,8 +338,9 @@ International Journal of Machine Tools and Manufacture, 2005, 45, 241-249</p>
 </ul>
 <hr>
 </section>
-<section id="an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017" class="level3">
-<h3 class="anchored" data-anchor-id="an-ensemble-deep-convolutional-neural-network-model-with-improved-d-s-evidence-fusion-for-bearing-fault-diagnosis-li2017">An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis <span class="citation" data-cites="Li2017">(<a href="#ref-Li2017" role="doc-biblioref">Li et al. 2017</a>)</span></h3>
+<section id="li2017" class="level3">
+<h3 class="anchored" data-anchor-id="li2017">Li2017</h3>
+<p><strong>An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis <span class="citation" data-cites="Li2017">(<a href="#ref-Li2017" role="doc-biblioref">Li et al. 2017</a>)</span></strong></p>
 <blockquote class="blockquote">
 <p>Article (Li2017)<br>
 Li, S.; Liu, G.; Tang, X.; Lu, J. &amp; Hu, J.<br>
@@ -347,8 +359,9 @@ Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729</p>
 </ul>
 <hr>
 </section>
-<section id="fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011" class="level3">
-<h3 class="anchored" data-anchor-id="fault-diagnosis-of-ball-bearings-using-machine-learning-methods-kankar2011">Fault diagnosis of ball bearings using machine learning methods <span class="citation" data-cites="Kankar2011">(<a href="#ref-Kankar2011" role="doc-biblioref">Kankar, Sharma, and Harsha 2011</a>)</span></h3>
+<section id="kankar2011" class="level3">
+<h3 class="anchored" data-anchor-id="kankar2011">Kankar2011</h3>
+<p><strong>Fault diagnosis of ball bearings using machine learning methods <span class="citation" data-cites="Kankar2011">(<a href="#ref-Kankar2011" role="doc-biblioref">Kankar, Sharma, and Harsha 2011</a>)</span></strong></p>
 <blockquote class="blockquote">
 <p>Article (Kankar2011)<br>
 Kankar, P. K.; Sharma, S. C. &amp; Harsha, S. P.<br>
@@ -376,8 +389,9 @@ Expert Systems with Applications, 2011, 38, 1876-1886</p>
 <p><img src="img/2023-01-09-12-28-36.png" class="img-fluid"></p>
 <hr>
 </section>
-<section id="tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision" class="level3">
-<h3 class="anchored" data-anchor-id="tool-condition-monitoring-in-cnc-end-milling-using-wavelet-neural-network-based-on-machine-vision">Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision</h3>
+<section id="ong2019" class="level3">
+<h3 class="anchored" data-anchor-id="ong2019">Ong2019</h3>
+<p><strong>Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision <span class="citation" data-cites="Ong2019">(<a href="#ref-Ong2019" role="doc-biblioref">Ong, Lee, and Lau 2019</a>)</span></strong></p>
 <blockquote class="blockquote">
 <p>Article (Ong2019)<br>
 Ong, P.; Lee, W. K. &amp; Lau, R. J. H.<br>
@@ -425,9 +439,6 @@ The International Journal of Advanced Manufacturing Technology, 2019, 104, 1369-
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Bertolini2021" class="csl-entry" role="doc-biblioentry">
-Bertolini, Massimo, Davide Mezzogori, Mattia Neroni, and Francesco Zammori. 2021. <span>“Machine <span>Learning</span> for Industrial Applications: <span>A</span> Comprehensive Literature Review.”</span> <em>Expert Systems with Applications</em> 175 (August): 114820. <a href="https://doi.org/10.1016/j.eswa.2021.114820">https://doi.org/10.1016/j.eswa.2021.114820</a>.
-</div>
 <div id="ref-Cho2005" class="csl-entry" role="doc-biblioentry">
 Cho, Sohyung, Shihab Asfour, Arzu Onar, and Nandita Kaundinya. 2005. <span>“Tool Breakage Detection Using Support Vector Machine Learning in a Milling Process.”</span> <em>International Journal of Machine Tools and Manufacture</em> 45 (3): 241–49. <a href="https://doi.org/10.1016/j.ijmachtools.2004.08.016">https://doi.org/10.1016/j.ijmachtools.2004.08.016</a>.
 </div>
@@ -442,6 +453,9 @@ Kim, Dong-Hyeon, Thomas J. Y. Kim, Xinlin Wang, Mincheol Kim, Ying-Jun Quan, Jin
 </div>
 <div id="ref-Li2017" class="csl-entry" role="doc-biblioentry">
 Li, Shaobo, Guokai Liu, Xianghong Tang, Jianguang Lu, and Jianjun Hu. 2017. <span>“An <span>Ensemble</span> <span>Deep</span> <span>Convolutional</span> <span>Neural</span> <span>Network</span> <span>Model</span> with <span>Improved</span> <span>D</span>-<span>S</span> <span>Evidence</span> <span>Fusion</span> for <span>Bearing</span> <span>Fault</span> <span>Diagnosis</span>.”</span> <em>Sensors</em> 17 (8): 1729. <a href="https://doi.org/10.3390/s17081729">https://doi.org/10.3390/s17081729</a>.
+</div>
+<div id="ref-Ong2019" class="csl-entry" role="doc-biblioentry">
+Ong, Pauline, Woon Kiow Lee, and Raymond Jit Hoo Lau. 2019. <span>“Tool Condition Monitoring in <span>CNC</span> End Milling Using Wavelet Neural Network Based on Machine Vision.”</span> <em>The International Journal of Advanced Manufacturing Technology</em> 104 (1): 1369–79. <a href="https://doi.org/10.1007/s00170-019-04020-6">https://doi.org/10.1007/s00170-019-04020-6</a>.
 </div>
 <div id="ref-Papandrea2020" class="csl-entry" role="doc-biblioentry">
 Papandrea, Pedro J., Edielson P. Frigieri, Paulo Roberto Maia, Lucas G. Oliveira, and Anderson P. Paiva. 2020. <span>“Surface Roughness Diagnosis in Hard Turning Using Acoustic Signals and Support Vector Machine: <span>A</span> <span>PCA</span>-Based Approach.”</span> <em>Applied Acoustics</em> 159 (February): 107102. <a href="https://doi.org/10.1016/j.apacoust.2019.107102">https://doi.org/10.1016/j.apacoust.2019.107102</a>.
