@@ -1,0 +1,26 @@
+---
+title: "Paper Reviews - 2022-12-13 LOS"
+date: "2022-12-12"
+categories: [paper]
+description: Paper reviews
+#image: 'img/2022-11-14-09-20-56.png'
+toc: true
+toc-location: left
+toc-depth: 4
+---
+
+A quick overview of some papers mentioned in LOS Seminar 2022-12-13
+
+## Xie2013: On A Nonlinear Generalization of Sparse Coding and Dictionary Learning
+
+- > a novel framework for sparse coding and dictionary learning for data on a Riemannian manifold, and it shows that the existing sparse coding and dictionary learning methods can be considered as special (Euclidean) cases of the more general framework proposed here.
+
+- > data and features are often presented as points on known Riemannian manifolds, e.g., the space of symmetric positive-definite matrices (Fletcher & Joshi, 2007), hyperspheres for parameterizing square-root densities (Srivastava et al., 2007), Stiefel and Grassmann manifolds (Mardia & Jupp, 1999), etc..
+
+- Manifold-based sparse coding.
+
+- Reformulates sparsity in affine way, reformulates sparse coding and dictionary learning
+
+- Example: dictionary learning on the sphere
+
+- Strongly mathematical

@@ -5,7 +5,8 @@ categories: [paper]
 description: A review of papers on ML / AI approaches in machining and CNC
 #image: 'img/2022-11-14-09-20-56.png'
 toc: true
-toc-location: body
+#toc-location: body
+toc-location: left
 toc-depth: 3
 
 bibliography: CNCpapers.bib
@@ -18,12 +19,16 @@ format:
 
 ## Review papers
 
-### ($5\star$) Machine Learning for industrial applications: A comprehensive literature review [@Bertolini2021]
+### Bertolini2021
 
-> Article (Bertolini2021)
-> Bertolini, M.; Mezzogori, D.; Neroni, M. & Zammori, F.
-> Machine Learning for industrial applications: A comprehensive literature review 
-> Expert Systems with Applications, 2021, 175, 114820 
+**Machine Learning for industrial applications: A comprehensive literature review**  
+
+$5/5 \star$
+
+> Article (Bertolini2021)  
+> Bertolini, M.; Mezzogori, D.; Neroni, M. & Zammori, F.  
+> Machine Learning for industrial applications: A comprehensive literature review
+> Expert Systems with Applications, 2021, 175, 114820  
 
 - Good review paper, classifies papers by Application Domain and by ML algorithm.
 - Not only for CNC / machining, but many types of industrial applications
@@ -112,7 +117,13 @@ Other things:
 - unbalanced data
 - low interpretability, with Deep NNs
 
-### ($3\star$) Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) [@Kim2018_SmartMachineReview]
+---
+
+### Kim2018
+
+**Smart Machining Process Using Machine Learning: A Review and Perspective on Machining Industry (2018) [@Kim2018_SmartMachineReview]**
+
+$3/5 \star$
 
 Contains a listing of many machining problems where machine learning algorithms have been used in machining.
 
@@ -120,7 +131,13 @@ Contains a listing of many machining problems where machine learning algorithms 
 - Purpose: Tool wear and breakage, predict energy consumption, surface roughness prediction, process parameter optimization
 - Algorithms: SVM and SVR, various NNs, Random forests, linear regression,  k-NN, depending on task
 
-### ($2\star$) Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review [@Tambake2021]
+---
+
+### Tambake2021
+
+**Data Driven Cutting Tool Fault Diagnosis System Using Machine Learning Approach: A Review [@Tambake2021]**
+
+$2/5 \star$
 
 - Poorly written, but contains a list of papers on fault detection
 
@@ -128,17 +145,25 @@ Contains a listing of many machining problems where machine learning algorithms 
 
 ![](img/2023-01-07-12-20-27.png)
 
+---
 
 ## Technical papers
 
-### Wear Characterization of the Cutting Tool in Milling Processes using Shape and Texture Descriptors (PhD thesis, 2017)[@Ordas2017_WearCharactPhD] 
+### Ordas2017
+
+**Wear Characterization of the Cutting Tool in Milling Processes using Shape and Texture Descriptors (PhD thesis, 2017)[@Ordas2017_WearCharactPhD]**
 
 - PhD thesis which proposes and evaluates some image-based descriptors to characterize tool wear, using a cheap Raspberry Pi + camera setup which captures images of the cutting tool.
 
 - Investigative / no remarkable results.
 
-### Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach [@Papandrea2020]
+---
 
+### Papandrea2020
+
+**Surface roughness diagnosis in hard turning using acoustic signals and support vector machine: A PCA-based approach [@Papandrea2020]**
+
+- Supervised Learning
 - Surface roughness classification, based on acoustic signals during cutting. 
 - Use STFT followed by PCA per coefficients, and SVM for classification.
 - Tested on CNC, with stock microphone
@@ -148,13 +173,18 @@ Contains a listing of many machining problems where machine learning algorithms 
 
 ![](img/2023-01-07-12-16-33.png)
 
-### Tool breakage detection using support vector machine learning in a milling process [@Cho2005]
+---
 
-> Article (Cho2005)
-> Cho, S.; Asfour, S.; Onar, A. & Kaundinya, N.
-> Tool breakage detection using support vector machine learning in a milling process
-> International Journal of Machine Tools and Manufacture, 2005, 45, 241-249
+### Cho2005
 
+**Tool breakage detection using support vector machine learning in a milling process [@Cho2005]**
+
+> Article (Cho2005)  
+> Cho, S.; Asfour, S.; Onar, A. & Kaundinya, N.  
+> Tool breakage detection using support vector machine learning in a milling process  
+> International Journal of Machine Tools and Manufacture, 2005, 45, 241-249  
+
+- Supervised Learning
 - Detect two types of tool breakage: shank breakage and flute breakage
 - Cutting forces + power consumption (proportional with force) + SVRegression => detect flute breakage
 - Idea:
@@ -162,21 +192,91 @@ Contains a listing of many machining problems where machine learning algorithms 
   - Detection: if actual measured values deviate a lot from model predictions (by a threshold), we have a breakage.
 - SVR is hard to parameterize!
 
-### An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis [@Li2017]
+---
 
-> Article (Li2017)
-> Li, S.; Liu, G.; Tang, X.; Lu, J. & Hu, J.
-> An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis 
-> Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729
+### Li2017
+
+**An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis [@Li2017]**
+
+> Article (Li2017)  
+> Li, S.; Liu, G.; Tang, X.; Lu, J. & Hu, J.  
+> An Ensemble Deep Convolutional Neural Network Model with Improved D-S Evidence Fusion for Bearing Fault Diagnosis  
+> Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729  
 
 ![](img/2023-01-08-19-37-45.png)
 
+- Supervised Learning
 - For bearing fault detection, with deep neural networks
 - Using Dempster–Shafer (D-S) evidence theory for sensor fusion, improves it with custom modifications
 - Raw signals: acceleration and vibration from 2 sensors
 - Data preprocessing: sliding windows, subband, RMS, reshape to square images
 - Small CNN trained in images, used as feature extractors
 - CNN outputs are fused with the Improved D-S scheme
+
+---
+
+### Kankar2011
+
+**Fault diagnosis of ball bearings using machine learning methods [@Kankar2011]**
+
+> Article (Kankar2011)  
+> Kankar, P. K.; Sharma, S. C. & Harsha, S. P.  
+> Fault diagnosis of ball bearings using machine learning methods  
+> Expert Systems with Applications, 2011, 38, 1876-1886  
+
+- Supervised Learning
+- Detect defects and in ball bearings based on vibration data collected with accelerometers
+- 2D acceleration signals (horizontal and vertical)
+- Recording length = about 0.5 to 1 second
+- 5 classes: 
+  - Healthy bearings (HB).
+  - Bearing with outer race crack (BORC).
+  - Bearing with rough inner race surface (BRIR).
+  - Ball with corrosion pitting (BCP).
+  - Combined bearing component defects (CBD)
+- **Manual features** (range, mean, kurtosis etc): 
+  
+  6 features from horizontal + 6 features vertical + speed + "number of loader" =< 14 features per instance
+- Feature selection step (not clear how)
+- Results: accuracy about 70%
+
+![](img/2023-01-09-12-28-36.png)
+
+---
+
+### Ong2019
+
+**Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision [@Ong2019]**
+
+> Article (Ong2019)  
+> Ong, P.; Lee, W. K. & Lau, R. J. H.  
+> Tool condition monitoring in CNC end milling using wavelet neural network based on machine vision   
+> The International Journal of Advanced Manufacturing Technology, 2019, 104, 1369-1379  
+
+- Nice introduction and review: 
+  - > For the indirect method of tool condition monitoring, there are considerably numerous studies attempting to correlate the
+      relationship between the machining parameters with tool wear
+  - tool wear detection with visual and non-visual signals (cutting force, sound, vibration)
+  - tool wear estimation by visually analyzing the surface of the machined part
+
+- Ue a special type of NN, Wavelet Neural Network, to predict **flank wear**. WNN is just their quirk.
+- WNN are a generalized form of RBF-NN, with wavelet activation functions
+- Use images of the tool itself and/or the surface of the machined part
+- Image preprocessing of the worn region of the tool:
+
+  ![]()img/2023-01-09-12-54-18.png
+
+- NN architecture used. Shallow with 1 hidden layer:
+
+  ![](img/2023-01-09-12-55-14.png)
+
+- Dataset: just 126 images
+
+- Results: good predictions by pretty much all methods compared. 
+
+  ![](img/2023-01-09-13-01-36.png)
+
+---
 
 ## Datasets
 
