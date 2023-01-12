@@ -172,7 +172,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, interior hidden, boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -654,6 +654,113 @@ The International Journal of Advanced Manufacturing Technology, 2019,
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\hypertarget{hahn2021}{%
+\subsubsection{Hahn2021}\label{hahn2021}}
+
+\begin{quote}
+Article (Hahn2021)\\
+Hahn, T. V. \& Mechefske, C. K.\\
+Self-supervised learning for tool wear monitoring with a
+disentangled-variational-autoencoder\\
+International Journal of Hydromechatronics, Inderscience Publishers,
+2021, 4, 69-98
+\end{quote}
+
+\begin{itemize}
+\item
+  from \texttt{PapersWithCode}
+\item
+  \begin{quote}
+  A disentangled-variational-autoencoder, with a temporal convolutional
+  neural network, is used to model and trend tool wear in a
+  self-supervised manner, and anomaly detection is used to make
+  predictions from both the input and latent spaces
+  \end{quote}
+\item
+  End-to-end Deep Learning
+\item
+  Temporal CNN:
+
+  \begin{itemize}
+  \item
+    causal and dilated convolutions
+
+    \includegraphics{img/2023-01-12-11-17-38.png}
+  \end{itemize}
+\item
+  Disentangled-VAE:
+
+  \begin{itemize}
+  \item
+    just a normal VAE with a value of \(\beta\) higher than one in the
+    cost function (?):
+
+    \includegraphics{img/2023-01-12-11-23-14.png}
+  \item
+    \begin{quote}
+    Tuning the hyper-parameter β, to a value larger than one, can enable
+    the factors to disentangle such that each coding only represents one
+    factor at a time. Thus, greater interpretability of the model can be
+    obtained. As such, the disentangled-VAE is also called a β-VAE
+    \end{quote}
+  \end{itemize}
+\item
+  \textbf{Latent space anomaly detection}: detect anomaly in the latent
+  variables, i.e.~out-of-distribution. Several methods available.
+  KL-divergence.
+\item
+  Datasets:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    UC Berkeley Milling dataset. Freely available, small.
+  \item
+    Actual data from industry partener: 27 days, 5600 parts, annotated.
+    Unavailable, large.
+  \end{itemize}
+\item
+  Process:
+
+  \includegraphics{img/2023-01-12-11-29-43.png}
+
+  \includegraphics{img/2023-01-12-11-35-37.png}
+\item
+  Preprocessing:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    select middle part of recording (stable cutting)
+  \item
+    sliding window
+  \item
+    MinMax scaling to \([0,1]\)
+  \item
+    each window labeled by hand (healthy / degraded / failed)
+  \item
+    randomly group windows into train/test sets
+  \end{itemize}
+\item
+  Standard training
+\item
+  Results:
+
+  \begin{itemize}
+  \item
+    PR-AUC 50\% for failed vs non-failed on the UC Berkeley dataset
+    (PR-AUC = Precision-Recall AUC)
+
+    \includegraphics{img/2023-01-12-11-44-23.png}
+  \item
+    4\% PR-AUC on the industrial dataset ????!!!!
+
+    \includegraphics{img/2023-01-12-11-45-14.png}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{datasets}{%
 \subsection{Datasets}\label{datasets}}
 
@@ -682,6 +789,32 @@ at 48,000 samples per second for drive end bearing faults. Speed and
 horsepower data were collected using the torque transducer/encoder and
 were recorded by hand.
 \end{quote}
+
+\hypertarget{uc-berkeley-milling-dataset}{%
+\subsubsection{UC Berkeley Milling
+dataset}\label{uc-berkeley-milling-dataset}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository}{Link
+  here}
+\item
+  PapersWithCode:
+  \href{https://paperswithcode.com/dataset/milling-data-set}{Link here}
+\item
+  Kaggle:
+  \href{https://www.kaggle.com/datasets/vinayak123tyagi/milling-data-set-prognostic-data}{Link
+  here}
+\end{itemize}
+
+\begin{quote}
+Experiments on a milling machine for different speeds, feeds, and depth
+of cut. Records the wear of the milling insert, VB. The data set was
+provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
+\end{quote}
+
+\includegraphics{img/2023-01-12-11-28-23.png}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}

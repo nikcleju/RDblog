@@ -173,10 +173,12 @@ div.csl-indent {
   <li><a href="#li2017" id="toc-li2017" class="nav-link" data-scroll-target="#li2017">Li2017</a></li>
   <li><a href="#kankar2011" id="toc-kankar2011" class="nav-link" data-scroll-target="#kankar2011">Kankar2011</a></li>
   <li><a href="#ong2019" id="toc-ong2019" class="nav-link" data-scroll-target="#ong2019">Ong2019</a></li>
+  <li><a href="#hahn2021" id="toc-hahn2021" class="nav-link" data-scroll-target="#hahn2021">Hahn2021</a></li>
   </ul></li>
   <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a>
   <ul class="collapse">
   <li><a href="#crwu-bearing-dataset" id="toc-crwu-bearing-dataset" class="nav-link" data-scroll-target="#crwu-bearing-dataset">CRWU Bearing Dataset</a></li>
+  <li><a href="#uc-berkeley-milling-dataset" id="toc-uc-berkeley-milling-dataset" class="nav-link" data-scroll-target="#uc-berkeley-milling-dataset">UC Berkeley Milling dataset</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -420,6 +422,61 @@ The International Journal of Advanced Manufacturing Technology, 2019, 104, 1369-
 </ul>
 <hr>
 </section>
+<section id="hahn2021" class="level3">
+<h3 class="anchored" data-anchor-id="hahn2021">Hahn2021</h3>
+<blockquote class="blockquote">
+<p>Article (Hahn2021)<br>
+Hahn, T. V. &amp; Mechefske, C. K.<br>
+Self-supervised learning for tool wear monitoring with a disentangled-variational-autoencoder<br>
+International Journal of Hydromechatronics, Inderscience Publishers, 2021, 4, 69-98</p>
+</blockquote>
+<ul>
+<li><p>from <code>PapersWithCode</code></p></li>
+<li><blockquote class="blockquote">
+<p>A disentangled-variational-autoencoder, with a temporal convolutional neural network, is used to model and trend tool wear in a self-supervised manner, and anomaly detection is used to make predictions from both the input and latent spaces</p>
+</blockquote></li>
+<li><p>End-to-end Deep Learning</p></li>
+<li><p>Temporal CNN:</p>
+<ul>
+<li><p>causal and dilated convolutions</p>
+<p><img src="img/2023-01-12-11-17-38.png" class="img-fluid"></p></li>
+</ul></li>
+<li><p>Disentangled-VAE:</p>
+<ul>
+<li><p>just a normal VAE with a value of <span class="math inline">\(\beta\)</span> higher than one in the cost function (?):</p>
+<p><img src="img/2023-01-12-11-23-14.png" class="img-fluid"></p></li>
+<li><blockquote class="blockquote">
+<p>Tuning the hyper-parameter β, to a value larger than one, can enable the factors to disentangle such that each coding only represents one factor at a time. Thus, greater interpretability of the model can be obtained. As such, the disentangled-VAE is also called a β-VAE</p>
+</blockquote></li>
+</ul></li>
+<li><p><strong>Latent space anomaly detection</strong>: detect anomaly in the latent variables, i.e.&nbsp;out-of-distribution. Several methods available. KL-divergence.</p></li>
+<li><p>Datasets:</p>
+<ul>
+<li>UC Berkeley Milling dataset. Freely available, small.</li>
+<li>Actual data from industry partener: 27 days, 5600 parts, annotated. Unavailable, large.</li>
+</ul></li>
+<li><p>Process:</p>
+<p><img src="img/2023-01-12-11-29-43.png" class="img-fluid"></p>
+<p><img src="img/2023-01-12-11-35-37.png" class="img-fluid"></p></li>
+<li><p>Preprocessing:</p>
+<ul>
+<li>select middle part of recording (stable cutting)</li>
+<li>sliding window</li>
+<li>MinMax scaling to <span class="math inline">\([0,1]\)</span></li>
+<li>each window labeled by hand (healthy / degraded / failed)</li>
+<li>randomly group windows into train/test sets</li>
+</ul></li>
+<li><p>Standard training</p></li>
+<li><p>Results:</p>
+<ul>
+<li><p>PR-AUC 50% for failed vs non-failed on the UC Berkeley dataset (PR-AUC = Precision-Recall AUC)</p>
+<p><img src="img/2023-01-12-11-44-23.png" class="img-fluid"></p></li>
+<li><p>4% PR-AUC on the industrial dataset ????!!!!</p>
+<p><img src="img/2023-01-12-11-45-14.png" class="img-fluid"></p></li>
+</ul></li>
+</ul>
+<hr>
+</section>
 </section>
 <section id="datasets" class="level2">
 <h2 class="anchored" data-anchor-id="datasets">Datasets</h2>
@@ -432,6 +489,18 @@ The International Journal of Advanced Manufacturing Technology, 2019, 104, 1369-
 <blockquote class="blockquote">
 <p>Vibration data was collected using accelerometers, which were attached to the housing with magnetic bases. Accelerometers were placed at the 12 o’clock position at both the drive end and fan end of the motor housing. During some experiments, an accelerometer was attached to the motor supporting base plate as well. Vibration signals were collected using a 16 channel DAT recorder, and were post processed in a Matlab environment. All data files are in Matlab (*.mat) format. Digital data was collected at 12,000 samples per second, and data was also collected at 48,000 samples per second for drive end bearing faults. Speed and horsepower data were collected using the torque transducer/encoder and were recorded by hand.</p>
 </blockquote>
+</section>
+<section id="uc-berkeley-milling-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="uc-berkeley-milling-dataset">UC Berkeley Milling dataset</h3>
+<ul>
+<li><a href="https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository">Link here</a></li>
+<li>PapersWithCode: <a href="https://paperswithcode.com/dataset/milling-data-set">Link here</a></li>
+<li>Kaggle: <a href="https://www.kaggle.com/datasets/vinayak123tyagi/milling-data-set-prognostic-data">Link here</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>Experiments on a milling machine for different speeds, feeds, and depth of cut. Records the wear of the milling insert, VB. The data set was provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.</p>
+</blockquote>
+<p><img src="img/2023-01-12-11-28-23.png" class="img-fluid"></p>
 
 
 
