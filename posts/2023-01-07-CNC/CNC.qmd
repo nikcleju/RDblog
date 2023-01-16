@@ -278,6 +278,66 @@ $2/5 \star$
 
 ---
 
+### Hahn2021
+
+> Article (Hahn2021)  
+> Hahn, T. V. & Mechefske, C. K.  
+> Self-supervised learning for tool wear monitoring with a disentangled-variational-autoencoder  
+> International Journal of Hydromechatronics, Inderscience Publishers, 2021, 4, 69-98  
+
+- from `PapersWithCode`
+
+- > A disentangled-variational-autoencoder, with a temporal convolutional neural network, is used to model and trend
+    tool wear in a self-supervised manner, and anomaly detection is used to make predictions from both the input and latent spaces
+
+- End-to-end Deep Learning
+- Temporal CNN: 
+  - causal and dilated convolutions
+
+    ![](img/2023-01-12-11-17-38.png)
+
+- Disentangled-VAE:
+  - just a normal VAE with a value of $\beta$ higher than one in the cost function (?):
+
+    ![](img/2023-01-12-11-23-14.png)
+
+  - > Tuning the hyper-parameter β, to a value larger than one, can enable the factors to disentangle such that each coding
+      only represents one factor at a time. Thus, greater interpretability of the model can be
+      obtained. As such, the disentangled-VAE is also called a β-VAE
+
+- **Latent space anomaly detection**: detect anomaly in the latent variables, i.e. out-of-distribution. Several methods available. KL-divergence.
+
+- Datasets:
+  - UC Berkeley Milling dataset. Freely available, small.
+  - Actual data from industry partener: 27 days, 5600 parts, annotated. Unavailable, large.
+
+
+- Process:
+  
+  ![](img/2023-01-12-11-29-43.png)
+
+  ![](img/2023-01-12-11-35-37.png)
+  
+- Preprocessing:
+  - select middle part of recording (stable cutting)
+  - sliding window
+  - MinMax scaling to $[0,1]$
+  - each window labeled by hand (healthy / degraded / failed)
+  - randomly group windows into train/test sets
+
+- Standard training
+
+- Results: 
+  - PR-AUC 50% for failed vs non-failed on the UC Berkeley dataset (PR-AUC = Precision-Recall AUC)
+    
+    ![](img/2023-01-12-11-44-23.png)
+
+  - 4% PR-AUC on the industrial dataset ????!!!!
+
+    ![](img/2023-01-12-11-45-14.png)
+
+---
+
 ## Datasets
 
 ### CRWU Bearing Dataset
@@ -287,3 +347,13 @@ $2/5 \star$
 - [Link here](https://engineering.case.edu/bearingdatacenter/download-data-file)
   
 > Vibration data was collected using accelerometers, which were attached to the housing with magnetic bases. Accelerometers were placed at the 12 o’clock position at both the drive end and fan end of the motor housing. During some experiments, an accelerometer was attached to the motor supporting base plate as well. Vibration signals were collected using a 16 channel DAT recorder, and were post processed in a Matlab environment. All data files are in Matlab (*.mat) format. Digital data was collected at 12,000 samples per second, and data was also collected at 48,000 samples per second for drive end bearing faults. Speed and horsepower data were collected using the torque transducer/encoder and were recorded by hand.
+
+### UC Berkeley Milling dataset
+
+- [Link here](https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository)
+- PapersWithCode: [Link here](https://paperswithcode.com/dataset/milling-data-set)
+- Kaggle: [Link here](https://www.kaggle.com/datasets/vinayak123tyagi/milling-data-set-prognostic-data)
+
+> Experiments on a milling machine for different speeds, feeds, and depth of cut. Records the wear of the milling insert, VB. The data set was provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
+
+![](img/2023-01-12-11-28-23.png)

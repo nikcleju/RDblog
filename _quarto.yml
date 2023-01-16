@@ -15,5 +15,6 @@ format:
     theme: cosmo
     css: styles.css
 
-
-
+# For Github Actions
+execute:
+  freeze: auto
