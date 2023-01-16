@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://nikcleju.github.io/RDblog/about.html</loc>
-    <lastmod>2023-01-12T15:46:27.934Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/index.html</loc>
+    <lastmod>2023-01-16T16:01:13.802Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/index.html</loc>
-    <lastmod>2023-01-12T15:46:28.356Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/about.html</loc>
+    <lastmod>2023-01-16T16:01:14.442Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-10_LOF/LOF.html</loc>
-    <lastmod>2023-01-12T15:46:28.585Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
+    <lastmod>2023-01-16T16:01:14.858Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-14_Scoring/Scoring.html</loc>
-    <lastmod>2023-01-12T15:46:28.832Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-14_Scoring/Scoring.html</loc>
+    <lastmod>2023-01-16T16:01:15.166Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
-    <lastmod>2023-01-12T15:46:29.147Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2023-01-16-VAE_Anomaly_Detection/VAEAnomalyDetection.html</loc>
+    <lastmod>2023-01-16T16:01:15.494Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
-    <lastmod>2023-01-12T15:46:29.379Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/post-with-code/index.html</loc>
+    <lastmod>2023-01-16T16:01:16.050Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-12-12_LOS-Reviews/LOS_Reviews.html</loc>
-    <lastmod>2023-01-12T15:46:29.601Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2023-01-07-CNC/CNC.html</loc>
+    <lastmod>2023-01-16T16:01:16.638Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2023-01-07-CNC/CNC.html</loc>
-    <lastmod>2023-01-12T15:46:30.069Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/welcome/index.html</loc>
+    <lastmod>2023-01-16T16:01:17.430Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/post-with-code/index.html</loc>
-    <lastmod>2023-01-12T15:46:30.711Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
+    <lastmod>2023-01-16T16:01:17.778Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/welcome/index.html</loc>
-    <lastmod>2023-01-12T15:46:30.953Z</lastmod>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-12-12_LOS-Reviews/LOS_Reviews.html</loc>
+    <lastmod>2023-01-16T16:01:18.070Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/nikcleju/RDblog/posts/2022-11-10_LOF/LOF.html</loc>
+    <lastmod>2023-01-16T16:01:18.358Z</lastmod>
   </url>
 </urlset>
