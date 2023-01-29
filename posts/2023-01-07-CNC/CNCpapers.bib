@@ -183,10 +183,70 @@ We have created three insert datasets to assess our solutions in similar conditi
   abstract = {The monitoring of tool condition in machining processes has significant importance to control the quality of machined parts and to reduce equipment downtime. This study investigates the application of a special variant of artificial neural networks (ANNs), in particular, wavelet neural network (WNN) for tool wear monitoring in CNC end milling process of high-speed steel. A mixed level design of experiments with machining parameters of cutting speed, feed rate, cutting depth, and machining time is developed, from which 126 experiments are conducted. For each experiment, tool wear and surface roughness of machined workpiece are measured. The tool wear images are processed, and the descriptor of wear zone is extracted. The WNN is then applied to predict the flank wear of the cutting tool and compared with commonly used types of ANNs and the statistical model. Different input combinations with the inclusion of wear zone descriptor and surface roughness of machined parts are used to evaluate the performance of all models. Results show that the WNN with the input parameters of cutting speed, feed rate, depth of cut, machining time, and descriptor of wear zone predicts the degree of tool wear most accurately.},
   doi      = {10.1007/s00170-019-04020-6},
   file     = {:Ong2019 - Tool Condition Monitoring in CNC End Milling Using Wavelet Neural Network Based on Machine Vision.pdf:PDF;:/mnt/D/Documentatie/CNC/tmp/s00170-019-04020-6.pdf:PDF},
+  groups   = {Technical},
   keywords = {Artificial neural networks, Multilayer perceptron, Radial basis function neural network, Tool wear monitoring, Wavelet neural network},
   language = {en},
   url      = {https://doi.org/10.1007/s00170-019-04020-6},
   urldate  = {2023-01-09},
+}
+
+'
+@Article{Hahn2021,
+  author    = {Hahn, Tim Von and Mechefske, Chris K.},
+  journal   = {International Journal of Hydromechatronics},
+  title     = {Self-supervised learning for tool wear monitoring with a disentangled-variational-autoencoder},
+  year      = {2021},
+  issn      = {2515-0464},
+  month     = jan,
+  number    = {1},
+  pages     = {69--98},
+  volume    = {4},
+  abstract  = {The use of end-to-end deep learning in machinery health monitoring allows machine learning models to be created without the need for feature engineering. The research presented here expands on this use in the context of tool wear monitoring. A disentangled-variational-autoencoder, with a temporal convolutional neural network, is used to model and trend tool wear in a self-supervised manner, and anomaly detection is used to make predictions from both the input and latent spaces. The method achieves a precision-recall area-under-curve (PR-AUC) score of 0.45 across all cutting parameters on a milling dataset, and a top score of 0.80 for shallow depth cuts. The method achieves a top PR-AUC score of 0.41 on a real-world industrial CNC dataset, but the method does not generalise as well across the broad range of manufactured parts. The benefits of the approach, along with the drawbacks, are discussed in detail.},
+  doi       = {10.1504/IJHM.2021.114174},
+  file      = {:Hahn2021 - Self Supervised Learning for Tool Wear Monitoring with a Disentangled Variational Autoencoder.pdf:PDF},
+  groups    = {Technical},
+  keywords  = {tool wear monitoring, deep learning, machine learning, machinery health monitoring, MHM, anomaly detection, self-supervised learning, variational-autoencoder, VAE},
+  publisher = {Inderscience Publishers},
+  url       = {https://www.inderscienceonline.com/doi/abs/10.1504/IJHM.2021.114174},
+  urldate   = {2023-01-12},
+}
+
+@Article{Tnani2022,
+  author     = {Tnani, Mohamed-Ali and Feil, Michael and Diepold, Klaus},
+  journal    = {Procedia CIRP},
+  title      = {Smart {Data} {Collection} {System} for {Brownfield} {CNC} {Milling} {Machines}: {A} {New} {Benchmark} {Dataset} for {Data}-{Driven} {Machine} {Monitoring}},
+  year       = {2022},
+  issn       = {2212-8271},
+  month      = jan,
+  pages      = {131--136},
+  volume     = {107},
+  abstract   = {Manufacturing processes have undergone tremendous technological progress in recent decades. To meet the agile philosophy in industry, data-driven algorithms need to handle growing complexity, particularly in Computer Numerical Control machining. To enhance the scalability of machine learning in real-world applications, this paper presents a benchmark dataset for process monitoring of brownfield milling machines based on acceleration data. The data is collected from a real-world production plant using a smart data collection system over a two-years period. In this work, the edge-to-cloud setup is presented followed by an extensive description of the different normal and abnormal processes. An analysis of the dataset highlights the challenges of machine learning in industry caused by the environmental and industrial factors. The new dataset is published with this paper and available at: https://github.com/boschresearch/CNC\_Machining.},
+  doi        = {10.1016/j.procir.2022.04.022},
+  file       = {:Tnani2022 - Smart Data Collection System for Brownfield CNC Milling Machines_ a New Benchmark Dataset for Data Driven Machine Monitoring.pdf:PDF},
+  groups     = {Technical},
+  keywords   = {Smart manufacturing, Internet of Things, Machine learning, Process monitoring, Data mining, Industry 4.0, Industrial dataset},
+  language   = {en},
+  series     = {Leading manufacturing systems transformation – {Proceedings} of the 55th {CIRP} {Conference} on {Manufacturing} {Systems} 2022},
+  shorttitle = {Smart {Data} {Collection} {System} for {Brownfield} {CNC} {Milling} {Machines}},
+  url        = {https://www.sciencedirect.com/science/article/pii/S2212827122002384},
+  urldate    = {2023-01-29},
+}
+
+@InProceedings{Mey2020,
+  author    = {Mey, Oliver and Neudeck, Willi and Schneider, André and Enge-Rosenblatt, Olaf},
+  booktitle = {2020 25th {IEEE} {International} {Conference} on {Emerging} {Technologies} and {Factory} {Automation} ({ETFA})},
+  title     = {Machine {Learning}-{Based} {Unbalance} {Detection} of a {Rotating} {Shaft} {Using} {Vibration} {Data}},
+  year      = {2020},
+  month     = sep,
+  note      = {ISSN: 1946-0759},
+  pages     = {1610--1617},
+  volume    = {1},
+  abstract  = {Fault detection at rotating machinery with the help of vibration sensors offers the possibility to detect damage to machines at an early stage and to prevent production downtimes by taking appropriate measures. The analysis of the vibration data using methods of machine learning promises a significant reduction in the associated analysis effort and a further improvement in diagnostic accuracy. Here we publish a dataset which is used as a basis for the development and evaluation of algorithms for unbalance detection. For this purpose, unbalances of various sizes were attached to a rotating shaft using a 3D-printed holder. In a speed range from approx. 630 RPM to 2330 RPM, three sensors were used to record vibrations on the rotating shaft at a sampling rate of 4096 values per second. A development and an evaluation dataset are available for each unbalance strength. Using the dataset recorded in this way, fully connected and convolutional neural networks, Hidden Markov Models and Random Forest classifications on the basis of automatically extracted time series features were tested. With a prediction accuracy of 98.6 \% on the evaluation dataset, the best result could be achieved with a fully-connected neural network that receives the scaled FFT-transformed vibration data as input.},
+  doi       = {10.1109/ETFA46521.2020.9212000},
+  file      = {:Mey2020 - Machine Learning Based Unbalance Detection of a Rotating Shaft Using Vibration Data.pdf:PDF},
+  groups    = {Technical},
+  issn      = {1946-0759},
+  keywords  = {Vibrations, Shafts, Time series analysis, Neural networks, Vibration measurement, Feature extraction, Sensors},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
@@ -196,5 +256,5 @@ We have created three insert datasets to assess our solutions in similar conditi
 @Comment{jabref-meta: grouping:
 0 AllEntriesGroup:;
 1 StaticGroup:Review\;0\;0\;0x8a8a8aff\;\;\;;
-1 StaticGroup:Technical\;0\;0\;0x8a8a8aff\;\;\;;
+1 StaticGroup:Technical\;0\;1\;0x8a8a8aff\;\;\;;
 }
