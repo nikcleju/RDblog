@@ -1,0 +1,38 @@
+---
+title: GPUs for Deep Learning
+date: "2023-01-30"
+categories: [hardware, buy]
+description: A collection of benchmarks of GPUs for Deep Learning
+#image: 'img/2022-11-14-09-20-56.png'
+toc: true
+#toc-location: body
+toc-location: left
+toc-depth: 3
+
+#bibliography: CNCpapers.bib
+
+format:
+  html: default
+  latex: default
+---
+
+
+## Various benchmarks
+
+### LambdaLabs GPU benchmarks
+
+Link: [https://lambdalabs.com/gpu-benchmarks](https://lambdalabs.com/gpu-benchmarks)
+
+![](img/2023-01-30-09-04-03.png)
+
+### AIME info
+
+Link: [https://www.aime.info/en/blog/deep-learning-gpu-benchmarks-2021/](https://www.aime.info/en/blog/deep-learning-gpu-benchmarks-2021/)
+
+![](img/2023-01-30-09-05-06.png)
+
+### Bizon-tech
+
+Link: [https://bizon-tech.com/gpu-benchmarks/NVIDIA-RTX-3090-vs-NVIDIA-RTX-A6000-vs-NVIDIA-RTX-A5000/579vs585vs605](https://bizon-tech.com/gpu-benchmarks/NVIDIA-RTX-3090-vs-NVIDIA-RTX-A6000-vs-NVIDIA-RTX-A5000/579vs585vs605)
+
+![](img/2023-01-30-09-06-56.png)
