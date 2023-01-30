@@ -174,11 +174,15 @@ div.csl-indent {
   <li><a href="#kankar2011" id="toc-kankar2011" class="nav-link" data-scroll-target="#kankar2011">Kankar2011</a></li>
   <li><a href="#ong2019" id="toc-ong2019" class="nav-link" data-scroll-target="#ong2019">Ong2019</a></li>
   <li><a href="#hahn2021" id="toc-hahn2021" class="nav-link" data-scroll-target="#hahn2021">Hahn2021</a></li>
+  <li><a href="#mey2020" id="toc-mey2020" class="nav-link" data-scroll-target="#mey2020">Mey2020</a></li>
   </ul></li>
   <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a>
   <ul class="collapse">
   <li><a href="#crwu-bearing-dataset" id="toc-crwu-bearing-dataset" class="nav-link" data-scroll-target="#crwu-bearing-dataset">CRWU Bearing Dataset</a></li>
-  <li><a href="#uc-berkeley-milling-dataset" id="toc-uc-berkeley-milling-dataset" class="nav-link" data-scroll-target="#uc-berkeley-milling-dataset">UC Berkeley Milling dataset</a></li>
+  <li><a href="#uc-berkeley-milling-dataset-nasa" id="toc-uc-berkeley-milling-dataset-nasa" class="nav-link" data-scroll-target="#uc-berkeley-milling-dataset-nasa">UC Berkeley Milling dataset, NASA</a></li>
+  <li><a href="#bosch-cnc-dataset" id="toc-bosch-cnc-dataset" class="nav-link" data-scroll-target="#bosch-cnc-dataset">Bosch CNC dataset</a></li>
+  <li><a href="#ims-bearing-dataset-cincinatti-nasa" id="toc-ims-bearing-dataset-cincinatti-nasa" class="nav-link" data-scroll-target="#ims-bearing-dataset-cincinatti-nasa">IMS Bearing Dataset, Cincinatti, NASA</a></li>
+  <li><a href="#fraunhoffer-unbalance-dataset" id="toc-fraunhoffer-unbalance-dataset" class="nav-link" data-scroll-target="#fraunhoffer-unbalance-dataset">Fraunhoffer unbalance dataset</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -477,6 +481,48 @@ International Journal of Hydromechatronics, Inderscience Publishers, 2021, 4, 69
 </ul>
 <hr>
 </section>
+<section id="mey2020" class="level3">
+<h3 class="anchored" data-anchor-id="mey2020">Mey2020</h3>
+<blockquote class="blockquote">
+<p>InProceedings (Mey2020)<br>
+Mey, O.; Neudeck, W.; Schneider, A. &amp; Enge-Rosenblatt, O.<br>
+Machine Learning-Based Unbalance Detection of a Rotating Shaft Using Vibration Data<br>
+2020 25th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA), 2020, 1, 1610-1617</p>
+</blockquote>
+<ul>
+<li>From <a href="https://paperswithcode.com/paper/machine-learning-based-unbalance-detection-of">PapersWithCode</a></li>
+<li>Code available in Github <a href="https://github.com/deepinsights-analytica/ieee-etfa2020-paper">here</a></li>
+<li>Uses (introduces) Fraunhoffer unbalance dataset</li>
+</ul>
+<p><img src="img/2023-01-29-17-20-58.png" class="img-fluid"></p>
+<ul>
+<li><p>Goal: try do detect if unbalance is present on the rotating shaft</p></li>
+<li><p>Introduces a new dataset (Fraunhoffer unbalance dataset)</p></li>
+<li><p>Methods:</p></li>
+<li><p>CNN on raw sensor data (windowed), 2-4 convs</p>
+<ul>
+<li>90% accuracy, weaker for small unbalance and particualar speeds (resonances?)</li>
+</ul></li>
+<li><p>Fully-connected MLP in FFT data</p>
+<ul>
+<li>similar to CNN results</li>
+</ul></li>
+<li><p>Random Forests on automatically extracted timeseries features (again with <strong>tsfresh</strong>)</p>
+<ul>
+<li>similar (?)</li>
+</ul></li>
+<li><p>Hidden Markov Models on MFCC</p></li>
+</ul>
+<p>Conclusions:</p>
+<blockquote class="blockquote">
+<ul>
+<li>The largest unbalance could be detected by all algorithms with almost perfect prediction accuracy, even if only 3 characteristic values per sample were used for the classification.</li>
+<li>With the smaller unbalances, on the other hand, wider variations between the different approaches were found.</li>
+<li>The best way to classify the dataset was to use an FC network with two hidden layers, which received the scaled FFT-transformed vibration data as input.</li>
+<li>Measured on the entire evaluation dataset, 98.6 % of the cases could be classified correctly.</li>
+</ul>
+</blockquote>
+</section>
 </section>
 <section id="datasets" class="level2">
 <h2 class="anchored" data-anchor-id="datasets">Datasets</h2>
@@ -489,9 +535,10 @@ International Journal of Hydromechatronics, Inderscience Publishers, 2021, 4, 69
 <blockquote class="blockquote">
 <p>Vibration data was collected using accelerometers, which were attached to the housing with magnetic bases. Accelerometers were placed at the 12 o’clock position at both the drive end and fan end of the motor housing. During some experiments, an accelerometer was attached to the motor supporting base plate as well. Vibration signals were collected using a 16 channel DAT recorder, and were post processed in a Matlab environment. All data files are in Matlab (*.mat) format. Digital data was collected at 12,000 samples per second, and data was also collected at 48,000 samples per second for drive end bearing faults. Speed and horsepower data were collected using the torque transducer/encoder and were recorded by hand.</p>
 </blockquote>
+<hr>
 </section>
-<section id="uc-berkeley-milling-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="uc-berkeley-milling-dataset">UC Berkeley Milling dataset</h3>
+<section id="uc-berkeley-milling-dataset-nasa" class="level3">
+<h3 class="anchored" data-anchor-id="uc-berkeley-milling-dataset-nasa">UC Berkeley Milling dataset, NASA</h3>
 <ul>
 <li><a href="https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository">Link here</a></li>
 <li>PapersWithCode: <a href="https://paperswithcode.com/dataset/milling-data-set">Link here</a></li>
@@ -501,6 +548,91 @@ International Journal of Hydromechatronics, Inderscience Publishers, 2021, 4, 69
 <p>Experiments on a milling machine for different speeds, feeds, and depth of cut. Records the wear of the milling insert, VB. The data set was provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.</p>
 </blockquote>
 <p><img src="img/2023-01-12-11-28-23.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="bosch-cnc-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="bosch-cnc-dataset">Bosch CNC dataset</h3>
+<ul>
+<li><p><a href="https://github.com/boschresearch/CNC_Machining">Link here</a></p></li>
+<li><p>PapersWithCode: <a href="https://paperswithcode.com/dataset/bosch-cnc-machining-dataset">Link here</a></p></li>
+<li><p>Described in:</p>
+<blockquote class="blockquote">
+<p>Article (Tnani2022)<br>
+Tnani, M.-A.; Feil, M. &amp; Diepold, K.<br>
+Smart Data Collection System for Brownfield CNC Milling Machines: A New Benchmark Dataset for Data-Driven Machine Monitoring<br>
+Procedia CIRP, 2022, 107, 131-136</p>
+</blockquote></li>
+<li><p>brownfield deployment: new hardware or software that must coexist with legacy IT systems</p></li>
+<li><p>A whole procedure for collecting data and analyzing on the fly</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/2023-01-29-16-21-13.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Sensor mounting</figcaption><p></p>
+</figure>
+</div>
+<p><img src="img/2023-01-29-16-26-15.png" class="img-fluid"></p>
+<p><img src="img/2023-01-29-16-27-04.png" class="img-fluid"></p></li>
+<li><p>Dataset:</p>
+<ul>
+<li>vibration data collected with accelerometer sensors mounted to the rear end of the spindle housing</li>
+<li>collected over 2 years</li>
+<li>three diferent machines</li>
+<li>sampling rate 2 kHz, argue that it is enough for anomalies</li>
+<li>smart mining system, otherwise would need 4GB data per day</li>
+<li>15 different operations recorded, with different parameterizations</li>
+<li>labeled <strong>good vs bad</strong> (normal vs anomaly)</li>
+</ul></li>
+<li><p>Processing:</p>
+<ul>
+<li><strong>Tsfresh</strong>: automatic package to extract standard features from time series, open source, <a href="https://tsfresh.readthedocs.io/en/latest/">here</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0925231218304843">paper here</a></li>
+</ul></li>
+<li><p>Real world challenges:</p>
+<ul>
+<li>problems when changing tools =&gt; some recordings are bad</li>
+<li>unbalanced data (815 to 35)</li>
+<li>normal wear of tools, hydraulic issues, incorrect settings =&gt; some variability</li>
+<li>15 different operations recorded, with different parameterizations =&gt; <strong>difficult to predict health status, it depends on all params</strong>
+<ul>
+<li><blockquote class="blockquote">
+<p>anomaly can be detected in frequencies which are integer multiples of the spindle speed ()</p>
+</blockquote></li>
+<li>anomalies better detected in frequency domain</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="ims-bearing-dataset-cincinatti-nasa" class="level3">
+<h3 class="anchored" data-anchor-id="ims-bearing-dataset-cincinatti-nasa">IMS Bearing Dataset, Cincinatti, NASA</h3>
+<ul>
+<li><p><a href="https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository">Link here</a>, no.4</p></li>
+<li><p>PapersWithCode: <a href="https://paperswithcode.com/dataset/ims-bearing-dataset">Link here</a></p></li>
+<li><p>Kaggle: <a href="https://www.kaggle.com/datasets/vinayak123tyagi/bearing-dataset">Link here</a></p></li>
+<li><p>Accelerometer data in turning bearings, recorded until they fail</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Four bearings were installed on a shaft. The rotation speed was kept constant at 2000 RPM by an AC motor coupled to the shaft via rub belts. A radial load of 6000 lbs is applied onto the shaft &gt; and bearing by a spring mechanism. All bearings are force lubricated. Rexnord ZA-2115 double row bearings were installed on the shaft as shown in Figure 1. PCB 353B33 High Sensitivity Quartz ICP accelerometers were installed on the bearing housing (two accelerometers for each bearing [x- and y-axes] for data set 1, one accelerometer for each bearing for data sets 2 and 3). Sensor placement is also shown in Figure 1. All failures occurred after exceeding designed life time of the bearing which is more than 100 million revolutions.</p>
+</blockquote>
+</section>
+<section id="fraunhoffer-unbalance-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="fraunhoffer-unbalance-dataset">Fraunhoffer unbalance dataset</h3>
+<ul>
+<li><p><a href="https://fordatis.fraunhofer.de/handle/fordatis/151.3">Link here</a></p></li>
+<li><p>PapersWithCode: <a href="https://paperswithcode.com/dataset/unbalance-classification-using-vibration-data">Link here</a></p></li>
+<li><p>Kaggle: <a href="https://www.kaggle.com/datasets/vinayak123tyagi/bearing-dataset">Link here</a></p></li>
+<li><p>Used by <span class="citation" data-cites="Mey2020">(<a href="#ref-Mey2020" role="doc-biblioref">Mey et al. 2020</a>)</span></p></li>
+<li><p>Not CNC</p></li>
+<li><p>A vibrating drive train (DC motor, shaft roller bearing)</p></li>
+<li><p>Unbalances of different weights and radii are attached to the shaft</p></li>
+</ul>
+<p><img src="img/2023-01-29-17-13-53.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>This dataset contains vibration data recorded on a rotating drive train. This drive train consists of an electronically commutated DC motor and a shaft driven by it, which passes through a roller bearing. With the help of a 3D-printed holder, unbalances with different weights and different radii were attached to the shaft. Besides the strength of the unbalances, the rotation speed of the motor was also varied. This dataset can be used to develop and test algorithms for the automatic detection of unbalances on drive trains. Datasets for 4 differently sized unbalances and for the unbalance-free case were recorded. The vibration data was recorded at a sampling rate of 4096 values per second. Datasets for development (ID “D[0-4]”) as well as for evaluation (ID “E[0-4]”) are available for each unbalance strength. The rotation speed was varied between approx. 630 and 2330 RPM in the development datasets and between approx. 1060 and 1900 RPM in the evaluation datasets. For each measurement of the development dataset there are approx. 107min of continuous measurement data available, for each measurement of the evaluation dataset 28min. Details of the recorded measurements and the used unbalance strengths are documented in the README.md file</p>
+</blockquote>
+<ul>
+<li><p>Each csv file contains:</p>
+<p><img src="img/2023-01-29-17-22-33.png" class="img-fluid"></p></li>
+</ul>
+<p><img src="img/2023-01-29-17-23-08.png" class="img-fluid"></p>
 
 
 
@@ -522,6 +654,9 @@ Kim, Dong-Hyeon, Thomas J. Y. Kim, Xinlin Wang, Mincheol Kim, Ying-Jun Quan, Jin
 </div>
 <div id="ref-Li2017" class="csl-entry" role="doc-biblioentry">
 Li, Shaobo, Guokai Liu, Xianghong Tang, Jianguang Lu, and Jianjun Hu. 2017. <span>“An <span>Ensemble</span> <span>Deep</span> <span>Convolutional</span> <span>Neural</span> <span>Network</span> <span>Model</span> with <span>Improved</span> <span>D</span>-<span>S</span> <span>Evidence</span> <span>Fusion</span> for <span>Bearing</span> <span>Fault</span> <span>Diagnosis</span>.”</span> <em>Sensors</em> 17 (8): 1729. <a href="https://doi.org/10.3390/s17081729">https://doi.org/10.3390/s17081729</a>.
+</div>
+<div id="ref-Mey2020" class="csl-entry" role="doc-biblioentry">
+Mey, Oliver, Willi Neudeck, André Schneider, and Olaf Enge-Rosenblatt. 2020. <span>“Machine <span>Learning</span>-<span>Based</span> <span>Unbalance</span> <span>Detection</span> of a <span>Rotating</span> <span>Shaft</span> <span>Using</span> <span>Vibration</span> <span>Data</span>.”</span> In <em>2020 25th <span>IEEE</span> <span>International</span> <span>Conference</span> on <span>Emerging</span> <span>Technologies</span> and <span>Factory</span> <span>Automation</span> (<span>ETFA</span>)</em>, 1:1610–17. <a href="https://doi.org/10.1109/ETFA46521.2020.9212000">https://doi.org/10.1109/ETFA46521.2020.9212000</a>.
 </div>
 <div id="ref-Ong2019" class="csl-entry" role="doc-biblioentry">
 Ong, Pauline, Woon Kiow Lee, and Raymond Jit Hoo Lau. 2019. <span>“Tool Condition Monitoring in <span>CNC</span> End Milling Using Wavelet Neural Network Based on Machine Vision.”</span> <em>The International Journal of Advanced Manufacturing Technology</em> 104 (1): 1369–79. <a href="https://doi.org/10.1007/s00170-019-04020-6">https://doi.org/10.1007/s00170-019-04020-6</a>.
