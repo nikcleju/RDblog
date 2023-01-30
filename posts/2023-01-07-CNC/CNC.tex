@@ -168,11 +168,11 @@
 
 \title{ML/AI in CNC and machining}
 \author{}
-\date{2023-01-07}
+\date{1/7/23}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, frame hidden, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, sharp corners, enhanced, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -761,91 +761,6 @@ International Journal of Hydromechatronics, Inderscience Publishers,
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{mey2020}{%
-\subsubsection{Mey2020}\label{mey2020}}
-
-\begin{quote}
-InProceedings (Mey2020)\\
-Mey, O.; Neudeck, W.; Schneider, A. \& Enge-Rosenblatt, O.\\
-Machine Learning-Based Unbalance Detection of a Rotating Shaft Using
-Vibration Data\\
-2020 25th IEEE International Conference on Emerging Technologies and
-Factory Automation (ETFA), 2020, 1, 1610-1617
-\end{quote}
-
-\begin{itemize}
-\tightlist
-\item
-  From
-  \href{https://paperswithcode.com/paper/machine-learning-based-unbalance-detection-of}{PapersWithCode}
-\item
-  Code available in Github
-  \href{https://github.com/deepinsights-analytica/ieee-etfa2020-paper}{here}
-\item
-  Uses (introduces) Fraunhoffer unbalance dataset
-\end{itemize}
-
-\includegraphics{img/2023-01-29-17-20-58.png}
-
-\begin{itemize}
-\item
-  Goal: try do detect if unbalance is present on the rotating shaft
-\item
-  Introduces a new dataset (Fraunhoffer unbalance dataset)
-\item
-  Methods:
-\item
-  CNN on raw sensor data (windowed), 2-4 convs
-
-  \begin{itemize}
-  \tightlist
-  \item
-    90\% accuracy, weaker for small unbalance and particualar speeds
-    (resonances?)
-  \end{itemize}
-\item
-  Fully-connected MLP in FFT data
-
-  \begin{itemize}
-  \tightlist
-  \item
-    similar to CNN results
-  \end{itemize}
-\item
-  Random Forests on automatically extracted timeseries features (again
-  with \textbf{tsfresh})
-
-  \begin{itemize}
-  \tightlist
-  \item
-    similar (?)
-  \end{itemize}
-\item
-  Hidden Markov Models on MFCC
-\end{itemize}
-
-Conclusions:
-
-\begin{quote}
-\begin{itemize}
-\tightlist
-\item
-  The largest unbalance could be detected by all algorithms with almost
-  perfect prediction accuracy, even if only 3 characteristic values per
-  sample were used for the classification.
-\item
-  With the smaller unbalances, on the other hand, wider variations
-  between the different approaches were found.
-\item
-  The best way to classify the dataset was to use an FC network with two
-  hidden layers, which received the scaled FFT-transformed vibration
-  data as input.
-\item
-  Measured on the entire evaluation dataset, 98.6 \% of the cases could
-  be classified correctly.
-\end{itemize}
-\end{quote}
-
 \hypertarget{datasets}{%
 \subsection{Datasets}\label{datasets}}
 
@@ -875,11 +790,9 @@ horsepower data were collected using the torque transducer/encoder and
 were recorded by hand.
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\hypertarget{uc-berkeley-milling-dataset-nasa}{%
-\subsubsection{UC Berkeley Milling dataset,
-NASA}\label{uc-berkeley-milling-dataset-nasa}}
+\hypertarget{uc-berkeley-milling-dataset}{%
+\subsubsection{UC Berkeley Milling
+dataset}\label{uc-berkeley-milling-dataset}}
 
 \begin{itemize}
 \tightlist
@@ -902,201 +815,6 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 \end{quote}
 
 \includegraphics{img/2023-01-12-11-28-23.png}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\hypertarget{bosch-cnc-dataset}{%
-\subsubsection{Bosch CNC dataset}\label{bosch-cnc-dataset}}
-
-\begin{itemize}
-\item
-  \href{https://github.com/boschresearch/CNC_Machining}{Link here}
-\item
-  PapersWithCode:
-  \href{https://paperswithcode.com/dataset/bosch-cnc-machining-dataset}{Link
-  here}
-\item
-  Described in:
-
-  \begin{quote}
-  Article (Tnani2022)\\
-  Tnani, M.-A.; Feil, M. \& Diepold, K.\\
-  Smart Data Collection System for Brownfield CNC Milling Machines: A
-  New Benchmark Dataset for Data-Driven Machine Monitoring\\
-  Procedia CIRP, 2022, 107, 131-136
-  \end{quote}
-\item
-  brownfield deployment: new hardware or software that must coexist with
-  legacy IT systems
-\item
-  A whole procedure for collecting data and analyzing on the fly
-
-  \begin{figure}
-
-  {\centering \includegraphics{img/2023-01-29-16-21-13.png}
-
-  }
-
-  \caption{Sensor mounting}
-
-  \end{figure}
-
-  \includegraphics{img/2023-01-29-16-26-15.png}
-
-  \includegraphics{img/2023-01-29-16-27-04.png}
-\item
-  Dataset:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    vibration data collected with accelerometer sensors mounted to the
-    rear end of the spindle housing
-  \item
-    collected over 2 years
-  \item
-    three diferent machines
-  \item
-    sampling rate 2 kHz, argue that it is enough for anomalies
-  \item
-    smart mining system, otherwise would need 4GB data per day
-  \item
-    15 different operations recorded, with different parameterizations
-  \item
-    labeled \textbf{good vs bad} (normal vs anomaly)
-  \end{itemize}
-\item
-  Processing:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Tsfresh}: automatic package to extract standard features
-    from time series, open source,
-    \href{https://tsfresh.readthedocs.io/en/latest/}{here},
-    \href{https://www.sciencedirect.com/science/article/pii/S0925231218304843}{paper
-    here}
-  \end{itemize}
-\item
-  Real world challenges:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    problems when changing tools =\textgreater{} some recordings are bad
-  \item
-    unbalanced data (815 to 35)
-  \item
-    normal wear of tools, hydraulic issues, incorrect settings
-    =\textgreater{} some variability
-  \item
-    15 different operations recorded, with different parameterizations
-    =\textgreater{} \textbf{difficult to predict health status, it
-    depends on all params}
-
-    \begin{itemize}
-    \item
-      \begin{quote}
-      anomaly can be detected in frequencies which are integer multiples
-      of the spindle speed ()
-      \end{quote}
-    \item
-      anomalies better detected in frequency domain
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{ims-bearing-dataset-cincinatti-nasa}{%
-\subsubsection{IMS Bearing Dataset, Cincinatti,
-NASA}\label{ims-bearing-dataset-cincinatti-nasa}}
-
-\begin{itemize}
-\item
-  \href{https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository}{Link
-  here}, no.4
-\item
-  PapersWithCode:
-  \href{https://paperswithcode.com/dataset/ims-bearing-dataset}{Link
-  here}
-\item
-  Kaggle:
-  \href{https://www.kaggle.com/datasets/vinayak123tyagi/bearing-dataset}{Link
-  here}
-\item
-  Accelerometer data in turning bearings, recorded until they fail
-\end{itemize}
-
-\begin{quote}
-Four bearings were installed on a shaft. The rotation speed was kept
-constant at 2000 RPM by an AC motor coupled to the shaft via rub belts.
-A radial load of 6000 lbs is applied onto the shaft \textgreater{} and
-bearing by a spring mechanism. All bearings are force lubricated.
-Rexnord ZA-2115 double row bearings were installed on the shaft as shown
-in Figure 1. PCB 353B33 High Sensitivity Quartz ICP accelerometers were
-installed on the bearing housing (two accelerometers for each bearing
-{[}x- and y-axes{]} for data set 1, one accelerometer for each bearing
-for data sets 2 and 3). Sensor placement is also shown in Figure 1. All
-failures occurred after exceeding designed life time of the bearing
-which is more than 100 million revolutions.
-\end{quote}
-
-\hypertarget{fraunhoffer-unbalance-dataset}{%
-\subsubsection{Fraunhoffer unbalance
-dataset}\label{fraunhoffer-unbalance-dataset}}
-
-\begin{itemize}
-\item
-  \href{https://fordatis.fraunhofer.de/handle/fordatis/151.3}{Link here}
-\item
-  PapersWithCode:
-  \href{https://paperswithcode.com/dataset/unbalance-classification-using-vibration-data}{Link
-  here}
-\item
-  Kaggle:
-  \href{https://www.kaggle.com/datasets/vinayak123tyagi/bearing-dataset}{Link
-  here}
-\item
-  Used by (Mey et al. 2020)
-\item
-  Not CNC
-\item
-  A vibrating drive train (DC motor, shaft roller bearing)
-\item
-  Unbalances of different weights and radii are attached to the shaft
-\end{itemize}
-
-\includegraphics{img/2023-01-29-17-13-53.png}
-
-\begin{quote}
-This dataset contains vibration data recorded on a rotating drive train.
-This drive train consists of an electronically commutated DC motor and a
-shaft driven by it, which passes through a roller bearing. With the help
-of a 3D-printed holder, unbalances with different weights and different
-radii were attached to the shaft. Besides the strength of the
-unbalances, the rotation speed of the motor was also varied. This
-dataset can be used to develop and test algorithms for the automatic
-detection of unbalances on drive trains. Datasets for 4 differently
-sized unbalances and for the unbalance-free case were recorded. The
-vibration data was recorded at a sampling rate of 4096 values per
-second. Datasets for development (ID ``D{[}0-4{]}'') as well as for
-evaluation (ID ``E{[}0-4{]}'') are available for each unbalance
-strength. The rotation speed was varied between approx. 630 and 2330 RPM
-in the development datasets and between approx. 1060 and 1900 RPM in the
-evaluation datasets. For each measurement of the development dataset
-there are approx. 107min of continuous measurement data available, for
-each measurement of the evaluation dataset 28min. Details of the
-recorded measurements and the used unbalance strengths are documented in
-the README.md file
-\end{quote}
-
-\begin{itemize}
-\item
-  Each csv file contains:
-
-  \includegraphics{img/2023-01-29-17-22-33.png}
-\end{itemize}
-
-\includegraphics{img/2023-01-29-17-23-08.png}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
@@ -1132,14 +850,6 @@ Li, Shaobo, Guokai Liu, Xianghong Tang, Jianguang Lu, and Jianjun Hu.
 with {Improved} {D}-{S} {Evidence} {Fusion} for {Bearing} {Fault}
 {Diagnosis}.''} \emph{Sensors} 17 (8): 1729.
 \url{https://doi.org/10.3390/s17081729}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-Mey2020}{}}%
-Mey, Oliver, Willi Neudeck, André Schneider, and Olaf Enge-Rosenblatt.
-2020. {``Machine {Learning}-{Based} {Unbalance} {Detection} of a
-{Rotating} {Shaft} {Using} {Vibration} {Data}.''} In \emph{2020 25th
-{IEEE} {International} {Conference} on {Emerging} {Technologies} and
-{Factory} {Automation} ({ETFA})}, 1:1610--17.
-\url{https://doi.org/10.1109/ETFA46521.2020.9212000}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ong2019}{}}%
 Ong, Pauline, Woon Kiow Lee, and Raymond Jit Hoo Lau. 2019. {``Tool
