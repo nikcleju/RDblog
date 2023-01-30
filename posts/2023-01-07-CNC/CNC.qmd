@@ -338,6 +338,40 @@ $2/5 \star$
 
 ---
 
+### Mey2020
+
+> InProceedings (Mey2020)  
+> Mey, O.; Neudeck, W.; Schneider, A. & Enge-Rosenblatt, O.  
+> Machine Learning-Based Unbalance Detection of a Rotating Shaft Using Vibration Data  
+> 2020 25th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA), 2020, 1, 1610-1617  
+
+- From [PapersWithCode](https://paperswithcode.com/paper/machine-learning-based-unbalance-detection-of)
+- Code available in Github [here](https://github.com/deepinsights-analytica/ieee-etfa2020-paper)
+- Uses (introduces) Fraunhoffer unbalance dataset
+
+![](img/2023-01-29-17-20-58.png)
+
+- Goal: try do detect if unbalance is present on the rotating shaft
+
+- Introduces a new dataset (Fraunhoffer unbalance dataset)
+
+- Methods:
+
+- CNN on raw sensor data (windowed), 2-4 convs
+  - 90% accuracy, weaker for small unbalance and particualar speeds (resonances?)
+- Fully-connected MLP in FFT data
+  - similar to CNN results
+- Random Forests on automatically extracted timeseries features (again with **tsfresh**)
+  - similar (?)
+- Hidden Markov Models on MFCC
+  
+Conclusions:
+
+> - The largest unbalance could be detected by all algorithms with almost perfect prediction accuracy, even if only 3 characteristic values per sample were used for the classification. 
+> - With the smaller unbalances, on the other hand, wider variations between the different approaches were found. 
+> - The best way to classify the dataset was to use an FC network with two hidden layers, which received the scaled FFT-transformed vibration data as input. 
+> - Measured on the entire evaluation dataset, 98.6 % of the cases could be classified correctly.
+
 ## Datasets
 
 ### CRWU Bearing Dataset
@@ -348,7 +382,9 @@ $2/5 \star$
   
 > Vibration data was collected using accelerometers, which were attached to the housing with magnetic bases. Accelerometers were placed at the 12 o’clock position at both the drive end and fan end of the motor housing. During some experiments, an accelerometer was attached to the motor supporting base plate as well. Vibration signals were collected using a 16 channel DAT recorder, and were post processed in a Matlab environment. All data files are in Matlab (*.mat) format. Digital data was collected at 12,000 samples per second, and data was also collected at 48,000 samples per second for drive end bearing faults. Speed and horsepower data were collected using the torque transducer/encoder and were recorded by hand.
 
-### UC Berkeley Milling dataset
+---
+
+### UC Berkeley Milling dataset, NASA
 
 - [Link here](https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository)
 - PapersWithCode: [Link here](https://paperswithcode.com/dataset/milling-data-set)
@@ -357,3 +393,80 @@ $2/5 \star$
 > Experiments on a milling machine for different speeds, feeds, and depth of cut. Records the wear of the milling insert, VB. The data set was provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 
 ![](img/2023-01-12-11-28-23.png)
+
+---
+
+### Bosch CNC dataset
+
+- [Link here](https://github.com/boschresearch/CNC_Machining)
+- PapersWithCode: [Link here](https://paperswithcode.com/dataset/bosch-cnc-machining-dataset)
+
+- Described in:
+  
+  > Article (Tnani2022)  
+  > Tnani, M.-A.; Feil, M. & Diepold, K.  
+  > Smart Data Collection System for Brownfield CNC Milling Machines: A New Benchmark Dataset for Data-Driven Machine Monitoring  
+  > Procedia CIRP, 2022, 107, 131-136  
+
+- brownfield deployment: new hardware or software that must coexist with legacy IT systems
+
+- A whole procedure for collecting data and analyzing on the fly
+
+  ![Sensor mounting](img/2023-01-29-16-21-13.png)
+
+  ![](img/2023-01-29-16-26-15.png)
+
+  ![](img/2023-01-29-16-27-04.png)
+
+- Dataset:
+  - vibration data collected with accelerometer sensors mounted to the rear end of the spindle housing
+  - collected over 2 years
+  - three diferent machines
+  - sampling rate 2 kHz, argue that it is enough for anomalies
+  - smart mining system, otherwise would need 4GB data per day
+  - 15 different operations recorded, with different parameterizations
+  - labeled **good vs bad** (normal vs anomaly)
+
+- Processing:
+  - **Tsfresh**: automatic package to extract standard features from time series, open source, [here](https://tsfresh.readthedocs.io/en/latest/), [paper here](https://www.sciencedirect.com/science/article/pii/S0925231218304843)
+
+- Real world challenges:
+  - problems when changing tools => some recordings are bad
+  - unbalanced data (815 to 35)
+  - normal wear of tools, hydraulic issues, incorrect settings => some variability
+  - 15 different operations recorded, with different parameterizations => **difficult to predict health status, it depends on all params**
+    - > anomaly can be detected in frequencies which are integer multiples of the spindle speed ()
+    - anomalies better detected in frequency domain
+
+### IMS Bearing Dataset, Cincinatti, NASA
+
+
+- [Link here](https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository), no.4
+- PapersWithCode: [Link here](https://paperswithcode.com/dataset/ims-bearing-dataset)
+- Kaggle: [Link here](https://www.kaggle.com/datasets/vinayak123tyagi/bearing-dataset)
+
+- Accelerometer data in turning bearings, recorded until they fail
+
+> Four bearings were installed on a shaft. The rotation speed was kept constant at 2000 RPM by an AC motor coupled to the shaft via rub belts. A radial load of 6000 lbs is applied onto the shaft   > and bearing by a spring mechanism. All bearings are force lubricated.
+> Rexnord ZA-2115 double row bearings were installed on the shaft as shown in Figure 1. PCB 353B33 High Sensitivity Quartz ICP accelerometers were installed on the bearing housing (two accelerometers for each bearing [x- and y-axes] for data set 1, one accelerometer for each bearing for data sets 2 and 3). Sensor placement is also shown in Figure 1. All failures occurred after exceeding designed life time of the bearing which is more than 100 million revolutions.
+
+### Fraunhoffer unbalance dataset
+
+- [Link here](https://fordatis.fraunhofer.de/handle/fordatis/151.3)
+- PapersWithCode: [Link here](https://paperswithcode.com/dataset/unbalance-classification-using-vibration-data)
+- Kaggle: [Link here](https://www.kaggle.com/datasets/vinayak123tyagi/bearing-dataset)
+- Used by [@Mey2020]
+
+- Not CNC
+- A vibrating drive train (DC motor, shaft roller bearing)
+- Unbalances of different weights and radii are attached to the shaft
+
+![](img/2023-01-29-17-13-53.png)
+
+> This dataset contains vibration data recorded on a rotating drive train. This drive train consists of an electronically commutated DC motor and a shaft driven by it, which passes through a roller bearing. With the help of a 3D-printed holder, unbalances with different weights and different radii were attached to the shaft. Besides the strength of the unbalances, the rotation speed of the motor was also varied. This dataset can be used to develop and test algorithms for the automatic detection of unbalances on drive trains. Datasets for 4 differently sized unbalances and for the unbalance-free case were recorded. The vibration data was recorded at a sampling rate of 4096 values per second. Datasets for development (ID "D[0-4]") as well as for evaluation (ID "E[0-4]") are available for each unbalance strength. The rotation speed was varied between approx. 630 and 2330 RPM in the development datasets and between approx. 1060 and 1900 RPM in the evaluation datasets. For each measurement of the development dataset there are approx. 107min of continuous measurement data available, for each measurement of the evaluation dataset 28min. Details of the recorded measurements and the used unbalance strengths are documented in the README.md file
+
+- Each csv file contains:
+  
+  ![](img/2023-01-29-17-22-33.png)
+
+![](img/2023-01-29-17-23-08.png)
