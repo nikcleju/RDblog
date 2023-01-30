@@ -25,6 +25,8 @@ Link: [https://lambdalabs.com/gpu-benchmarks](https://lambdalabs.com/gpu-benchma
 
 ![](img/2023-01-30-09-04-03.png)
 
+![](img/2023-01-30-12-02-07.png)
+
 ### AIME info
 
 Link: [https://www.aime.info/en/blog/deep-learning-gpu-benchmarks-2021/](https://www.aime.info/en/blog/deep-learning-gpu-benchmarks-2021/)
