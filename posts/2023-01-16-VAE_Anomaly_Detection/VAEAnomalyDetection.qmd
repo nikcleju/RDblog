@@ -73,3 +73,70 @@ The algorithm:
     > because it gives slightly better results in our experiments.
 
 - The "reconstruction probability" used in An2015 is just the first part of the loss function (ELBO), why not use the full loss, since this is what the model was trained to minimize
+
+### Yao2023
+
+> Article (Yao2023)  
+> Yao, Y.; Ma, J. & Ye, Y.  
+> Regularizing autoencoders with wavelet transform for sequence anomaly detection  
+> Pattern Recognition, 2023, 134, 109084  
+
+![](img/2023-02-27-09-36-02.png)
+
+![](img/2023-02-27-09-36-27.png)
+
+- Use a custom loss function which includes filtering with DWT
+- Learn the regularization parameter $\lambda$ which balances between AE loss and fixed DWT error
+- Only for training. In production, only AE used, as normal.
+- Empirical, non-reliable, DWT features
+- Idea: Learn **less** the vectors which are less modified by DWT
+  - when second term is close to 0 (i.e. input vector unchanged by DWT filtering), $\lambda$ becomes close to 1, which reduces the influence of the AE loss,
+    so the AE will learn **less** about these vectors
+  - so these vectors will be reconstructed more poorly, so more likely to be considered outliers
+  - a way to make some inputs more likely to be declared outliers: vectors untouched by DWT filtering are learned less, so more likely to be outliers
+
+- Afterthoughts:
+  - What if we **multiply** somehow two learnables? i.e. $\lambda \cdot \| AE loss \|$, or $AE1 loss \cdot AE2 loss$. Which learns faster?
+  - If one NN learns first (e.g. $\lambda$), it will reduce the incentive for the other one to learn.
+  - What if $\lambda$ adapts much slower than the AE?
+    $$(1 - \lambda) AE_{loss}  + \lambda Const$$ 
+  - AE loss drops first, then lambda will learn much later if the input is an outlier or not:
+    - if AE loss is small, $\lambda$ will be close to 1
+    - if AE loss is large, $\lambda$ will be close to 0
+    - just an indirect reflection of AE loss / C ?
+  - Two NNs in competition. Does it matter which one learns first?
+  - Outlier detection based on speed of learning?
+
+### Lappas2021
+
+> InProceedings (Lappas2021)  
+> Lappas, D.; Argyriou, V. & Makris, D.  
+> Fourier Transformation Autoencoders for Anomaly Detection  
+> ICASSP 2021 - 2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2021, 1475-1479  
+
+![](img/2023-02-27-10-00-46.png)
+
+- Augment input vector with Fourier transform, real and imaginary parts
+- Learn three coders, for each part
+- Concatenate the latent variables
+- A single decoder, which produces the real and imaginary parts
+- Architecture:
+  - 3N => 3L => 2N 
+- Y' to X' means what?? "Another mapping"
+
+### Choi2023
+
+> TechReport (Choi2023)  
+> Choi, J.; Park, J.; Japesh, A. & Adarsh  
+> A Subspace Projection Approach to Autoencoder-based Anomaly Detection  
+> arXiv, arXiv, 2023  
+
+![](img/2023-02-27-10-13-03.png)
+
+- Information theoretic interpretation (MIMO), but not sure if useful at all
+- Practically: evaluate reconstruction error only on the subspace of the least significant eigenvectors of the error vectors
+  - If error is large => outlier, if small, normal
+- **Just another example of weighted $\ell_2$ norm**
+  - here is in the space of the eigenvectors, inversely prop to variance (eigenvalues) (here just with 0, 1 binary selection)
+  - here it is the covariance matrix of all errors, since for AE we have a 1-to-1 input to output (single output vector)
+  - for VAE, we have the same idea, but the covariance matrix is per input vector, since we have 1-to-many (one input, multiple outputs) (see An2015)
