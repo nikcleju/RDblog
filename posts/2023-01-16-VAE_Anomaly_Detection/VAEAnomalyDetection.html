@@ -144,6 +144,9 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#an2015" id="toc-an2015" class="nav-link" data-scroll-target="#an2015">An2015</a></li>
   <li><a href="#wievel2019" id="toc-wievel2019" class="nav-link" data-scroll-target="#wievel2019">Wievel2019</a></li>
+  <li><a href="#yao2023" id="toc-yao2023" class="nav-link" data-scroll-target="#yao2023">Yao2023</a></li>
+  <li><a href="#lappas2021" id="toc-lappas2021" class="nav-link" data-scroll-target="#lappas2021">Lappas2021</a></li>
+  <li><a href="#choi2023" id="toc-choi2023" class="nav-link" data-scroll-target="#choi2023">Choi2023</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -214,6 +217,87 @@ ICASSP 2019 - 2019 IEEE International Conference on Acoustics, Speech and Signal
 </blockquote></li>
 </ul></li>
 <li><p>The “reconstruction probability” used in An2015 is just the first part of the loss function (ELBO), why not use the full loss, since this is what the model was trained to minimize</p></li>
+</ul>
+</section>
+<section id="yao2023" class="level3">
+<h3 class="anchored" data-anchor-id="yao2023">Yao2023</h3>
+<blockquote class="blockquote">
+<p>Article (Yao2023)<br>
+Yao, Y.; Ma, J. &amp; Ye, Y.<br>
+Regularizing autoencoders with wavelet transform for sequence anomaly detection<br>
+Pattern Recognition, 2023, 134, 109084</p>
+</blockquote>
+<p><img src="img/2023-02-27-09-36-02.png" class="img-fluid"></p>
+<p><img src="img/2023-02-27-09-36-27.png" class="img-fluid"></p>
+<ul>
+<li>Use a custom loss function which includes filtering with DWT</li>
+<li>Learn the regularization parameter <span class="math inline">\(\lambda\)</span> which balances between AE loss and fixed DWT error</li>
+<li>Only for training. In production, only AE used, as normal.</li>
+<li>Empirical, non-reliable, DWT features</li>
+<li>Idea: Learn <strong>less</strong> the vectors which are less modified by DWT
+<ul>
+<li>when second term is close to 0 (i.e.&nbsp;input vector unchanged by DWT filtering), <span class="math inline">\(\lambda\)</span> becomes close to 1, which reduces the influence of the AE loss, so the AE will learn <strong>less</strong> about these vectors</li>
+<li>so these vectors will be reconstructed more poorly, so more likely to be considered outliers</li>
+<li>a way to make some inputs more likely to be declared outliers: vectors untouched by DWT filtering are learned less, so more likely to be outliers</li>
+</ul></li>
+<li>Afterthoughts:
+<ul>
+<li>What if we <strong>multiply</strong> somehow two learnables? i.e.&nbsp;<span class="math inline">\(\lambda \cdot \| AE loss \|\)</span>, or <span class="math inline">\(AE1 loss \cdot AE2 loss\)</span>. Which learns faster?</li>
+<li>If one NN learns first (e.g.&nbsp;<span class="math inline">\(\lambda\)</span>), it will reduce the incentive for the other one to learn.</li>
+<li>What if <span class="math inline">\(\lambda\)</span> adapts much slower than the AE? <span class="math display">\[(1 - \lambda) AE_{loss}  + \lambda Const\]</span></li>
+<li>AE loss drops first, then lambda will learn much later if the input is an outlier or not:
+<ul>
+<li>if AE loss is small, <span class="math inline">\(\lambda\)</span> will be close to 1</li>
+<li>if AE loss is large, <span class="math inline">\(\lambda\)</span> will be close to 0</li>
+<li>just an indirect reflection of AE loss / C ?</li>
+</ul></li>
+<li>Two NNs in competition. Does it matter which one learns first?</li>
+<li>Outlier detection based on speed of learning?</li>
+</ul></li>
+</ul>
+</section>
+<section id="lappas2021" class="level3">
+<h3 class="anchored" data-anchor-id="lappas2021">Lappas2021</h3>
+<blockquote class="blockquote">
+<p>InProceedings (Lappas2021)<br>
+Lappas, D.; Argyriou, V. &amp; Makris, D.<br>
+Fourier Transformation Autoencoders for Anomaly Detection<br>
+ICASSP 2021 - 2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2021, 1475-1479</p>
+</blockquote>
+<p><img src="img/2023-02-27-10-00-46.png" class="img-fluid"></p>
+<ul>
+<li>Augment input vector with Fourier transform, real and imaginary parts</li>
+<li>Learn three coders, for each part</li>
+<li>Concatenate the latent variables</li>
+<li>A single decoder, which produces the real and imaginary parts</li>
+<li>Architecture:
+<ul>
+<li>3N =&gt; 3L =&gt; 2N</li>
+</ul></li>
+<li>Y’ to X’ means what?? “Another mapping”</li>
+</ul>
+</section>
+<section id="choi2023" class="level3">
+<h3 class="anchored" data-anchor-id="choi2023">Choi2023</h3>
+<blockquote class="blockquote">
+<p>TechReport (Choi2023)<br>
+Choi, J.; Park, J.; Japesh, A. &amp; Adarsh<br>
+A Subspace Projection Approach to Autoencoder-based Anomaly Detection<br>
+arXiv, arXiv, 2023</p>
+</blockquote>
+<p><img src="img/2023-02-27-10-13-03.png" class="img-fluid"></p>
+<ul>
+<li>Information theoretic interpretation (MIMO), but not sure if useful at all</li>
+<li>Practically: evaluate reconstruction error only on the subspace of the least significant eigenvectors of the error vectors
+<ul>
+<li>If error is large =&gt; outlier, if small, normal</li>
+</ul></li>
+<li><strong>Just another example of weighted <span class="math inline">\(\ell_2\)</span> norm</strong>
+<ul>
+<li>here is in the space of the eigenvectors, inversely prop to variance (eigenvalues) (here just with 0, 1 binary selection)</li>
+<li>here it is the covariance matrix of all errors, since for AE we have a 1-to-1 input to output (single output vector)</li>
+<li>for VAE, we have the same idea, but the covariance matrix is per input vector, since we have 1-to-many (one input, multiple outputs) (see An2015)</li>
+</ul></li>
 </ul>
 
 

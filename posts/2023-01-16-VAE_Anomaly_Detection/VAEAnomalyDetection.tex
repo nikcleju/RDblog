@@ -148,7 +148,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, frame hidden, breakable, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, interior hidden, sharp corners, boxrule=0pt, frame hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -276,6 +276,164 @@ and Signal Processing (ICASSP), 2019, 3837-3841
   The ``reconstruction probability'' used in An2015 is just the first
   part of the loss function (ELBO), why not use the full loss, since
   this is what the model was trained to minimize
+\end{itemize}
+
+\hypertarget{yao2023}{%
+\subsubsection{Yao2023}\label{yao2023}}
+
+\begin{quote}
+Article (Yao2023)\\
+Yao, Y.; Ma, J. \& Ye, Y.\\
+Regularizing autoencoders with wavelet transform for sequence anomaly
+detection\\
+Pattern Recognition, 2023, 134, 109084
+\end{quote}
+
+\includegraphics{img/2023-02-27-09-36-02.png}
+
+\includegraphics{img/2023-02-27-09-36-27.png}
+
+\begin{itemize}
+\tightlist
+\item
+  Use a custom loss function which includes filtering with DWT
+\item
+  Learn the regularization parameter \(\lambda\) which balances between
+  AE loss and fixed DWT error
+\item
+  Only for training. In production, only AE used, as normal.
+\item
+  Empirical, non-reliable, DWT features
+\item
+  Idea: Learn \textbf{less} the vectors which are less modified by DWT
+
+  \begin{itemize}
+  \tightlist
+  \item
+    when second term is close to 0 (i.e.~input vector unchanged by DWT
+    filtering), \(\lambda\) becomes close to 1, which reduces the
+    influence of the AE loss, so the AE will learn \textbf{less} about
+    these vectors
+  \item
+    so these vectors will be reconstructed more poorly, so more likely
+    to be considered outliers
+  \item
+    a way to make some inputs more likely to be declared outliers:
+    vectors untouched by DWT filtering are learned less, so more likely
+    to be outliers
+  \end{itemize}
+\item
+  Afterthoughts:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What if we \textbf{multiply} somehow two learnables?
+    i.e.~\(\lambda \cdot \| AE loss \|\), or
+    \(AE1 loss \cdot AE2 loss\). Which learns faster?
+  \item
+    If one NN learns first (e.g.~\(\lambda\)), it will reduce the
+    incentive for the other one to learn.
+  \item
+    What if \(\lambda\) adapts much slower than the AE?
+    \[(1 - \lambda) AE_{loss}  + \lambda Const\]
+  \item
+    AE loss drops first, then lambda will learn much later if the input
+    is an outlier or not:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      if AE loss is small, \(\lambda\) will be close to 1
+    \item
+      if AE loss is large, \(\lambda\) will be close to 0
+    \item
+      just an indirect reflection of AE loss / C ?
+    \end{itemize}
+  \item
+    Two NNs in competition. Does it matter which one learns first?
+  \item
+    Outlier detection based on speed of learning?
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{lappas2021}{%
+\subsubsection{Lappas2021}\label{lappas2021}}
+
+\begin{quote}
+InProceedings (Lappas2021)\\
+Lappas, D.; Argyriou, V. \& Makris, D.\\
+Fourier Transformation Autoencoders for Anomaly Detection\\
+ICASSP 2021 - 2021 IEEE International Conference on Acoustics, Speech
+and Signal Processing (ICASSP), 2021, 1475-1479
+\end{quote}
+
+\includegraphics{img/2023-02-27-10-00-46.png}
+
+\begin{itemize}
+\tightlist
+\item
+  Augment input vector with Fourier transform, real and imaginary parts
+\item
+  Learn three coders, for each part
+\item
+  Concatenate the latent variables
+\item
+  A single decoder, which produces the real and imaginary parts
+\item
+  Architecture:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    3N =\textgreater{} 3L =\textgreater{} 2N
+  \end{itemize}
+\item
+  Y' to X' means what?? ``Another mapping''
+\end{itemize}
+
+\hypertarget{choi2023}{%
+\subsubsection{Choi2023}\label{choi2023}}
+
+\begin{quote}
+TechReport (Choi2023)\\
+Choi, J.; Park, J.; Japesh, A. \& Adarsh\\
+A Subspace Projection Approach to Autoencoder-based Anomaly Detection\\
+arXiv, arXiv, 2023
+\end{quote}
+
+\includegraphics{img/2023-02-27-10-13-03.png}
+
+\begin{itemize}
+\tightlist
+\item
+  Information theoretic interpretation (MIMO), but not sure if useful at
+  all
+\item
+  Practically: evaluate reconstruction error only on the subspace of the
+  least significant eigenvectors of the error vectors
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If error is large =\textgreater{} outlier, if small, normal
+  \end{itemize}
+\item
+  \textbf{Just another example of weighted \(\ell_2\) norm}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    here is in the space of the eigenvectors, inversely prop to variance
+    (eigenvalues) (here just with 0, 1 binary selection)
+  \item
+    here it is the covariance matrix of all errors, since for AE we have
+    a 1-to-1 input to output (single output vector)
+  \item
+    for VAE, we have the same idea, but the covariance matrix is per
+    input vector, since we have 1-to-many (one input, multiple outputs)
+    (see An2015)
+  \end{itemize}
 \end{itemize}
 
 
