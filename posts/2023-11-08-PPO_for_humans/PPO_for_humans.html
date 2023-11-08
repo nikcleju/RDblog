@@ -276,13 +276,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li>Rollout
 <ul>
-<li>play simulations with current policy and collect rewards</li>
+<li>play simulations with current policy (i.e.&nbsp;current Action Net) and collect rewards</li>
 <li>doesn’t update anything</li>
 <li>it’s here where distribution sampling is done, during simulations</li>
 </ul></li>
 <li>Train
 <ul>
-<li>train neural networks according to PPO policy, using the data recorded during the rollout stage</li>
+<li>train neural networks according to PPO learning algorithm, using the data recorded during the rollout stage</li>
 <li>distribution is not sampled here, but it needs to recompute the probability of the actions recorded during collection</li>
 </ul></li>
 </ol></li>
