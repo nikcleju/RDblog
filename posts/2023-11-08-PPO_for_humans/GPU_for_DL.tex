@@ -188,7 +188,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, frame hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -317,10 +317,10 @@ The general idea of PPO training is:
   \begin{itemize}
   \tightlist
   \item
-    This used the current policy, i.e.~current Action Net, when sampling
+    This uses the current policy, i.e.~current Action Net, when sampling
     actions
   \item
-    Save all the tuples
+    Record all the tuples
     \texttt{(state,\ action\ taken,\ cumulative\ reward)}
   \end{itemize}
 \item
@@ -355,9 +355,10 @@ those states' values as computed by the Value Net.
 \hypertarget{sampling-mechanism}{%
 \subsection{Sampling mechanism}\label{sampling-mechanism}}
 
-For sampling, it depends how the policy (action probability
-distribution) is parameterized. The underlying distributions are the
-ones from PyTorch (see below, from
+Sampling depends on how the policy (action probability distribution) is
+parameterized.
+
+The underlying distributions are the ones from PyTorch (see below, from
 \texttt{/data/venv/cnc-rl/lib/python3.11/site-packages/stable\_baselines3/common/policies.py}):
 
 \begin{Shaded}
@@ -406,19 +407,20 @@ gaussian:
 \item
   the mean is the value produced by the Action Net (size = action size)
 \item
-  the deviation is another learnable parameter (size = 1, same value for
-  all dimensions)
+  the deviation is a separate learnable parameter (size = 1, same value
+  for all dimensions)
 \end{itemize}
 
 Sampling is done using the same reparameterization trick as in
 Variational Autoencoders: sample the standard normal, then multiply with
 deviation and add mean.
 
-When no sampling is done and we want the most likely action, this is
-simply the mean action, i.e.~the output of the Action Net.
+During evaluation runs, when we want the most likely action and not a
+sample, we simply take the output of the Action Net, i.e.~the mean
+action.
 
-Choosing the next step is therefore choosing a point from a gaussian
-cloud:
+During our simulation, choosing the next step is therefore choosing a
+point from a gaussian cloud:
 
 \hfill\break
 
@@ -435,7 +437,7 @@ For discrete actions, the distribution is a categorical distribution
   Action Net produces directly the probabilities (or logits) of every
   action (vector size = action size)
 \item
-  sampling is done with PyTorch
+  sampling is done with PyTorch.
 \end{itemize}
 
 

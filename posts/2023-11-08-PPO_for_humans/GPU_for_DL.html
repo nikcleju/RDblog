@@ -291,8 +291,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li>During rollout, collect the cumulative reward (i.e.&nbsp;value) out of every state, to act like a ground truth
 <ul>
-<li>This used the current policy, i.e.&nbsp;current Action Net, when sampling actions</li>
-<li>Save all the tuples <code>(state, action taken, cumulative reward)</code></li>
+<li>This uses the current policy, i.e.&nbsp;current Action Net, when sampling actions</li>
+<li>Record all the tuples <code>(state, action taken, cumulative reward)</code></li>
 </ul></li>
 <li>Compute the estimated value of the same states with the Value Net</li>
 <li>Compare and update:
@@ -306,7 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sampling-mechanism" class="level2">
 <h2 class="anchored" data-anchor-id="sampling-mechanism">Sampling mechanism</h2>
-<p>For sampling, it depends how the policy (action probability distribution) is parameterized. The underlying distributions are the ones from PyTorch (see below, from <code>/data/venv/cnc-rl/lib/python3.11/site-packages/stable_baselines3/common/policies.py</code>):</p>
+<p>Sampling depends on how the policy (action probability distribution) is parameterized.</p>
+<p>The underlying distributions are the ones from PyTorch (see below, from <code>/data/venv/cnc-rl/lib/python3.11/site-packages/stable_baselines3/common/policies.py</code>):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.distributions <span class="im">import</span> Bernoulli, Categorical, Normal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> _get_action_dist_from_latent(<span class="va">self</span>, latent_pi: th.Tensor) <span class="op">-&gt;</span> Distribution:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>      <span class="co">"""</span></span>
@@ -337,11 +338,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For continuous actions, the distribution is parameterized a diagonal gaussian:</p>
 <ul>
 <li>the mean is the value produced by the Action Net (size = action size)</li>
-<li>the deviation is another learnable parameter (size = 1, same value for all dimensions)</li>
+<li>the deviation is a separate learnable parameter (size = 1, same value for all dimensions)</li>
 </ul>
 <p>Sampling is done using the same reparameterization trick as in Variational Autoencoders: sample the standard normal, then multiply with deviation and add mean.</p>
-<p>When no sampling is done and we want the most likely action, this is simply the mean action, i.e.&nbsp;the output of the Action Net.</p>
-<p>Choosing the next step is therefore choosing a point from a gaussian cloud:</p>
+<p>During evaluation runs, when we want the most likely action and not a sample, we simply take the output of the Action Net, i.e.&nbsp;the mean action.</p>
+<p>During our simulation, choosing the next step is therefore choosing a point from a gaussian cloud:</p>
 <p><br>
 </p>
 <p><img src="img/Explanation.png" class="img-fluid"></p>
@@ -351,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For discrete actions, the distribution is a categorical distribution</p>
 <ul>
 <li>Action Net produces directly the probabilities (or logits) of every action (vector size = action size)</li>
-<li>sampling is done with PyTorch</li>
+<li>sampling is done with PyTorch.</li>
 </ul>
 
 
