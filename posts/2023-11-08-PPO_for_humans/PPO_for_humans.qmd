@@ -67,12 +67,12 @@ The main loop in PPO consists of two steps:
 
 1. Repeat
    1. Rollout
-      - play simulations with current policy and collect rewards
+      - play simulations with current policy (i.e. current Action Net) and collect rewards
       - doesn't update anything
       - it's here where distribution sampling is done, during simulations
 
    2. Train
-      - train neural networks according to PPO policy, using the data recorded during the rollout stage
+      - train neural networks according to PPO learning algorithm, using the data recorded during the rollout stage
       - distribution is not sampled here, but it needs to recompute the probability of the actions
         recorded during collection
 
