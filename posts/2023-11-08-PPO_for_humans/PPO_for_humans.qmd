@@ -25,11 +25,11 @@ For PPO, we have two neural networks:
 
 
 
-![Overview the Action Net](img/ActionNet.png)
+![Overview of the Action Net](img/ActionNet.png)
 
 \
 
-![Overview the Value Net](img/ValueNet.png)
+![Overview of the Value Net](img/ValueNet.png)
 
 Both networks are joined together in a single PyTorch network object,
 whose `forward()` function (the forward pass) is the following
@@ -79,8 +79,8 @@ The main loop in PPO consists of two steps:
 The general idea of PPO training is:
 
 1. During rollout, collect the cumulative reward (i.e. value) out of every state, to act like a ground truth
-   - This used the current policy, i.e. current Action Net, when sampling actions
-   - Save all the tuples `(state, action taken, cumulative reward)`
+   - This uses the current policy, i.e. current Action Net, when sampling actions
+   - Record all the tuples `(state, action taken, cumulative reward)`
 2. Compute the estimated value of the same states with the Value Net
 3. Compare and update:
    - look back on all the `(state, action taken, cumulative reward)` tuples collected, and:
@@ -95,7 +95,8 @@ are identical to those states' values as computed by the Value Net.
 
 ## Sampling mechanism
 
-For sampling, it depends how the policy (action probability distribution) is parameterized.
+Sampling depends on how the policy (action probability distribution) is parameterized.
+
 The underlying distributions are the ones from PyTorch
 (see below, from `/data/venv/cnc-rl/lib/python3.11/site-packages/stable_baselines3/common/policies.py`):
 
@@ -135,15 +136,15 @@ from torch.distributions import Bernoulli, Categorical, Normal
 For continuous actions, the distribution is parameterized a diagonal gaussian:
 
 - the mean is the value produced by the Action Net (size = action size)
-- the deviation is another learnable parameter (size = 1,  same value for all dimensions)
+- the deviation is a separate learnable parameter (size = 1,  same value for all dimensions)
 
 Sampling is done using the same reparameterization trick as in Variational Autoencoders:
 sample the standard normal, then multiply with deviation and add mean.
 
-When no sampling is done and we want the most likely action, this is simply
-the mean action, i.e. the output of the Action Net.
+During evaluation runs, when we want the most likely action and not a sample,
+we simply take the output of the Action Net, i.e. the mean action.
 
-Choosing the next step is therefore choosing a point from a gaussian cloud:
+During our simulation, choosing the next step is therefore choosing a point from a gaussian cloud:
 
 \
 
@@ -154,4 +155,4 @@ Choosing the next step is therefore choosing a point from a gaussian cloud:
 For discrete actions, the distribution is a categorical distribution
 
 - Action Net produces directly the probabilities (or logits) of every action (vector size = action size)
-- sampling is done with PyTorch
+- sampling is done with PyTorch.
