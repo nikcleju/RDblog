@@ -1,0 +1,74 @@
+---
+title: Kernel Blues
+date: "2024-01-26"
+categories: [AD]
+description: Response for Iulian
+#image: 'img/2022-11-14-09-20-56.png'
+toc: true
+#toc-location: body
+toc-location: left
+toc-depth: 3
+
+#bibliography: CNCpapers.bib
+
+format:
+  html: default
+  latex: default
+
+crossref:
+  eq-prefix: ""
+---
+
+## Claim
+
+For testing, I think we should replace $I$ with
+$\tilde{\gamma} = K^{-1} k$, i.e the expansion of $k$ in the basis $K$.
+
+## Justification
+
+The justification follows the same lines as Kernel DL.
+
+The starting problem we want to solve is:
+
+$$\arg\min_{\tilde{x}} \|\varphi(\tilde{y}) - \varphi(D) \tilde{x}\|_2$${#eq-1}
+
+where $\varphi$ is the feature map and $\tilde{y}$ test point
+(let's assume it's a single vector).
+
+Kernel DL restricts $\varphi(D)$ to be in the span of $\varphi(Y)$,
+i.e. $\varphi(D) = \varphi(Y) A$ for some A (that is learned), so we have:
+
+$$\arg\min_{\tilde{x}} \|\varphi(\tilde{y}) - \varphi(Y) A \tilde{x}\|_2$$
+
+Part of $\varphi(\tilde{y})$ lies is in the span of $\varphi(Y)$ and
+another part is orthogonal to it, and it is clear that only the
+component in the span of $\varphi(Y)$ can ever be minimized with atoms $\varphi(Y)$,
+so without loss of generality we can state the problem (@eq-1) as:
+
+$$\arg\min_{\tilde{x}} \|\varphi(Y) \tilde{\gamma} - \varphi(Y) A \tilde{x}\|_2$${#eq-2}
+
+where $\varphi(Y)\tilde{\gamma}$ is the orthogonal projection
+of $\varphi(\tilde{y})$ onto the span of $\varphi(Y)$:
+
+$$\tilde{\gamma} = \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2$${#eq-3}
+
+With this change, the problem (@eq-2) becomes similar to the Kernel DL problem:
+
+$$\arg\min_{\tilde{x}} \|\varphi(Y) \left( \tilde{\gamma} - A \tilde{x} \right) \|_2$${#eq-4}
+
+and the algorithm tries to minimize the right-hand paranthesis $(\tilde{\gamma} - A \tilde{x})$.
+Thus, $\tilde{\gamma}$ is replacing $I$ from the training.
+
+Now, coming back at $\tilde{\gamma}$, this is the least-squares solution
+to the problem (@eq-3):
+$$\begin{align}
+\tilde{\gamma} &= \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2 \\
+&\overset{(a)}{=} \left( \varphi(Y)^T \varphi(Y) \right)^{-1} \varphi(Y)^T \varphi(\tilde{y}) \\
+&= K^{-1} k
+\end{align}$${#eq-5}
+where $(a)$ is because $\varphi(Y)$ is a tall matrix.
+
+Observe that $\tilde{\gamma}= K^{-1} k$ is just the basis expansion of $k$ in $K$,
+$$k = K \tilde{\gamma}$$
+
+QED.
