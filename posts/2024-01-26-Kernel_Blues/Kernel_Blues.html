@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-11-30">
-<meta name="description" content="Webinar notes`">
+<meta name="dcterms.date" content="2024-01-26">
+<meta name="description" content="Response for Iulian">
 
-<title>My Notes - The benefits of Matlab Campus-Wide license - webinar notes</title>
+<title>My Notes - Kernel Blues</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,6 +61,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -104,14 +105,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The benefits of Matlab Campus-Wide license - webinar notes</h1>
+      <h1 class="title">Kernel Blues</h1>
                   <div>
         <div class="description">
-          Webinar notes`
+          Response for Iulian
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">software</div>
+                <div class="quarto-category">AD</div>
               </div>
                   </div>
   </div>
@@ -123,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 30, 2022</p>
+        <p class="date">January 26, 2024</p>
       </div>
     </div>
       
@@ -137,12 +138,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#online-courses" id="toc-online-courses" class="nav-link" data-scroll-target="#online-courses">Online courses</a></li>
-  <li><a href="#matlab-online" id="toc-matlab-online" class="nav-link" data-scroll-target="#matlab-online">Matlab Online</a></li>
-  <li><a href="#live-scripts" id="toc-live-scripts" class="nav-link" data-scroll-target="#live-scripts">Live Scripts</a></li>
-  <li><a href="#matlab-grader" id="toc-matlab-grader" class="nav-link" data-scroll-target="#matlab-grader">Matlab Grader</a></li>
-  <li><a href="#ml-dl-ai-support" id="toc-ml-dl-ai-support" class="nav-link" data-scroll-target="#ml-dl-ai-support">ML, DL, AI support</a></li>
+  <li><a href="#claim" id="toc-claim" class="nav-link active" data-scroll-target="#claim">Claim</a></li>
+  <li><a href="#justification" id="toc-justification" class="nav-link" data-scroll-target="#justification">Justification</a></li>
   </ul>
 </nav>
 </nav>
@@ -155,98 +152,32 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Title: The benefits of Matlab Campus-Wide license</p>
-<ul>
-<li>with a focus on AI and ML</li>
-</ul>
-<p>Contents:</p>
-<p><img src="img/2022-11-30-16-39-47.png" class="img-fluid"></p>
+<section id="claim" class="level2">
+<h2 class="anchored" data-anchor-id="claim">Claim</h2>
+<p>For testing, I think we should replace <span class="math inline">\(I\)</span> with <span class="math inline">\(\tilde{\gamma} = K^{-1} k\)</span>, i.e the expansion of <span class="math inline">\(k\)</span> in the basis <span class="math inline">\(K\)</span>.</p>
 </section>
-<section id="online-courses" class="level2">
-<h2 class="anchored" data-anchor-id="online-courses">Online courses</h2>
-<ul>
-<li><p>Mathworks portal: University has dedicated portal</p></li>
-<li><p>Courses homepage: <a href="matlabacademy.mathworks.com">matlabacademy.mathworks.com</a></p>
-<ul>
-<li>OnRamp courses: 13 courses, 23 hours
-<ul>
-<li>prior to the first classroom lectures</li>
-<li>don’t waste time teach basics of syntax, use online course</li>
-<li>Matlab, Simulink, AI, ML DL, RL Onramps</li>
-<li>Signal Processing</li>
-</ul></li>
-<li>InDepth: free for CWL, 13 courses, 100 hours</li>
-</ul></li>
-</ul>
-</section>
-<section id="matlab-online" class="level2">
-<h2 class="anchored" data-anchor-id="matlab-online">Matlab Online</h2>
-</section>
-<section id="live-scripts" class="level2">
-<h2 class="anchored" data-anchor-id="live-scripts">Live Scripts</h2>
-<ul>
-<li><p>include controls, like in Jupyter notebooks</p></li>
-<li><p>much less files in one project</p></li>
-<li><p>Matlab on mobile platforms (phone)</p>
-<ul>
-<li>access sensors (e.g.&nbsp;step counter)</li>
-</ul></li>
-</ul>
-</section>
-<section id="matlab-grader" class="level2">
-<h2 class="anchored" data-anchor-id="matlab-grader">Matlab Grader</h2>
-<ul>
-<li>90% of tests can be implemented online instead of paper &amp; pen</li>
-<li>some effort:
-<ul>
-<li>clear description, form of solution</li>
-<li>Latex based support</li>
-<li>prepare template, piece of code with empty parts</li>
-<li>prepare reference solution</li>
-<li>MG compares student solution with reference sol</li>
-<li>provide testing criteria</li>
-<li>can add <em>.m files or </em>.p files</li>
-<li>test types:
-<ul>
-<li>compare variable with correct result</li>
-<li>matlab code for own testing</li>
-</ul></li>
-<li>can be implemented in Moodle!</li>
-</ul></li>
-<li>It is possible to compare students’ solutions&nbsp;among each other</li>
-<li>Can later modify come and evaluate them again</li>
-<li>Can export results in excel sheet format</li>
-</ul>
-</section>
-<section id="ml-dl-ai-support" class="level2">
-<h2 class="anchored" data-anchor-id="ml-dl-ai-support">ML, DL, AI support</h2>
-<p><img src="img/2022-11-30-16-31-44.png" class="img-fluid"></p>
-<ul>
-<li><p>supports entire workflow:</p>
-<ul>
-<li>data preparation, generation, cleaning</li>
-<li>AI modeling: design, tuning, train, compatib with TF and pytorch (yeah sure )</li>
-<li>System design (simulink, simscape, validation)</li>
-<li>Deployment &amp; code generation</li>
-</ul></li>
-<li><p>Use DL Toolbox examples, courses</p></li>
-<li><p>Examples:</p>
-<ul>
-<li><p>Written character recognition</p></li>
-<li><p>Classification Learner tool</p>
-<ul>
-<li>many algorithms available</li>
-</ul></li>
-<li><p>Transfer Learning with Deep Network Designer</p>
-<p><img src="img/2022-11-30-16-33-36.png" class="img-fluid"></p>
-<ul>
-<li>built-in pretrain networks</li>
-</ul></li>
-<li><p>Parallel computing support (<code>parfor</code>)</p></li>
-</ul></li>
-</ul>
+<section id="justification" class="level2">
+<h2 class="anchored" data-anchor-id="justification">Justification</h2>
+<p>The justification follows the same lines as Kernel DL.</p>
+<p>The starting problem we want to solve is:</p>
+<p><span id="eq-1"><span class="math display">\[\arg\min_{\tilde{x}} \|\varphi(\tilde{y}) - \varphi(D) \tilde{x}\|_2 \tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(\varphi\)</span> is the feature map and <span class="math inline">\(\tilde{y}\)</span> test point (let’s assume it’s a single vector).</p>
+<p>Kernel DL restricts <span class="math inline">\(\varphi(D)\)</span> to be in the span of <span class="math inline">\(\varphi(Y)\)</span>, i.e.&nbsp;<span class="math inline">\(\varphi(D) = \varphi(Y) A\)</span> for some A (that is learned), so we have:</p>
+<p><span class="math display">\[\arg\min_{\tilde{x}} \|\varphi(\tilde{y}) - \varphi(Y) A \tilde{x}\|_2\]</span></p>
+<p>Part of <span class="math inline">\(\varphi(\tilde{y})\)</span> lies is in the span of <span class="math inline">\(\varphi(Y)\)</span> and another part is orthogonal to it, and it is clear that only the component in the span of <span class="math inline">\(\varphi(Y)\)</span> can ever be minimized with atoms <span class="math inline">\(\varphi(Y)\)</span>, so without loss of generality we can state the problem (<a href="#eq-1">1</a>) as:</p>
+<p><span id="eq-2"><span class="math display">\[\arg\min_{\tilde{x}} \|\varphi(Y) \tilde{\gamma} - \varphi(Y) A \tilde{x}\|_2 \tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(\varphi(Y)\tilde{\gamma}\)</span> is the orthogonal projection of <span class="math inline">\(\varphi(\tilde{y})\)</span> onto the span of <span class="math inline">\(\varphi(Y)\)</span>:</p>
+<p><span id="eq-3"><span class="math display">\[\tilde{\gamma} = \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2 \tag{3}\]</span></span></p>
+<p>With this change, the problem (<a href="#eq-2">2</a>) becomes similar to the Kernel DL problem:</p>
+<p><span id="eq-4"><span class="math display">\[\arg\min_{\tilde{x}} \|\varphi(Y) \left( \tilde{\gamma} - A \tilde{x} \right) \|_2 \tag{4}\]</span></span></p>
+<p>and the algorithm tries to minimize the right-hand paranthesis <span class="math inline">\((\tilde{\gamma} - A \tilde{x})\)</span>. Thus, <span class="math inline">\(\tilde{\gamma}\)</span> is replacing <span class="math inline">\(I\)</span> from the training.</p>
+<p>Now, coming back at <span class="math inline">\(\tilde{\gamma}\)</span>, this is the least-squares solution to the problem (<a href="#eq-3">3</a>): <span id="eq-5"><span class="math display">\[\begin{align}
+\tilde{\gamma} &amp;= \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2 \\
+&amp;\overset{(a)}{=} \left( \varphi(Y)^T \varphi(Y) \right)^{-1} \varphi(Y)^T \varphi(\tilde{y}) \\
+&amp;= K^{-1} k
+\end{align} \tag{5}\]</span></span> where <span class="math inline">\((a)\)</span> is because <span class="math inline">\(\varphi(Y)\)</span> is a tall matrix.</p>
+<p>Observe that <span class="math inline">\(\tilde{\gamma}= K^{-1} k\)</span> is just the basis expansion of <span class="math inline">\(k\)</span> in <span class="math inline">\(K\)</span>, <span class="math display">\[k = K \tilde{\gamma}\]</span></p>
+<p>QED.</p>
 
 
 </section>

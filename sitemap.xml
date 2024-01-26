@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://nikcleju.github.io/RDblog/about.html</loc>
-    <lastmod>2023-11-08T13:05:34.733Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/about.html</loc>
+    <lastmod>2024-01-26T22:22:55.489Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/index.html</loc>
-    <lastmod>2023-11-08T13:05:35.340Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/index.html</loc>
+    <lastmod>2024-01-26T22:22:56.576Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-10_LOF/LOF.html</loc>
-    <lastmod>2023-11-08T13:05:35.578Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-10_LOF/LOF.html</loc>
+    <lastmod>2024-01-26T22:22:56.985Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-14_Scoring/Scoring.html</loc>
-    <lastmod>2023-11-08T13:05:35.825Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-14_Scoring/Scoring.html</loc>
+    <lastmod>2024-01-26T22:22:57.362Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
-    <lastmod>2023-11-08T13:05:36.150Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
+    <lastmod>2024-01-26T22:22:57.846Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
-    <lastmod>2023-11-08T13:05:36.400Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
+    <lastmod>2024-01-26T22:22:58.226Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2022-12-12_LOS-Reviews/LOS_Reviews.html</loc>
-    <lastmod>2023-11-08T13:05:36.625Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2022-12-12_LOS-Reviews/LOS_Reviews.html</loc>
+    <lastmod>2024-01-26T22:22:58.716Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2023-01-07-CNC/CNC.html</loc>
-    <lastmod>2023-11-08T13:05:37.219Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2023-01-07-CNC/CNC.html</loc>
+    <lastmod>2024-01-26T22:22:59.556Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2023-01-16-VAE_Anomaly_Detection/VAEAnomalyDetection.html</loc>
-    <lastmod>2023-11-08T13:05:38.016Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2023-01-16-VAE_Anomaly_Detection/VAEAnomalyDetection.html</loc>
+    <lastmod>2024-01-26T22:23:00.926Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2023-01-30-GPU_for_DL/GPU_for_DL.html</loc>
-    <lastmod>2023-11-08T13:05:38.594Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2023-01-30-GPU_for_DL/GPU_for_DL.html</loc>
+    <lastmod>2024-01-26T22:23:01.781Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/2023-11-08-PPO_for_humans/PPO_for_humans.html</loc>
-    <lastmod>2023-11-08T13:05:39.287Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2023-11-08-PPO_for_humans/PPO_for_humans.html</loc>
+    <lastmod>2024-01-26T22:23:02.499Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/post-with-code/index.html</loc>
-    <lastmod>2023-11-08T13:05:39.925Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/2024-01-26-Kernel_Blues/Kernel_Blues.html</loc>
+    <lastmod>2024-01-26T22:23:03.184Z</lastmod>
   </url>
   <url>
-    <loc>https://nikcleju.github.io/RDblog/posts/welcome/index.html</loc>
-    <lastmod>2023-11-08T13:05:40.197Z</lastmod>
+    <loc>https://github.com/nikcleju/rdblog/posts/post-with-code/index.html</loc>
+    <lastmod>2024-01-26T22:23:03.777Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/nikcleju/rdblog/posts/welcome/index.html</loc>
+    <lastmod>2024-01-26T22:23:04.086Z</lastmod>
   </url>
 </urlset>

@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-01-26-Kernel_Blues/Kernel_Blues.html",
       "/posts/2023-11-08-PPO_for_humans/PPO_for_humans.html",
       "/posts/2023-01-30-GPU_for_DL/GPU_for_DL.html",
       "/posts/2023-01-16-VAE_Anomaly_Detection/VAEAnomalyDetection.html",
