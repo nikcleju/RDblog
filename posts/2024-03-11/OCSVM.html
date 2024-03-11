@@ -211,7 +211,7 @@ window.Quarto = {
 \begin{align}
 \alpha G &amp;= \alpha \left( \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
 - \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i) \right) \\
-&amp;= \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' - \sum_{i=1}^{N} \lambda_i (\omega'^T (\sqrt{\alpha} x_i - \rho' + \xi_i') \\
+&amp;= \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' - \sum_{i=1}^{N} \lambda_i (\omega'^T \sqrt{\alpha} x_i - \rho' + \xi_i') \\
 \end{align}
 \]</span></p>
 <p>That’s a normal OC-SVM problem in variables <span class="math inline">\(\omega', \rho', \xi'\)</span>, but with a scaled <span class="math inline">\(X' = X \sqrt{\alpha}\)</span>, because there remains a <span class="math inline">\(\sqrt{\alpha}\)</span> factor in the constraint.</p>
