@@ -1,0 +1,200 @@
+---
+title: Weighting OCSVM
+date: "2024-03-11"
+categories: [AD]
+description: What happens
+toc: true
+#toc-location: body
+toc-location: left
+toc-depth: 3
+
+#bibliography: CNCpapers.bib
+
+format:
+  html: default
+  latex: default
+
+crossref:
+  eq-prefix: ""
+---
+
+# Current
+
+We have an optimization problem
+
+$$\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F + G,$$
+
+where
+
+$$
+%------------
+\begin{align}
+F(Y, D, X)  &= \frac12 \|Y - DX\|_F^2
+  + \beta \sum_{i=1}^{n} \phi\left(\|x^i\|_2\right)  \\
+G(X, \omega, \rho, \xi) &=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i)
+\end{align}
+%------------
+$$ {#eq-FG}
+
+
+This leads to the inner K-SVD style problem is:
+
+$$
+\begin{align}
+(d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \omega_i x^i\lambda ,
+\end{align}
+$$
+
+# Problem
+
+We want to increase the weight of the G term, i.e. minimize $F + \alpha G$ for some $\alpha$.
+
+This was implemented by multiplying with $\alpha$ in the inner problem alongside $\omega_i x^i \lambda$, as a consequence of $\alpha G$ with $G$ defined as in (@eq-FG):
+
+$$
+\begin{align}
+(d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
+\end{align}
+$$ {#eq-inner}
+
+
+# Claim
+
+I think this is not correct. Suppose we had written instead the OC-SVM problem with constraints:
+
+$$
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+\textbf{subject to  } \omega^T x_i - \rho + \xi_i \geq 0\\
+\end{align}
+$$ {#eq-OCSVMconstr}
+
+What (@eq-inner) actually solves, with the $\alpha$ factor, is this:
+$$
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+\textbf{subject to  } \alpha \left( \omega^T x_i - \rho + \xi_i \right) \geq 0\\
+\end{align}
+$$ {#eq-OCSVMconstr2}
+
+We haven't increased the $G$ term, but the constraint!
+
+### Proof
+
+The Langrangean of this problem (@eq-OCSVMconstr2) is:
+
+$$
+\begin{align}
+\mathcal{L} = F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \alpha \sum_i \lambda_i \left(\omega^T x_i - \rho + \xi_i \right)
+\end{align}
+$$
+
+1. When minimizing F, the inner K-SVD problem is exactly (@eq-inner):
+  $$
+  \begin{align}
+  (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
+  \end{align}
+  $$
+
+1. When minimizing G, with $X$ fixed, we run standard OC-SVM from Scikit Learn,
+   which solves the standard OC-SVM problem (no $\alpha$):
+  $$
+  \begin{align}
+  \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \sum_i \lambda_i \left(\omega^T x_i - \rho + \xi_i \right)
+  \end{align}
+  $$
+  which is the same as the standard constrained formulation:
+  $$
+  \begin{align}
+  \underset{\omega, \rho, \xi}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+  \textbf{subject to  } \omega^T x_i - \rho + \xi_i \geq 0\\
+  \end{align}
+  $$ {#eq-OCSVMconstr-standard}
+  which has the same solution as the one with the constraint multiplied by $\alpha$:
+  $$
+  \begin{align}
+  \underset{\omega, \rho, \xi}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+  \textbf{subject to  } \alpha \left( \omega^T x_i - \rho + \xi_i \right) \geq 0\\
+  \end{align}
+  $$
+  which is (@eq-OCSVMconstr2). QED.
+
+So our implementation actually solves (@eq-OCSVMconstr2), which
+doesn't change the optimization problem,
+but just the constraint. This makes the Lagrangean steeper
+w.r.t. to $\lambda$ variables, which impacts the convergence speed.
+Basically, we just increase step size towards the same solution.
+Thus, we can get instability.
+
+# Solution
+
+What we actually want to solve with the factor $\alpha$ is:
+
+$$
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \alpha \left(\|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i \right), \\
+\textbf{subject to  } \alpha \left(\omega^T x_i - \rho + \xi_i \right) \geq 0\\
+\end{align}
+$$
+
+Note that the constraint could have been left unchanged,
+or multiplied by some other factor,
+as it only affects convergence speed.
+Here, for simplicity, we consider it multipled by $\alpha$ as well.
+
+We can rewrite the optimization problem using a change of variables
+$\omega' = \sqrt{\alpha} \cdot \omega$,
+$\rho' = \alpha \rho$,
+$\xi' = \alpha \xi$:
+
+$$
+\begin{align}
+\underset{D, X, \omega', \rho', \xi'}{\textbf{minimize  }} F(Y, D, X) + \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' , \\
+\textbf{subject to  } \sqrt{\alpha} \cdot {\omega'}^T x_i - \rho' + \xi_i' \geq 0
+\end{align}
+$$ {#eq-OCSVMconstr-correct}
+
+Note the extra $\sqrt{\alpha}$ factor in the constraint, which appears
+because in the objective we have squared $\|\omega\|^2$ while in the constraint
+we just have linear $\omega^T$.
+
+The Lagrangean of this problem is:
+$$
+\begin{align}
+\mathcal{L} = F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \sum_i \lambda_i \left( \sqrt{\alpha} \omega^T x_i - \rho + \xi_i \right)
+\end{align}
+$$
+
+What does this mean in terms of algorithm?
+
+1. When minimizing F, the inner problem is just like (@eq-inner) but with $\sqrt{\alpha}$ instead of $\alpha$:
+  $$
+  \begin{align}
+  (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \sqrt{\alpha} \omega_i x^i\lambda
+  \end{align}
+  $$ {#eq-inner2}
+
+1. For the OC-SVM, we can't just apply standard OC-SVM.
+   Standard OC-SVM (@eq-OCSVMconstr-standard) assumes that
+   the ratio $\omega / \rho$ is the same in the objective
+   and in the constraint.
+   This is not the case in (@eq-OCSVMconstr-correct), because
+   of the extra $\sqrt{\alpha}$ factor in the constraint.
+
+   Instead, we need to scale $X$ with $\sqrt{\alpha}$:
+   $$X' = X \sqrt{\alpha}$$
+
+   and only afterwards call standard OC-SVM on $X'$:
+  $$
+  \begin{align}
+  \underset{\omega, \rho, \xi'}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+  \textbf{subject to  } \omega^T x_i' - \rho + \xi_i \geq 0\\
+  \end{align}
+  $$ {#eq-OCSVMconstr-scaled}
+  thus achieving (@eq-OCSVMconstr-correct).
+
+# Acknowledgement
+
+This is late night research. If this is horribly wrong,
+just attribute it to sleep deprivation.
