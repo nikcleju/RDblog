@@ -149,6 +149,39 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
+\section{Tl;dr}\label{tldr}
+
+When we scale G with some factor \(\alpha\) in the main optimization
+problem, we have: \[
+\alpha G = \alpha \left( \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i) \right)
+\] which is equivalent to a normal G with variables
+\(\omega' = \sqrt{\alpha} \cdot \omega\), \(\rho' = \alpha \rho\),
+\(\xi' = \alpha \xi\), \textbf{and a scaled \(X' = X \sqrt{\alpha}\)}:
+
+\[
+\begin{align}
+\alpha G &= \alpha \left( \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i) \right) \\
+&= \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' - \sum_{i=1}^{N} \lambda_i (\omega'^T (\sqrt{\alpha} x_i - \rho' + \xi_i') \\
+\end{align}
+\]
+
+That's a normal OC-SVM problem in variables \(\omega', \rho', \xi'\),
+but with a scaled \(X' = X \sqrt{\alpha}\), because there remains a
+\(\sqrt{\alpha}\) factor in the constraint.
+
+Therefore:
+
+\begin{itemize}
+\tightlist
+\item
+  scale with \(\sqrt{\alpha}\) in the inner \((d,x)\) problem, not with
+  \(\alpha\)
+\item
+  scale \(X' = X \sqrt{\alpha}\) before running OC-SVM afterwards
+\end{itemize}
+
 \section{Current}\label{current}
 
 We have an optimization problem

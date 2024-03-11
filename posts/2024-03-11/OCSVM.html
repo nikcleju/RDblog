@@ -178,7 +178,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#current" id="toc-current" class="nav-link active" data-scroll-target="#current">Current</a></li>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">Tl;dr</a></li>
+  <li><a href="#current" id="toc-current" class="nav-link" data-scroll-target="#current">Current</a></li>
   <li><a href="#problem" id="toc-problem" class="nav-link" data-scroll-target="#problem">Problem</a></li>
   <li><a href="#claim" id="toc-claim" class="nav-link" data-scroll-target="#claim">Claim</a>
   <ul class="collapse">
@@ -200,6 +201,26 @@ window.Quarto = {
 
 
 
+<section id="tldr" class="level1">
+<h1>Tl;dr</h1>
+<p>When we scale G with some factor <span class="math inline">\(\alpha\)</span> in the main optimization problem, we have: <span class="math display">\[
+\alpha G = \alpha \left( \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i) \right)
+\]</span> which is equivalent to a normal G with variables <span class="math inline">\(\omega' = \sqrt{\alpha} \cdot \omega\)</span>, <span class="math inline">\(\rho' = \alpha \rho\)</span>, <span class="math inline">\(\xi' = \alpha \xi\)</span>, <strong>and a scaled <span class="math inline">\(X' = X \sqrt{\alpha}\)</span></strong>:</p>
+<p><span class="math display">\[
+\begin{align}
+\alpha G &amp;= \alpha \left( \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i) \right) \\
+&amp;= \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' - \sum_{i=1}^{N} \lambda_i (\omega'^T (\sqrt{\alpha} x_i - \rho' + \xi_i') \\
+\end{align}
+\]</span></p>
+<p>That’s a normal OC-SVM problem in variables <span class="math inline">\(\omega', \rho', \xi'\)</span>, but with a scaled <span class="math inline">\(X' = X \sqrt{\alpha}\)</span>, because there remains a <span class="math inline">\(\sqrt{\alpha}\)</span> factor in the constraint.</p>
+<p>Therefore:</p>
+<ul>
+<li>scale with <span class="math inline">\(\sqrt{\alpha}\)</span> in the inner <span class="math inline">\((d,x)\)</span> problem, not with <span class="math inline">\(\alpha\)</span></li>
+<li>scale <span class="math inline">\(X' = X \sqrt{\alpha}\)</span> before running OC-SVM afterwards</li>
+</ul>
+</section>
 <section id="current" class="level1">
 <h1>Current</h1>
 <p>We have an optimization problem</p>
