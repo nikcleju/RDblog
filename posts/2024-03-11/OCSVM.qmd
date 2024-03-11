@@ -38,7 +38,7 @@ G(X, \omega, \rho, \xi) &=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho + \
 $$ {#eq-FG}
 
 
-This leads to the inner K-SVD style problem is:
+This leads to the inner K-SVD style problem:
 
 $$
 \begin{align}
@@ -50,7 +50,7 @@ $$
 
 We want to increase the weight of the G term, i.e. minimize $F + \alpha G$ for some $\alpha$.
 
-This was implemented by multiplying with $\alpha$ in the inner problem alongside $\omega_i x^i \lambda$, as a consequence of $\alpha G$ with $G$ defined as in (@eq-FG):
+This was implemented by multiplying with $\alpha$ in the inner problem alongside $\omega_i x^i \lambda$, as a consequence of having $\alpha G$ in (@eq-FG):
 
 $$
 \begin{align}
@@ -122,10 +122,12 @@ $$
 
 So our implementation actually solves (@eq-OCSVMconstr2), which
 doesn't change the optimization problem,
-but just the constraint. This makes the Lagrangean steeper
-w.r.t. to $\lambda$ variables, which impacts the convergence speed.
-Basically, we just increase step size towards the same solution.
-Thus, we can get instability.
+just the constraint.
+Multiplying the constraint with $\alpha$ makes the Lagrangean steeper,
+which (probably) impacts the convergence
+(like increasing step sizes in SGD),
+but not the optimal solution.
+Thus, we may get instability.
 
 # Solution
 
@@ -180,7 +182,8 @@ What does this mean in terms of algorithm?
    the ratio $\omega / \rho$ is the same in the objective
    and in the constraint.
    This is not the case in (@eq-OCSVMconstr-correct), because
-   of the extra $\sqrt{\alpha}$ factor in the constraint.
+   of the extra $\sqrt{\alpha}$ factor in the constraint. You can't have
+   a larger $\omega$ in the constraint and a smaller $\omega$ in the objective.
 
    Instead, we need to scale $X$ with $\sqrt{\alpha}$:
    $$X' = X \sqrt{\alpha}$$
