@@ -9,7 +9,6 @@
   numbers=noendperiod]{scrartcl}
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -19,6 +18,10 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -77,10 +80,6 @@
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
-\makeatother
-\makeatletter
-\makeatother
-\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
 \ifdefined\contentsname
@@ -116,21 +115,16 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
-\makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -148,7 +142,6 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced, boxrule=0pt, interior hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -156,21 +149,19 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-\hypertarget{claim}{%
-\subsection{Claim}\label{claim}}
+\subsection{Claim}\label{claim}
 
 For testing, I think we should replace \(I\) with
 \(\tilde{\gamma} = K^{-1} k\), i.e the expansion of \(k\) in the basis
 \(K\).
 
-\hypertarget{justification}{%
-\subsection{Justification}\label{justification}}
+\subsection{Justification}\label{justification}
 
 The justification follows the same lines as Kernel DL.
 
 The starting problem we want to solve is:
 
-\begin{equation}\protect\hypertarget{eq-1}{}{\arg\min_{\tilde{x}} \|\varphi(\tilde{y}) - \varphi(D) \tilde{x}\|_2}\label{eq-1}\end{equation}
+\begin{equation}\phantomsection\label{eq-1}{\arg\min_{\tilde{x}} \|\varphi(\tilde{y}) - \varphi(D) \tilde{x}\|_2}\end{equation}
 
 where \(\varphi\) is the feature map and \(\tilde{y}\) test point (let's
 assume it's a single vector).
@@ -187,17 +178,17 @@ component in the span of \(\varphi(Y)\) can ever be minimized with atoms
 \(\varphi(Y)\), so without loss of generality we can state the problem
 (\ref{eq-1}) as:
 
-\begin{equation}\protect\hypertarget{eq-2}{}{\arg\min_{\tilde{x}} \|\varphi(Y) \tilde{\gamma} - \varphi(Y) A \tilde{x}\|_2}\label{eq-2}\end{equation}
+\begin{equation}\phantomsection\label{eq-2}{\arg\min_{\tilde{x}} \|\varphi(Y) \tilde{\gamma} - \varphi(Y) A \tilde{x}\|_2}\end{equation}
 
 where \(\varphi(Y)\tilde{\gamma}\) is the orthogonal projection of
 \(\varphi(\tilde{y})\) onto the span of \(\varphi(Y)\):
 
-\begin{equation}\protect\hypertarget{eq-3}{}{\tilde{\gamma} = \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2}\label{eq-3}\end{equation}
+\begin{equation}\phantomsection\label{eq-3}{\tilde{\gamma} = \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2}\end{equation}
 
 With this change, the problem (\ref{eq-2}) becomes similar to the Kernel
 DL problem:
 
-\begin{equation}\protect\hypertarget{eq-4}{}{\arg\min_{\tilde{x}} \|\varphi(Y) \left( \tilde{\gamma} - A \tilde{x} \right) \|_2}\label{eq-4}\end{equation}
+\begin{equation}\phantomsection\label{eq-4}{\arg\min_{\tilde{x}} \|\varphi(Y) \left( \tilde{\gamma} - A \tilde{x} \right) \|_2}\end{equation}
 
 and the algorithm tries to minimize the right-hand paranthesis
 \((\tilde{\gamma} - A \tilde{x})\). Thus, \(\tilde{\gamma}\) is
@@ -205,12 +196,12 @@ replacing \(I\) from the training.
 
 Now, coming back at \(\tilde{\gamma}\), this is the least-squares
 solution to the problem (\ref{eq-3}):
-\begin{equation}\protect\hypertarget{eq-5}{}{\begin{align}
+\begin{equation}\phantomsection\label{eq-5}{\begin{align}
 \tilde{\gamma} &= \arg\min_{\gamma} \|\varphi(\tilde{y}) - \varphi(Y) \gamma\|_2 \\
 &\overset{(a)}{=} \left( \varphi(Y)^T \varphi(Y) \right)^{-1} \varphi(Y)^T \varphi(\tilde{y}) \\
 &= K^{-1} k
-\end{align}}\label{eq-5}\end{equation} where \((a)\) is because
-\(\varphi(Y)\) is a tall matrix.
+\end{align}}\end{equation} where \((a)\) is because \(\varphi(Y)\) is a
+tall matrix.
 
 Observe that \(\tilde{\gamma}= K^{-1} k\) is just the basis expansion of
 \(k\) in \(K\), \[k = K \tilde{\gamma}\]

@@ -9,7 +9,6 @@
   numbers=noendperiod]{scrartcl}
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -19,6 +18,10 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -37,7 +40,13 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage[normalem]{ulem}
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+  
+\fi
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
@@ -75,35 +84,41 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
   % turn on hanging indent if param 1 is 1
   \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
   \fi
   % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
 \usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \KOMAoption{captions}{tableheading}
-\makeatletter
-\makeatother
-\makeatletter
-\makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -140,21 +155,16 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
-\makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -172,7 +182,6 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -180,11 +189,9 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-\hypertarget{review-papers}{%
-\subsection{Review papers}\label{review-papers}}
+\subsection{Review papers}\label{review-papers}
 
-\hypertarget{bertolini2021}{%
-\subsubsection{Bertolini2021}\label{bertolini2021}}
+\subsubsection{Bertolini2021}\label{bertolini2021}
 
 \textbf{Machine Learning for industrial applications: A comprehensive
 literature review}
@@ -222,7 +229,7 @@ review Expert Systems with Applications, 2021, 175, 114820
     (THER), Cyber-Physical Systems (CPS), and Design For (D4) belong to
     this category.
   \item
-    \textbf{Hot Topics (Low Age and \sout{Negative} Positive Trend)} --
+    \textbf{Hot Topics (Low Age and \st{Negative} Positive Trend)} --
     Very recent topics of booming interest. At present, none of the
     keywords properly belong to this category. Yet, Additive
     Manufacturing (ADD\_MN), Prediction \& Prognostic (PR\_PR), and
@@ -278,8 +285,7 @@ review Expert Systems with Applications, 2021, 175, 114820
   \includegraphics{img/2023-01-07-12-53-08.png}
 \end{itemize}
 
-\hypertarget{interesting-aspects}{%
-\paragraph{Interesting aspects}\label{interesting-aspects}}
+\paragraph{Interesting aspects}\label{interesting-aspects}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -359,8 +365,7 @@ unbalanced data - low interpretability, with Deep NNs
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{kim2018}{%
-\subsubsection{Kim2018}\label{kim2018}}
+\subsubsection{Kim2018}\label{kim2018}
 
 \textbf{Smart Machining Process Using Machine Learning: A Review and
 Perspective on Machining Industry (2018) (Kim et al. 2018)}
@@ -384,8 +389,7 @@ algorithms have been used in machining.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{tambake2021}{%
-\subsubsection{Tambake2021}\label{tambake2021}}
+\subsubsection{Tambake2021}\label{tambake2021}
 
 \textbf{Data Driven Cutting Tool Fault Diagnosis System Using Machine
 Learning Approach: A Review (Tambake, Deshmukh, and Patange 2021)}
@@ -404,11 +408,9 @@ Learning Approach: A Review (Tambake, Deshmukh, and Patange 2021)}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{technical-papers}{%
-\subsection{Technical papers}\label{technical-papers}}
+\subsection{Technical papers}\label{technical-papers}
 
-\hypertarget{ordas2017}{%
-\subsubsection{Ordas2017}\label{ordas2017}}
+\subsubsection{Ordas2017}\label{ordas2017}
 
 \textbf{Wear Characterization of the Cutting Tool in Milling Processes
 using Shape and Texture Descriptors (PhD thesis, 2017)(García-Ordás
@@ -425,8 +427,7 @@ using Shape and Texture Descriptors (PhD thesis, 2017)(García-Ordás
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{papandrea2020}{%
-\subsubsection{Papandrea2020}\label{papandrea2020}}
+\subsubsection{Papandrea2020}\label{papandrea2020}
 
 \textbf{Surface roughness diagnosis in hard turning using acoustic
 signals and support vector machine: A PCA-based approach (Papandrea et
@@ -459,8 +460,7 @@ al. 2020)}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{cho2005}{%
-\subsubsection{Cho2005}\label{cho2005}}
+\subsubsection{Cho2005}\label{cho2005}
 
 \textbf{Tool breakage detection using support vector machine learning in
 a milling process (Cho et al. 2005)}
@@ -502,8 +502,7 @@ International Journal of Machine Tools and Manufacture, 2005, 45,
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{li2017}{%
-\subsubsection{Li2017}\label{li2017}}
+\subsubsection{Li2017}\label{li2017}
 
 \textbf{An Ensemble Deep Convolutional Neural Network Model with
 Improved D-S Evidence Fusion for Bearing Fault Diagnosis (Li et al.
@@ -541,8 +540,7 @@ Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{kankar2011}{%
-\subsubsection{Kankar2011}\label{kankar2011}}
+\subsubsection{Kankar2011}\label{kankar2011}
 
 \textbf{Fault diagnosis of ball bearings using machine learning methods
 (Kankar, Sharma, and Harsha 2011)}
@@ -595,8 +593,7 @@ Expert Systems with Applications, 2011, 38, 1876-1886
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{ong2019}{%
-\subsubsection{Ong2019}\label{ong2019}}
+\subsubsection{Ong2019}\label{ong2019}
 
 \textbf{Tool condition monitoring in CNC end milling using wavelet
 neural network based on machine vision (Ong, Lee, and Lau 2019)}
@@ -654,8 +651,7 @@ The International Journal of Advanced Manufacturing Technology, 2019,
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{hahn2021}{%
-\subsubsection{Hahn2021}\label{hahn2021}}
+\subsubsection{Hahn2021}\label{hahn2021}
 
 \begin{quote}
 Article (Hahn2021)\\
@@ -761,8 +757,7 @@ International Journal of Hydromechatronics, Inderscience Publishers,
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{mey2020}{%
-\subsubsection{Mey2020}\label{mey2020}}
+\subsubsection{Mey2020}\label{mey2020}
 
 \begin{quote}
 InProceedings (Mey2020)\\
@@ -846,11 +841,9 @@ Conclusions:
 \end{itemize}
 \end{quote}
 
-\hypertarget{datasets}{%
-\subsection{Datasets}\label{datasets}}
+\subsection{Datasets}\label{datasets}
 
-\hypertarget{crwu-bearing-dataset}{%
-\subsubsection{CRWU Bearing Dataset}\label{crwu-bearing-dataset}}
+\subsubsection{CRWU Bearing Dataset}\label{crwu-bearing-dataset}
 
 \includegraphics{img/2023-01-08-19-36-39.png}
 
@@ -877,9 +870,8 @@ were recorded by hand.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{uc-berkeley-milling-dataset-nasa}{%
 \subsubsection{UC Berkeley Milling dataset,
-NASA}\label{uc-berkeley-milling-dataset-nasa}}
+NASA}\label{uc-berkeley-milling-dataset-nasa}
 
 \begin{itemize}
 \tightlist
@@ -905,8 +897,7 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{bosch-cnc-dataset}{%
-\subsubsection{Bosch CNC dataset}\label{bosch-cnc-dataset}}
+\subsubsection{Bosch CNC dataset}\label{bosch-cnc-dataset}
 
 \begin{itemize}
 \item
@@ -931,7 +922,7 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 \item
   A whole procedure for collecting data and analyzing on the fly
 
-  \begin{figure}
+  \begin{figure}[H]
 
   {\centering \includegraphics{img/2023-01-29-16-21-13.png}
 
@@ -939,7 +930,7 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 
   \caption{Sensor mounting}
 
-  \end{figure}
+  \end{figure}%
 
   \includegraphics{img/2023-01-29-16-26-15.png}
 
@@ -1006,9 +997,8 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
   \end{itemize}
 \end{itemize}
 
-\hypertarget{ims-bearing-dataset-cincinatti-nasa}{%
 \subsubsection{IMS Bearing Dataset, Cincinatti,
-NASA}\label{ims-bearing-dataset-cincinatti-nasa}}
+NASA}\label{ims-bearing-dataset-cincinatti-nasa}
 
 \begin{itemize}
 \item
@@ -1040,9 +1030,8 @@ failures occurred after exceeding designed life time of the bearing
 which is more than 100 million revolutions.
 \end{quote}
 
-\hypertarget{fraunhoffer-unbalance-dataset}{%
 \subsubsection{Fraunhoffer unbalance
-dataset}\label{fraunhoffer-unbalance-dataset}}
+dataset}\label{fraunhoffer-unbalance-dataset}
 
 \begin{itemize}
 \item
@@ -1098,27 +1087,27 @@ the README.md file
 
 \includegraphics{img/2023-01-29-17-23-08.png}
 
-\hypertarget{refs}{}
+\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-Cho2005}{}}%
+\bibitem[\citeproctext]{ref-Cho2005}
 Cho, Sohyung, Shihab Asfour, Arzu Onar, and Nandita Kaundinya. 2005.
 {``Tool Breakage Detection Using Support Vector Machine Learning in a
 Milling Process.''} \emph{International Journal of Machine Tools and
 Manufacture} 45 (3): 241--49.
 \url{https://doi.org/10.1016/j.ijmachtools.2004.08.016}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Ordas2017_WearCharactPhD}{}}%
+\bibitem[\citeproctext]{ref-Ordas2017_WearCharactPhD}
 García-Ordás, Teresa María. 2017. {``Wear Characterization of the
 Cutting Tool in Milling Processes Using Shape and Texture
 Descriptors.''} PhD thesis. \url{https://doi.org/10.18002/10612/6915}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Kankar2011}{}}%
+\bibitem[\citeproctext]{ref-Kankar2011}
 Kankar, P. K., Satish C. Sharma, and S. P. Harsha. 2011. {``Fault
 Diagnosis of Ball Bearings Using Machine Learning Methods.''}
 \emph{Expert Systems with Applications} 38 (3): 1876--86.
 \url{https://doi.org/10.1016/j.eswa.2010.07.119}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Kim2018_SmartMachineReview}{}}%
+\bibitem[\citeproctext]{ref-Kim2018_SmartMachineReview}
 Kim, Dong-Hyeon, Thomas J. Y. Kim, Xinlin Wang, Mincheol Kim, Ying-Jun
 Quan, Jin Woo Oh, Soo-Hong Min, et al. 2018. {``Smart Machining Process
 Using Machine Learning: A Review and Perspective on Machining
@@ -1126,14 +1115,14 @@ Industry.''} \emph{International Journal of Precision Engineering and
 Manufacturing-Green Technology} 5 (4): 555--68.
 \url{https://doi.org/10.1007/s40684-018-0057-y}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Li2017}{}}%
+\bibitem[\citeproctext]{ref-Li2017}
 Li, Shaobo, Guokai Liu, Xianghong Tang, Jianguang Lu, and Jianjun Hu.
 2017. {``An {Ensemble} {Deep} {Convolutional} {Neural} {Network} {Model}
 with {Improved} {D}-{S} {Evidence} {Fusion} for {Bearing} {Fault}
 {Diagnosis}.''} \emph{Sensors} 17 (8): 1729.
 \url{https://doi.org/10.3390/s17081729}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Mey2020}{}}%
+\bibitem[\citeproctext]{ref-Mey2020}
 Mey, Oliver, Willi Neudeck, André Schneider, and Olaf Enge-Rosenblatt.
 2020. {``Machine {Learning}-{Based} {Unbalance} {Detection} of a
 {Rotating} {Shaft} {Using} {Vibration} {Data}.''} In \emph{2020 25th
@@ -1141,21 +1130,21 @@ Mey, Oliver, Willi Neudeck, André Schneider, and Olaf Enge-Rosenblatt.
 {Factory} {Automation} ({ETFA})}, 1:1610--17.
 \url{https://doi.org/10.1109/ETFA46521.2020.9212000}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Ong2019}{}}%
+\bibitem[\citeproctext]{ref-Ong2019}
 Ong, Pauline, Woon Kiow Lee, and Raymond Jit Hoo Lau. 2019. {``Tool
 Condition Monitoring in {CNC} End Milling Using Wavelet Neural Network
 Based on Machine Vision.''} \emph{The International Journal of Advanced
 Manufacturing Technology} 104 (1): 1369--79.
 \url{https://doi.org/10.1007/s00170-019-04020-6}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Papandrea2020}{}}%
+\bibitem[\citeproctext]{ref-Papandrea2020}
 Papandrea, Pedro J., Edielson P. Frigieri, Paulo Roberto Maia, Lucas G.
 Oliveira, and Anderson P. Paiva. 2020. {``Surface Roughness Diagnosis in
 Hard Turning Using Acoustic Signals and Support Vector Machine: {A}
 {PCA}-Based Approach.''} \emph{Applied Acoustics} 159 (February):
 107102. \url{https://doi.org/10.1016/j.apacoust.2019.107102}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-Tambake2021}{}}%
+\bibitem[\citeproctext]{ref-Tambake2021}
 Tambake, Nagesh R., Bhagyesh B. Deshmukh, and Abhishek D. Patange. 2021.
 {``Data {Driven} {Cutting} {Tool} {Fault} {Diagnosis} {System} {Using}
 {Machine} {Learning} {Approach}: {A} {Review}.''} \emph{Journal of

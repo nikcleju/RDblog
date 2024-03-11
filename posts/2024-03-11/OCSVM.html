@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-12-12">
-<meta name="description" content="Paper reviews">
+<meta name="dcterms.date" content="2024-03-11">
+<meta name="description" content="What happens">
 
-<title>My Notes - Paper Reviews - 2022-12-13 LOS</title>
+<title>My Notes - Weighting OCSVM</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -115,14 +144,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Paper Reviews - 2022-12-13 LOS</h1>
+      <h1 class="title">Weighting OCSVM</h1>
                   <div>
         <div class="description">
-          Paper reviews
+          What happens
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">paper</div>
+                <div class="quarto-category">AD</div>
               </div>
                   </div>
   </div>
@@ -134,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 12, 2022</p>
+        <p class="date">March 11, 2024</p>
       </div>
     </div>
     
@@ -149,9 +178,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#xie2013-on-a-nonlinear-generalization-of-sparse-coding-and-dictionary-learning" id="toc-xie2013-on-a-nonlinear-generalization-of-sparse-coding-and-dictionary-learning" class="nav-link active" data-scroll-target="#xie2013-on-a-nonlinear-generalization-of-sparse-coding-and-dictionary-learning">Xie2013: On A Nonlinear Generalization of Sparse Coding and Dictionary Learning</a></li>
+  <li><a href="#current" id="toc-current" class="nav-link active" data-scroll-target="#current">Current</a></li>
+  <li><a href="#problem" id="toc-problem" class="nav-link" data-scroll-target="#problem">Problem</a></li>
+  <li><a href="#claim" id="toc-claim" class="nav-link" data-scroll-target="#claim">Claim</a>
+  <ul class="collapse">
+  <li><a href="#proof" id="toc-proof" class="nav-link" data-scroll-target="#proof">Proof</a></li>
+  </ul></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  <li><a href="#acknowledgement" id="toc-acknowledgement" class="nav-link" data-scroll-target="#acknowledgement">Acknowledgement</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="OCSVM.tex"><i class="bi bi-file"></i>LaTeX</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -164,21 +200,130 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>A quick overview of some papers mentioned in LOS Seminar 2022-12-13</p>
-<section id="xie2013-on-a-nonlinear-generalization-of-sparse-coding-and-dictionary-learning" class="level2">
-<h2 class="anchored" data-anchor-id="xie2013-on-a-nonlinear-generalization-of-sparse-coding-and-dictionary-learning">Xie2013: On A Nonlinear Generalization of Sparse Coding and Dictionary Learning</h2>
-<ul>
-<li><blockquote class="blockquote">
-<p>a novel framework for sparse coding and dictionary learning for data on a Riemannian manifold, and it shows that the existing sparse coding and dictionary learning methods can be considered as special (Euclidean) cases of the more general framework proposed here.</p>
-</blockquote></li>
-<li><blockquote class="blockquote">
-<p>data and features are often presented as points on known Riemannian manifolds, e.g., the space of symmetric positive-definite matrices (Fletcher &amp; Joshi, 2007), hyperspheres for parameterizing square-root densities (Srivastava et al., 2007), Stiefel and Grassmann manifolds (Mardia &amp; Jupp, 1999), etc..</p>
-</blockquote></li>
-<li><p>Manifold-based sparse coding.</p></li>
-<li><p>Reformulates sparsity in affine way, reformulates sparse coding and dictionary learning</p></li>
-<li><p>Example: dictionary learning on the sphere</p></li>
-<li><p>Strongly mathematical</p></li>
-</ul>
+<section id="current" class="level1">
+<h1>Current</h1>
+<p>We have an optimization problem</p>
+<p><span class="math display">\[\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F + G,\]</span></p>
+<p>where</p>
+<p><span id="eq-FG"><span class="math display">\[
+%------------
+\begin{align}
+F(Y, D, X)  &amp;= \frac12 \|Y - DX\|_F^2
+  + \beta \sum_{i=1}^{n} \phi\left(\|x^i\|_2\right)  \\
+G(X, \omega, \rho, \xi) &amp;=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i)
+\end{align}
+%------------
+\tag{1}\]</span></span></p>
+<p>This leads to the inner K-SVD style problem is:</p>
+<p><span class="math display">\[
+\begin{align}
+(d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \omega_i x^i\lambda ,
+\end{align}
+\]</span></p>
+</section>
+<section id="problem" class="level1">
+<h1>Problem</h1>
+<p>We want to increase the weight of the G term, i.e.&nbsp;minimize <span class="math inline">\(F + \alpha G\)</span> for some <span class="math inline">\(\alpha\)</span>.</p>
+<p>This was implemented by multiplying with <span class="math inline">\(\alpha\)</span> in the inner problem alongside <span class="math inline">\(\omega_i x^i \lambda\)</span>, as a consequence of <span class="math inline">\(\alpha G\)</span> with <span class="math inline">\(G\)</span> defined as in (<a href="#eq-FG" class="quarto-xref">1</a>):</p>
+<p><span id="eq-inner"><span class="math display">\[
+\begin{align}
+(d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
+\end{align}
+\tag{2}\]</span></span></p>
+</section>
+<section id="claim" class="level1">
+<h1>Claim</h1>
+<p>I think this is not correct. Suppose we had written instead the OC-SVM problem with constraints:</p>
+<p><span id="eq-OCSVMconstr"><span class="math display">\[
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+\textbf{subject to  } \omega^T x_i - \rho + \xi_i \geq 0\\
+\end{align}
+\tag{3}\]</span></span></p>
+<p>What (<a href="#eq-inner" class="quarto-xref">2</a>) actually solves, with the <span class="math inline">\(\alpha\)</span> factor, is this: <span id="eq-OCSVMconstr2"><span class="math display">\[
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+\textbf{subject to  } \alpha \left( \omega^T x_i - \rho + \xi_i \right) \geq 0\\
+\end{align}
+\tag{4}\]</span></span></p>
+<p>We haven’t increased the <span class="math inline">\(G\)</span> term, but the constraint!</p>
+<section id="proof" class="level3">
+<h3 class="anchored" data-anchor-id="proof">Proof</h3>
+<p>The Langrangean of this problem (<a href="#eq-OCSVMconstr2" class="quarto-xref">4</a>) is:</p>
+<p><span class="math display">\[
+\begin{align}
+\mathcal{L} = F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \alpha \sum_i \lambda_i \left(\omega^T x_i - \rho + \xi_i \right)
+\end{align}
+\]</span></p>
+<ol type="1">
+<li><p>When minimizing F, the inner K-SVD problem is exactly (<a href="#eq-inner" class="quarto-xref">2</a>): <span class="math display">\[
+  \begin{align}
+  (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
+  \end{align}
+  \]</span></p></li>
+<li><p>When minimizing G, with <span class="math inline">\(X\)</span> fixed, we run standard OC-SVM from Scikit Learn, which solves the standard OC-SVM problem (no <span class="math inline">\(\alpha\)</span>): <span class="math display">\[
+  \begin{align}
+  \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \sum_i \lambda_i \left(\omega^T x_i - \rho + \xi_i \right)
+  \end{align}
+  \]</span> which is the same as the standard constrained formulation: <span id="eq-OCSVMconstr-standard"><span class="math display">\[
+  \begin{align}
+  \underset{\omega, \rho, \xi}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+  \textbf{subject to  } \omega^T x_i - \rho + \xi_i \geq 0\\
+  \end{align}
+   \tag{5}\]</span></span> which has the same solution as the one with the constraint multiplied by <span class="math inline">\(\alpha\)</span>: <span class="math display">\[
+  \begin{align}
+  \underset{\omega, \rho, \xi}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+  \textbf{subject to  } \alpha \left( \omega^T x_i - \rho + \xi_i \right) \geq 0\\
+  \end{align}
+  \]</span> which is (<a href="#eq-OCSVMconstr2" class="quarto-xref">4</a>). QED.</p></li>
+</ol>
+<p>So our implementation actually solves (<a href="#eq-OCSVMconstr2" class="quarto-xref">4</a>), which doesn’t change the optimization problem, but just the constraint. This makes the Lagrangean steeper w.r.t. to <span class="math inline">\(\lambda\)</span> variables, which impacts the convergence speed. Basically, we just increase step size towards the same solution. Thus, we can get instability.</p>
+</section>
+</section>
+<section id="solution" class="level1">
+<h1>Solution</h1>
+<p>What we actually want to solve with the factor <span class="math inline">\(\alpha\)</span> is:</p>
+<p><span class="math display">\[
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \alpha \left(\|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i \right), \\
+\textbf{subject to  } \alpha \left(\omega^T x_i - \rho + \xi_i \right) \geq 0\\
+\end{align}
+\]</span></p>
+<p>Note that the constraint could have been left unchanged, or multiplied by some other factor, as it only affects convergence speed. Here, for simplicity, we consider it multipled by <span class="math inline">\(\alpha\)</span> as well.</p>
+<p>We can rewrite the optimization problem using a change of variables <span class="math inline">\(\omega' = \sqrt{\alpha} \cdot \omega\)</span>, <span class="math inline">\(\rho' = \alpha \rho\)</span>, <span class="math inline">\(\xi' = \alpha \xi\)</span>:</p>
+<p><span id="eq-OCSVMconstr-correct"><span class="math display">\[
+\begin{align}
+\underset{D, X, \omega', \rho', \xi'}{\textbf{minimize  }} F(Y, D, X) + \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' , \\
+\textbf{subject to  } \sqrt{\alpha} \cdot {\omega'}^T x_i - \rho' + \xi_i' \geq 0
+\end{align}
+\tag{6}\]</span></span></p>
+<p>Note the extra <span class="math inline">\(\sqrt{\alpha}\)</span> factor in the constraint, which appears because in the objective we have squared <span class="math inline">\(\|\omega\|^2\)</span> while in the constraint we just have linear <span class="math inline">\(\omega^T\)</span>.</p>
+<p>The Lagrangean of this problem is: <span class="math display">\[
+\begin{align}
+\mathcal{L} = F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \sum_i \lambda_i \left( \sqrt{\alpha} \omega^T x_i - \rho + \xi_i \right)
+\end{align}
+\]</span></p>
+<p>What does this mean in terms of algorithm?</p>
+<ol type="1">
+<li><p>When minimizing F, the inner problem is just like (<a href="#eq-inner" class="quarto-xref">2</a>) but with <span class="math inline">\(\sqrt{\alpha}\)</span> instead of <span class="math inline">\(\alpha\)</span>: <span id="eq-inner2"><span class="math display">\[
+  \begin{align}
+  (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \sqrt{\alpha} \omega_i x^i\lambda
+  \end{align}
+   \tag{7}\]</span></span></p></li>
+<li><p>For the OC-SVM, we can’t just apply standard OC-SVM. Standard OC-SVM (<a href="#eq-OCSVMconstr-standard" class="quarto-xref">5</a>) assumes that the ratio <span class="math inline">\(\omega / \rho\)</span> is the same in the objective and in the constraint. This is not the case in (<a href="#eq-OCSVMconstr-correct" class="quarto-xref">6</a>), because of the extra <span class="math inline">\(\sqrt{\alpha}\)</span> factor in the constraint.</p>
+<p>Instead, we need to scale <span class="math inline">\(X\)</span> with <span class="math inline">\(\sqrt{\alpha}\)</span>: <span class="math display">\[X' = X \sqrt{\alpha}\]</span></p>
+<p>and only afterwards call standard OC-SVM on <span class="math inline">\(X'\)</span>: <span id="eq-OCSVMconstr-scaled"><span class="math display">\[
+  \begin{align}
+  \underset{\omega, \rho, \xi'}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+  \textbf{subject to  } \omega^T x_i' - \rho + \xi_i \geq 0\\
+  \end{align}
+   \tag{8}\]</span></span> thus achieving (<a href="#eq-OCSVMconstr-correct" class="quarto-xref">6</a>).</p></li>
+</ol>
+</section>
+<section id="acknowledgement" class="level1">
+<h1>Acknowledgement</h1>
+<p>This is late night research. If this is horribly wrong, just attribute it to sleep deprivation.</p>
 
 
 </section>

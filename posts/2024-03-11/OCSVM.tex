@@ -1,0 +1,337 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Weighting OCSVM},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Weighting OCSVM}
+\author{}
+\date{2024-03-11}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\section{Current}\label{current}
+
+We have an optimization problem
+
+\[\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F + G,\]
+
+where
+
+\begin{equation}\phantomsection\label{eq-FG}{
+%------------
+\begin{align}
+F(Y, D, X)  &= \frac12 \|Y - DX\|_F^2
+  + \beta \sum_{i=1}^{n} \phi\left(\|x^i\|_2\right)  \\
+G(X, \omega, \rho, \xi) &=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i
+- \sum_{i=1}^{N} \lambda_i (\omega^T x_i - \rho + \xi_i)
+\end{align}
+%------------
+}\end{equation}
+
+This leads to the inner K-SVD style problem is:
+
+\[
+\begin{align}
+(d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \omega_i x^i\lambda ,
+\end{align}
+\]
+
+\section{Problem}\label{problem}
+
+We want to increase the weight of the G term, i.e.~minimize
+\(F + \alpha G\) for some \(\alpha\).
+
+This was implemented by multiplying with \(\alpha\) in the inner problem
+alongside \(\omega_i x^i \lambda\), as a consequence of \(\alpha G\)
+with \(G\) defined as in (\ref{eq-FG}):
+
+\begin{equation}\phantomsection\label{eq-inner}{
+\begin{align}
+(d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
+\end{align}
+}\end{equation}
+
+\section{Claim}\label{claim}
+
+I think this is not correct. Suppose we had written instead the OC-SVM
+problem with constraints:
+
+\begin{equation}\phantomsection\label{eq-OCSVMconstr}{
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+\textbf{subject to  } \omega^T x_i - \rho + \xi_i \geq 0\\
+\end{align}
+}\end{equation}
+
+What (\ref{eq-inner}) actually solves, with the \(\alpha\) factor, is
+this: \begin{equation}\phantomsection\label{eq-OCSVMconstr2}{
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+\textbf{subject to  } \alpha \left( \omega^T x_i - \rho + \xi_i \right) \geq 0\\
+\end{align}
+}\end{equation}
+
+We haven't increased the \(G\) term, but the constraint!
+
+\subsubsection{Proof}\label{proof}
+
+The Langrangean of this problem (\ref{eq-OCSVMconstr2}) is:
+
+\[
+\begin{align}
+\mathcal{L} = F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \alpha \sum_i \lambda_i \left(\omega^T x_i - \rho + \xi_i \right)
+\end{align}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  When minimizing F, the inner K-SVD problem is exactly
+  (\ref{eq-inner}): \[
+    \begin{align}
+    (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
+    \end{align}
+    \]
+\item
+  When minimizing G, with \(X\) fixed, we run standard OC-SVM from
+  Scikit Learn, which solves the standard OC-SVM problem (no
+  \(\alpha\)): \[
+    \begin{align}
+    \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \sum_i \lambda_i \left(\omega^T x_i - \rho + \xi_i \right)
+    \end{align}
+    \] which is the same as the standard constrained formulation:
+  \begin{equation}\phantomsection\label{eq-OCSVMconstr-standard}{
+    \begin{align}
+    \underset{\omega, \rho, \xi}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+    \textbf{subject to  } \omega^T x_i - \rho + \xi_i \geq 0\\
+    \end{align}
+    }\end{equation} which has the same solution as the one with the
+  constraint multiplied by \(\alpha\): \[
+    \begin{align}
+    \underset{\omega, \rho, \xi}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+    \textbf{subject to  } \alpha \left( \omega^T x_i - \rho + \xi_i \right) \geq 0\\
+    \end{align}
+    \] which is (\ref{eq-OCSVMconstr2}). QED.
+\end{enumerate}
+
+So our implementation actually solves (\ref{eq-OCSVMconstr2}), which
+doesn't change the optimization problem, but just the constraint. This
+makes the Lagrangean steeper w.r.t. to \(\lambda\) variables, which
+impacts the convergence speed. Basically, we just increase step size
+towards the same solution. Thus, we can get instability.
+
+\section{Solution}\label{solution}
+
+What we actually want to solve with the factor \(\alpha\) is:
+
+\[
+\begin{align}
+\underset{D, X, \omega, \rho, \xi}{\textbf{minimize  }} F(Y, D, X) + \alpha \left(\|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i \right), \\
+\textbf{subject to  } \alpha \left(\omega^T x_i - \rho + \xi_i \right) \geq 0\\
+\end{align}
+\]
+
+Note that the constraint could have been left unchanged, or multiplied
+by some other factor, as it only affects convergence speed. Here, for
+simplicity, we consider it multipled by \(\alpha\) as well.
+
+We can rewrite the optimization problem using a change of variables
+\(\omega' = \sqrt{\alpha} \cdot \omega\), \(\rho' = \alpha \rho\),
+\(\xi' = \alpha \xi\):
+
+\begin{equation}\phantomsection\label{eq-OCSVMconstr-correct}{
+\begin{align}
+\underset{D, X, \omega', \rho', \xi'}{\textbf{minimize  }} F(Y, D, X) + \|\omega'\|^2 - \rho' + \frac{1}{CN} \sum_{i=1}^{N} \xi_i' , \\
+\textbf{subject to  } \sqrt{\alpha} \cdot {\omega'}^T x_i - \rho' + \xi_i' \geq 0
+\end{align}
+}\end{equation}
+
+Note the extra \(\sqrt{\alpha}\) factor in the constraint, which appears
+because in the objective we have squared \(\|\omega\|^2\) while in the
+constraint we just have linear \(\omega^T\).
+
+The Lagrangean of this problem is: \[
+\begin{align}
+\mathcal{L} = F(Y, D, X) + \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i - \sum_i \lambda_i \left( \sqrt{\alpha} \omega^T x_i - \rho + \xi_i \right)
+\end{align}
+\]
+
+What does this mean in terms of algorithm?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  When minimizing F, the inner problem is just like (\ref{eq-inner}) but
+  with \(\sqrt{\alpha}\) instead of \(\alpha\):
+  \begin{equation}\phantomsection\label{eq-inner2}{
+    \begin{align}
+    (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \sqrt{\alpha} \omega_i x^i\lambda
+    \end{align}
+    }\end{equation}
+\item
+  For the OC-SVM, we can't just apply standard OC-SVM. Standard OC-SVM
+  (\ref{eq-OCSVMconstr-standard}) assumes that the ratio
+  \(\omega / \rho\) is the same in the objective and in the constraint.
+  This is not the case in (\ref{eq-OCSVMconstr-correct}), because of the
+  extra \(\sqrt{\alpha}\) factor in the constraint.
+
+  Instead, we need to scale \(X\) with \(\sqrt{\alpha}\):
+  \[X' = X \sqrt{\alpha}\]
+
+  and only afterwards call standard OC-SVM on \(X'\):
+  \begin{equation}\phantomsection\label{eq-OCSVMconstr-scaled}{
+    \begin{align}
+    \underset{\omega, \rho, \xi'}{\textbf{minimize  }} \|\omega\|^2 - \rho + \frac{1}{CN} \sum_{i=1}^{N} \xi_i, \\
+    \textbf{subject to  } \omega^T x_i' - \rho + \xi_i \geq 0\\
+    \end{align}
+    }\end{equation} thus achieving (\ref{eq-OCSVMconstr-correct}).
+\end{enumerate}
+
+\section{Acknowledgement}\label{acknowledgement}
+
+This is late night research. If this is horribly wrong, just attribute
+it to sleep deprivation.
+
+
+
+\end{document}

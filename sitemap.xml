@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/nikcleju/rdblog/about.html</loc>
-    <lastmod>2024-01-26T22:22:55.489Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/welcome/index.html</loc>
+    <lastmod>2023-01-07T10:01:44.198Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/index.html</loc>
-    <lastmod>2024-01-26T22:22:56.576Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2024-03-11/OCSVM.html</loc>
+    <lastmod>2024-03-11T17:41:30.795Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-10_LOF/LOF.html</loc>
-    <lastmod>2024-01-26T22:22:56.985Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2023-11-08-PPO_for_humans/PPO_for_humans.html</loc>
+    <lastmod>2024-01-26T21:34:58.266Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-14_Scoring/Scoring.html</loc>
-    <lastmod>2024-01-26T22:22:57.362Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2023-01-16-VAE_Anomaly_Detection/VAEAnomalyDetection.html</loc>
+    <lastmod>2024-01-26T21:34:58.232Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
-    <lastmod>2024-01-26T22:22:57.846Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2022-12-12_LOS-Reviews/LOS_Reviews.html</loc>
+    <lastmod>2023-01-29T13:49:59.598Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
-    <lastmod>2024-01-26T22:22:58.226Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2022-11-17_DLFrameworks/DLResources.html</loc>
+    <lastmod>2023-01-07T10:01:44.091Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2022-12-12_LOS-Reviews/LOS_Reviews.html</loc>
-    <lastmod>2024-01-26T22:22:58.716Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2022-11-10_LOF/LOF.html</loc>
+    <lastmod>2023-01-07T10:01:44.087Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2023-01-07-CNC/CNC.html</loc>
-    <lastmod>2024-01-26T22:22:59.556Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/about.html</loc>
+    <lastmod>2023-01-07T10:01:44.084Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2023-01-16-VAE_Anomaly_Detection/VAEAnomalyDetection.html</loc>
-    <lastmod>2024-01-26T22:23:00.926Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/index.html</loc>
+    <lastmod>2023-01-07T10:01:44.084Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2023-01-30-GPU_for_DL/GPU_for_DL.html</loc>
-    <lastmod>2024-01-26T22:23:01.781Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2022-11-14_Scoring/Scoring.html</loc>
+    <lastmod>2023-01-07T10:01:44.087Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2023-11-08-PPO_for_humans/PPO_for_humans.html</loc>
-    <lastmod>2024-01-26T22:23:02.499Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2022-11-30-MatlabWebinarAI/MatlabWebinarAI.html</loc>
+    <lastmod>2023-01-07T10:01:44.173Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/2024-01-26-Kernel_Blues/Kernel_Blues.html</loc>
-    <lastmod>2024-01-26T22:23:03.184Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2023-01-07-CNC/CNC.html</loc>
+    <lastmod>2023-01-29T15:37:08.883Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/post-with-code/index.html</loc>
-    <lastmod>2024-01-26T22:23:03.777Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2023-01-30-GPU_for_DL/GPU_for_DL.html</loc>
+    <lastmod>2024-01-26T21:34:58.248Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/nikcleju/rdblog/posts/welcome/index.html</loc>
-    <lastmod>2024-01-26T22:23:04.086Z</lastmod>
+    <loc>https://nikcleju.github.io/rdblog/posts/2024-01-26-Kernel_Blues/Kernel_Blues.html</loc>
+    <lastmod>2024-01-26T22:21:55.103Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nikcleju.github.io/rdblog/posts/post-with-code/index.html</loc>
+    <lastmod>2023-01-07T10:01:44.198Z</lastmod>
   </url>
 </urlset>

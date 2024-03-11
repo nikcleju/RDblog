@@ -9,7 +9,6 @@
   numbers=noendperiod]{scrartcl}
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -19,6 +18,10 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -117,10 +120,6 @@
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
-\makeatother
-\makeatletter
-\makeatother
-\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
 \ifdefined\contentsname
@@ -156,21 +155,16 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
-\makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -188,7 +182,6 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, enhanced, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable, interior hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -196,8 +189,7 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-\hypertarget{neural-networks}{%
-\subsection{Neural networks}\label{neural-networks}}
+\subsection{Neural networks}\label{neural-networks}
 
 For PPO, we have two neural networks:
 
@@ -209,7 +201,7 @@ For PPO, we have two neural networks:
   the value network \texttt{value\_net}
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{img/ActionNet.png}
 
@@ -217,11 +209,11 @@ For PPO, we have two neural networks:
 
 \caption{Overview of the Action Net}
 
-\end{figure}
+\end{figure}%
 
 \hfill\break
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{img/ValueNet.png}
 
@@ -229,7 +221,7 @@ For PPO, we have two neural networks:
 
 \caption{Overview of the Value Net}
 
-\end{figure}
+\end{figure}%
 
 Both networks are joined together in a single PyTorch network object,
 whose \texttt{forward()} function (the forward pass) is the following
@@ -264,8 +256,7 @@ whose \texttt{forward()} function (the forward pass) is the following
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{ppo-training}{%
-\subsection{PPO training}\label{ppo-training}}
+\subsection{PPO training}\label{ppo-training}
 
 The main loop in PPO consists of two steps:
 
@@ -353,8 +344,7 @@ converged, is when the cumulative rewards collected in the rollout
 stage, with the current Action Net (current policy), are identical to
 those states' values as computed by the Value Net.
 
-\hypertarget{sampling-mechanism}{%
-\subsection{Sampling mechanism}\label{sampling-mechanism}}
+\subsection{Sampling mechanism}\label{sampling-mechanism}
 
 Sampling depends on how the policy (action probability distribution) is
 parameterized.
@@ -397,8 +387,7 @@ The underlying distributions are the ones from PyTorch (see below, from
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{continuous-actions}{%
-\subsubsection{Continuous actions}\label{continuous-actions}}
+\subsubsection{Continuous actions}\label{continuous-actions}
 
 For continuous actions, the distribution is parameterized a diagonal
 gaussian:
@@ -427,8 +416,7 @@ point from a gaussian cloud:
 
 \includegraphics{img/Explanation.png}
 
-\hypertarget{discrete-actions}{%
-\subsubsection{Discrete actions}\label{discrete-actions}}
+\subsubsection{Discrete actions}\label{discrete-actions}
 
 For discrete actions, the distribution is a categorical distribution
 
