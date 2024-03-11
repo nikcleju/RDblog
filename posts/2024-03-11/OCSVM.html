@@ -215,7 +215,7 @@ G(X, \omega, \rho, \xi) &amp;=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho
 \end{align}
 %------------
 \tag{1}\]</span></span></p>
-<p>This leads to the inner K-SVD style problem is:</p>
+<p>This leads to the inner K-SVD style problem:</p>
 <p><span class="math display">\[
 \begin{align}
 (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \omega_i x^i\lambda ,
@@ -225,7 +225,7 @@ G(X, \omega, \rho, \xi) &amp;=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho
 <section id="problem" class="level1">
 <h1>Problem</h1>
 <p>We want to increase the weight of the G term, i.e.&nbsp;minimize <span class="math inline">\(F + \alpha G\)</span> for some <span class="math inline">\(\alpha\)</span>.</p>
-<p>This was implemented by multiplying with <span class="math inline">\(\alpha\)</span> in the inner problem alongside <span class="math inline">\(\omega_i x^i \lambda\)</span>, as a consequence of <span class="math inline">\(\alpha G\)</span> with <span class="math inline">\(G\)</span> defined as in (<a href="#eq-FG" class="quarto-xref">1</a>):</p>
+<p>This was implemented by multiplying with <span class="math inline">\(\alpha\)</span> in the inner problem alongside <span class="math inline">\(\omega_i x^i \lambda\)</span>, as a consequence of having <span class="math inline">\(\alpha G\)</span> in (<a href="#eq-FG" class="quarto-xref">1</a>):</p>
 <p><span id="eq-inner"><span class="math display">\[
 \begin{align}
 (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \alpha \omega_i x^i\lambda ,
@@ -278,7 +278,7 @@ G(X, \omega, \rho, \xi) &amp;=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho
   \end{align}
   \]</span> which is (<a href="#eq-OCSVMconstr2" class="quarto-xref">4</a>). QED.</p></li>
 </ol>
-<p>So our implementation actually solves (<a href="#eq-OCSVMconstr2" class="quarto-xref">4</a>), which doesn’t change the optimization problem, but just the constraint. This makes the Lagrangean steeper w.r.t. to <span class="math inline">\(\lambda\)</span> variables, which impacts the convergence speed. Basically, we just increase step size towards the same solution. Thus, we can get instability.</p>
+<p>So our implementation actually solves (<a href="#eq-OCSVMconstr2" class="quarto-xref">4</a>), which doesn’t change the optimization problem, just the constraint. Multiplying the constraint with <span class="math inline">\(\alpha\)</span> makes the Lagrangean steeper, which (probably) impacts the convergence (like increasing step sizes in SGD), but not the optimal solution. Thus, we may get instability.</p>
 </section>
 </section>
 <section id="solution" class="level1">
@@ -311,7 +311,7 @@ G(X, \omega, \rho, \xi) &amp;=\max\limits_{\lambda \ge 0} \; \|\omega\|^2 - \rho
   (d^+_i,(x^i)^+) = \underset{d_i: \|d_i\|=1,x^i}{\arg\min} \frac12\|d_ix^i - R\|_F^2  + \beta\|x^i\|_2 - \sqrt{\alpha} \omega_i x^i\lambda
   \end{align}
    \tag{7}\]</span></span></p></li>
-<li><p>For the OC-SVM, we can’t just apply standard OC-SVM. Standard OC-SVM (<a href="#eq-OCSVMconstr-standard" class="quarto-xref">5</a>) assumes that the ratio <span class="math inline">\(\omega / \rho\)</span> is the same in the objective and in the constraint. This is not the case in (<a href="#eq-OCSVMconstr-correct" class="quarto-xref">6</a>), because of the extra <span class="math inline">\(\sqrt{\alpha}\)</span> factor in the constraint.</p>
+<li><p>For the OC-SVM, we can’t just apply standard OC-SVM. Standard OC-SVM (<a href="#eq-OCSVMconstr-standard" class="quarto-xref">5</a>) assumes that the ratio <span class="math inline">\(\omega / \rho\)</span> is the same in the objective and in the constraint. This is not the case in (<a href="#eq-OCSVMconstr-correct" class="quarto-xref">6</a>), because of the extra <span class="math inline">\(\sqrt{\alpha}\)</span> factor in the constraint. You can’t have a larger <span class="math inline">\(\omega\)</span> in the constraint and a smaller <span class="math inline">\(\omega\)</span> in the objective.</p>
 <p>Instead, we need to scale <span class="math inline">\(X\)</span> with <span class="math inline">\(\sqrt{\alpha}\)</span>: <span class="math display">\[X' = X \sqrt{\alpha}\]</span></p>
 <p>and only afterwards call standard OC-SVM on <span class="math inline">\(X'\)</span>: <span id="eq-OCSVMconstr-scaled"><span class="math display">\[
   \begin{align}
