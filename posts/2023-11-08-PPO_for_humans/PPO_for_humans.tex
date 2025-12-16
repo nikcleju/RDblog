@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -7,21 +8,22 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrartcl}
-
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -39,18 +41,29 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -70,7 +83,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -80,7 +93,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -93,8 +106,7 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -106,17 +118,33 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
@@ -160,13 +188,9 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={PPO for humans},
   colorlinks=true,
@@ -176,10 +200,10 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \title{PPO for humans}
 \author{}
 \date{2023-11-08}
-
 \begin{document}
 \maketitle
 
@@ -189,6 +213,7 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
+
 \subsection{Neural networks}\label{neural-networks}
 
 For PPO, we have two neural networks:
@@ -203,7 +228,7 @@ For PPO, we have two neural networks:
 
 \begin{figure}[H]
 
-{\centering \includegraphics{img/ActionNet.png}
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{img/ActionNet.png}}
 
 }
 
@@ -215,7 +240,7 @@ For PPO, we have two neural networks:
 
 \begin{figure}[H]
 
-{\centering \includegraphics{img/ValueNet.png}
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{img/ValueNet.png}}
 
 }
 
@@ -297,7 +322,7 @@ The main loop in PPO consists of two steps:
   \end{enumerate}
 \end{enumerate}
 
-The general idea of PPO training is:
+The general idea of PPO learning algorithm is:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -313,7 +338,7 @@ The general idea of PPO training is:
     actions
   \item
     Record all the tuples
-    \texttt{(state,\ action\ taken,\ cumulative\ reward)}
+    \texttt{(state,\ action\ taken,\ action\ probability,\ return\ (cumulative\ reward)}
   \end{itemize}
 \item
   Compute the estimated value of the same states with the Value Net
@@ -324,25 +349,25 @@ The general idea of PPO training is:
   \tightlist
   \item
     look back on all the
-    \texttt{(state,\ action\ taken,\ cumulative\ reward)} tuples
-    collected, and:
+    \texttt{(state,\ action\ taken,\ action\ probability,\ cumulative\ reward)}
+    tuples collected, and:
   \item
-    for actions leading to states where the Value Net output is larger
-    than observed ground truth value, decrease the probability of those
-    actions (i.e.~we overestimated those actions' worth, compared to
-    ground truth)
+    compute the action \textbf{advantages} = difference between the
+    return when taking that action - the state value (averaging all
+    actions from that state)
   \item
-    for actions leading to states where the Value Net output is smaller
-    than observed ground truth value, increase the probability of those
-    actions (i.e.~we underestimated those action' worth, compared to
-    ground truth)
+    for actions with positive advantage, increase the probability of
+    those actions (they are better than the average action)
+  \item
+    for actions with negative advantage, decrease the probability of
+    those actions (they are worse than the average action)
   \end{itemize}
 \end{enumerate}
 
-The equilibrium state, when both Action Net and Value Net are fully
-converged, is when the cumulative rewards collected in the rollout
-stage, with the current Action Net (current policy), are identical to
-those states' values as computed by the Value Net.
+\textbf{To rethink}: The equilibrium state, when both Action Net and
+Value Net are fully converged, is when the cumulative rewards collected
+in the rollout stage, with the current Action Net (current policy), are
+identical to those states' values as computed by the Value Net.
 
 \subsection{Sampling mechanism}\label{sampling-mechanism}
 
@@ -414,7 +439,7 @@ point from a gaussian cloud:
 
 \hfill\break
 
-\includegraphics{img/Explanation.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/Explanation.png}}
 
 \subsubsection{Discrete actions}\label{discrete-actions}
 
@@ -428,6 +453,7 @@ For discrete actions, the distribution is a categorical distribution
 \item
   sampling is done with PyTorch.
 \end{itemize}
+
 
 
 

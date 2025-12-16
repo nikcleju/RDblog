@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -7,21 +8,22 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrartcl}
-
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -39,29 +41,32 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\ifLuaTeX
-  \usepackage{luacolor}
-  \usepackage[soul]{lua-ul}
-\else
-  \usepackage{soul}
-  
-\fi
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -73,17 +78,27 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+\fi
+
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -117,6 +132,18 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
@@ -160,13 +187,9 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={ML/AI in CNC and machining},
   colorlinks=true,
@@ -176,10 +199,10 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \title{ML/AI in CNC and machining}
 \author{}
 \date{2023-01-07}
-
 \begin{document}
 \maketitle
 
@@ -189,6 +212,7 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
+
 \subsection{Review papers}\label{review-papers}
 
 \subsubsection{Bertolini2021}\label{bertolini2021}
@@ -260,20 +284,21 @@ review Expert Systems with Applications, 2021, 175, 114820
   \end{enumerate}
   \end{quote}
 
-  \includegraphics{img/2023-01-07-12-44-41.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-44-41.png}}
 \end{itemize}
 
-\includegraphics{img/2023-01-07-12-32-41.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-32-41.png}}
 
-\includegraphics{img/2023-01-07-12-38-32.png} \ldots{}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-38-32.png}}
+\ldots{}
 
 \begin{itemize}
 \item
   Anomaly detection examples:
 
-  \includegraphics{img/2023-01-07-12-48-20.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-48-20.png}}
 
-  \includegraphics{img/2023-01-07-12-49-39.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-49-39.png}}
 \item
   Sample variables commonly used in datasets:
 
@@ -282,7 +307,7 @@ review Expert Systems with Applications, 2021, 175, 114820
   are commonly used per each application domain and sub-area
   \end{quote}
 
-  \includegraphics{img/2023-01-07-12-53-08.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-53-08.png}}
 \end{itemize}
 
 \paragraph{Interesting aspects}\label{interesting-aspects}
@@ -402,9 +427,9 @@ Learning Approach: A Review (Tambake, Deshmukh, and Patange 2021)}
   Poorly written, but contains a list of papers on fault detection
 \end{itemize}
 
-\includegraphics{img/2023-01-07-12-19-30.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-19-30.png}}
 
-\includegraphics{img/2023-01-07-12-20-27.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-20-27.png}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -456,7 +481,7 @@ al. 2020)}
   More investigative / basic research, no remarkable results.
 \end{itemize}
 
-\includegraphics{img/2023-01-07-12-16-33.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-07-12-16-33.png}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -516,7 +541,7 @@ Evidence Fusion for Bearing Fault Diagnosis\\
 Sensors, Multidisciplinary Digital Publishing Institute, 2017, 17, 1729
 \end{quote}
 
-\includegraphics{img/2023-01-08-19-37-45.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-08-19-37-45.png}}
 
 \begin{itemize}
 \tightlist
@@ -589,7 +614,7 @@ Expert Systems with Applications, 2011, 38, 1876-1886
   Results: accuracy about 70\%
 \end{itemize}
 
-\includegraphics{img/2023-01-09-12-28-36.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-09-12-28-36.png}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -636,17 +661,17 @@ The International Journal of Advanced Manufacturing Technology, 2019,
 \item
   Image preprocessing of the worn region of the tool:
 
-  \includegraphics{.pdf}img/2023-01-09-12-54-18.png
+  \pandocbounded{\includegraphics[keepaspectratio]{.pdf}}img/2023-01-09-12-54-18.png
 \item
   NN architecture used. Shallow with 1 hidden layer:
 
-  \includegraphics{img/2023-01-09-12-55-14.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-09-12-55-14.png}}
 \item
   Dataset: just 126 images
 \item
   Results: good predictions by pretty much all methods compared.
 
-  \includegraphics{img/2023-01-09-13-01-36.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-09-13-01-36.png}}
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -681,7 +706,7 @@ International Journal of Hydromechatronics, Inderscience Publishers,
   \item
     causal and dilated convolutions
 
-    \includegraphics{img/2023-01-12-11-17-38.png}
+    \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-17-38.png}}
   \end{itemize}
 \item
   Disentangled-VAE:
@@ -691,7 +716,7 @@ International Journal of Hydromechatronics, Inderscience Publishers,
     just a normal VAE with a value of \(\beta\) higher than one in the
     cost function (?):
 
-    \includegraphics{img/2023-01-12-11-23-14.png}
+    \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-23-14.png}}
   \item
     \begin{quote}
     Tuning the hyper-parameter β, to a value larger than one, can enable
@@ -718,9 +743,9 @@ International Journal of Hydromechatronics, Inderscience Publishers,
 \item
   Process:
 
-  \includegraphics{img/2023-01-12-11-29-43.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-29-43.png}}
 
-  \includegraphics{img/2023-01-12-11-35-37.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-35-37.png}}
 \item
   Preprocessing:
 
@@ -747,11 +772,11 @@ International Journal of Hydromechatronics, Inderscience Publishers,
     PR-AUC 50\% for failed vs non-failed on the UC Berkeley dataset
     (PR-AUC = Precision-Recall AUC)
 
-    \includegraphics{img/2023-01-12-11-44-23.png}
+    \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-44-23.png}}
   \item
     4\% PR-AUC on the industrial dataset ????!!!!
 
-    \includegraphics{img/2023-01-12-11-45-14.png}
+    \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-45-14.png}}
   \end{itemize}
 \end{itemize}
 
@@ -780,7 +805,7 @@ Factory Automation (ETFA), 2020, 1, 1610-1617
   Uses (introduces) Fraunhoffer unbalance dataset
 \end{itemize}
 
-\includegraphics{img/2023-01-29-17-20-58.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-17-20-58.png}}
 
 \begin{itemize}
 \item
@@ -845,7 +870,7 @@ Conclusions:
 
 \subsubsection{CRWU Bearing Dataset}\label{crwu-bearing-dataset}
 
-\includegraphics{img/2023-01-08-19-36-39.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-08-19-36-39.png}}
 
 \begin{itemize}
 \tightlist
@@ -893,7 +918,7 @@ of cut. Records the wear of the milling insert, VB. The data set was
 provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 \end{quote}
 
-\includegraphics{img/2023-01-12-11-28-23.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-12-11-28-23.png}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -924,7 +949,7 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 
   \begin{figure}[H]
 
-  {\centering \includegraphics{img/2023-01-29-16-21-13.png}
+  {\centering \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-16-21-13.png}}
 
   }
 
@@ -932,9 +957,9 @@ provided by the UC Berkeley Emergent Space Tensegrities (BEST) Lab.
 
   \end{figure}%
 
-  \includegraphics{img/2023-01-29-16-26-15.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-16-26-15.png}}
 
-  \includegraphics{img/2023-01-29-16-27-04.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-16-27-04.png}}
 \item
   Dataset:
 
@@ -1054,7 +1079,7 @@ dataset}\label{fraunhoffer-unbalance-dataset}
   Unbalances of different weights and radii are attached to the shaft
 \end{itemize}
 
-\includegraphics{img/2023-01-29-17-13-53.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-17-13-53.png}}
 
 \begin{quote}
 This dataset contains vibration data recorded on a rotating drive train.
@@ -1082,10 +1107,10 @@ the README.md file
 \item
   Each csv file contains:
 
-  \includegraphics{img/2023-01-29-17-22-33.png}
+  \pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-17-22-33.png}}
 \end{itemize}
 
-\includegraphics{img/2023-01-29-17-23-08.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/2023-01-29-17-23-08.png}}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
@@ -1152,6 +1177,7 @@ Physics: Conference Series} 1969 (1): 012049.
 \url{https://doi.org/10.1088/1742-6596/1969/1/012049}.
 
 \end{CSLReferences}
+
 
 
 

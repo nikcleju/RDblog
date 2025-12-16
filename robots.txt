@@ -1,1 +1,1 @@
-Sitemap: https://nikcleju.github.io/rdblog/sitemap.xml
+Sitemap: https://nikcleju.github.io/RDblog/sitemap.xml
