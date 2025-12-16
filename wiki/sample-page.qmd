@@ -1,0 +1,23 @@
+---
+title: "Sample Page"
+description: "Template for new wiki entries."
+---
+
+## Summary
+
+This is a sample wiki entry. Use it as a template when adding new notes.
+
+## Key Points
+
+- Write short, focused sections with clear headings.
+- Add code fences for snippets and commands:
+
+```bash
+quarto render wiki
+```
+
+- Link related topics to help navigation, e.g. back to the [Wiki Home](index.qmd).
+
+## Next Steps
+
+Copy this page, update the title, and start filling in your own content.

@@ -76,20 +76,19 @@ The main loop in PPO consists of two steps:
       - distribution is not sampled here, but it needs to recompute the probability of the actions
         recorded during collection
 
-The general idea of PPO training is:
+The general idea of PPO learning algorithm is:
 
 1. During rollout, collect the cumulative reward (i.e. value) out of every state, to act like a ground truth
    - This uses the current policy, i.e. current Action Net, when sampling actions
-   - Record all the tuples `(state, action taken, cumulative reward)`
+   - Record all the tuples `(state, action taken, action probability, return (cumulative reward)`
 2. Compute the estimated value of the same states with the Value Net
 3. Compare and update:
-   - look back on all the `(state, action taken, cumulative reward)` tuples collected, and:
-   - for actions leading to states where the Value Net output is larger than observed ground truth value, decrease the probability of those actions
-     (i.e. we overestimated those actions' worth, compared to ground truth)
-   - for actions leading to states where the Value Net output is smaller than observed ground truth value, increase the probability of those actions
-     (i.e. we underestimated those action' worth, compared to ground truth)
+   - look back on all the `(state, action taken, action probability, cumulative reward)` tuples collected, and:
+   - compute the action **advantages** = difference between the return when taking that action - the state value (averaging all actions from that state)
+   - for actions with positive advantage, increase the probability of those actions (they are better than the average action)
+   - for actions with negative advantage, decrease the probability of those actions (they are worse than the average action)
 
-The equilibrium state, when both Action Net and Value Net are fully converged, is
+**To rethink**: The equilibrium state, when both Action Net and Value Net are fully converged, is
 when the cumulative rewards collected in the rollout stage, with the current Action Net (current policy),
 are identical to those states' values as computed by the Value Net.
 

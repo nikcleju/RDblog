@@ -3,8 +3,25 @@ project:
 
 website:
   title: "My Notes"
+  search: true
+  sidebar:
+    - id: wiki
+      title: "Wiki"
+      style: "floating"
+      search: true
+      contents:
+        - href: wiki/index.qmd
+          text: Wiki Home
+        - section: Topics
+          contents:
+            - href: wiki/sample-page.qmd
+              text: Sample Page
   navbar:
     right:
+      - text: "Blog"
+        href: index.qmd
+      - text: "Wiki"
+        href: wiki/index.qmd
       - about.qmd
       - icon: github
         href: https://github.com/

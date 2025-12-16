@@ -1,0 +1,16 @@
+---
+title: "Wiki"
+description: "Working notes, references, and quick reminders."
+---
+
+Welcome to the wiki. Use the sidebar to jump into topics or the search box to quickly find a page.
+
+## How to add a page
+
+- Create a new `.qmd` in this folder.
+- Add it to `wiki/_metadata.yml` under `sidebar.contents` so it shows up in navigation.
+- Link between pages with standard markdown links, e.g. `[Sample Page](sample-page.qmd)`.
+
+### Try it out
+
+Start with the sample page: [Sample Page](sample-page.qmd).
